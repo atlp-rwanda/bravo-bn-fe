@@ -1,6 +1,7 @@
 ## Barefoot Frontend (TEAM BRAVO)
 
-[![Build Status](https://travis-ci.org/andela/devrepublic-bn-frontend.svg?branch=develop)](https://travis-ci.org/andela/devrepublic-bn-frontend)
+[![Build Status](https://app.travis-ci.com/atlp-rwanda/bravo-bn-fe.svg?branch=develop)](https://app.travis-ci.com/github/atlp-rwanda/bravo-bn-fe)
+
 
 ## Installation
 
