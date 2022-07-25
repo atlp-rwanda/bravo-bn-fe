@@ -6,3 +6,6 @@ install:
 
 script:
   - npm test
+
+  deploy:
+  github-token: $GITHUB_TOKEN
