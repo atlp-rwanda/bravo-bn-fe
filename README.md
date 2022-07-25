@@ -1,5 +1,7 @@
 ## Barefoot Frontend (TEAM BRAVO)
 
+[![Build Status](https://travis-ci.org/andela/devrepublic-bn-frontend.svg?branch=develop)](https://travis-ci.org/andela/devrepublic-bn-frontend)
+
 ## Installation
 
 ```bash
