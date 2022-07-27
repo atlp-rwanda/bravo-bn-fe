@@ -8,8 +8,8 @@
     "build": "webpack --mode production",
     "lint": "eslint src/**/*.js",
     "lintFix": "eslint --fix --ext src/**/*.js",
-    "test:cov": "react-scripts test",
-    "coverage": "react-scripts test --coverage"
+    "test": "react-scripts test",
+    "test:cov": "react-scripts test --coverage"
   },
   "keywords": [],
   "author": "",
