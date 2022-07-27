@@ -1,13 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class App extends Component {
-  render() {
-    return (
-        <div>
-           <h1> Barefoot Nomad </h1>
-        </div>
-    );
-  }
-}
-
+const App = () => <h1>Welcome to Barefoot Nomad</h1>;
 export default App;
