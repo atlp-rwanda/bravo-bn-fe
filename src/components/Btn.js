@@ -1,13 +1,13 @@
-import React from 'react'
-import './Btn.css'
+import React from "react";
+import "./styles/Btn.scss";
 
-function Button (props) {
-  const { variant = 'primary', children, ...rest } = props
+function Button(props) {
+  const { variant = "primary", children, ...rest } = props;
   return (
     <button className={`button ${variant}`} {...rest}>
       {children}
     </button>
-  )
+  );
 }
 
-export default Button
+export default Button;
