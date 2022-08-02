@@ -35,7 +35,7 @@ Barefoot Nomad is an application that will enable its "Company Nomads" book thei
 
 ## Test
 
-```bash
+bash
 # unit tests
 $ npm run test
 
@@ -44,5 +44,10 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+
+## contributors
+<a href="https://github.com/atlp-rwanda/bravo-bn-fe/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=atlp-rwanda/bravo-bn-fe" />
+</a>
 
 
