@@ -10,8 +10,6 @@
 
 Barefoot Nomad is an application that will enable its "Company Nomads" book their travel and accommodation easily and conveniently across all the locations/centers where the company has its operations.
  
-
-
 ## Installation
 
 1. Install [Node js]()
@@ -23,6 +21,17 @@ Then open [http://localhost:3000](http://localhost:3000) to view it in the brows
 
 ### production mode
  npm run start:prod
+ 
+ ## technologies used
+1. React :  a JavaScript library for building user interfaces
+2. Redux :  Predictable state container for JavaScript apps
+3. SCSS :   Syntactically Awesome Style Sheet
+4. mocha : a feature-rich JavaScript test framework running on Node.js 
+5. Node/Express : A JavaScript runtime built on Chrome V8 JavaScript engine.
+6. Pivotal Tracker : A project management tool used to manage the app.
+7. Figma Used for design mockups.
+8. Npm Used as the package manager for the app. A fast, reliable, and secure dependency management system.
+
 
 ## Test
 
@@ -35,3 +44,5 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+
+
