@@ -2,8 +2,12 @@
 
 body
 {
+  font-family: 'Montserrat';
   background-color: $primaryColor;
+  margin: 0;
+  padding: 0;
   @import './landingPage.scss';
   @import './counter.scss';
+  @import './registrationPage.scss';
 
 }
