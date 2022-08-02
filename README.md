@@ -17,7 +17,7 @@ Barefoot Nomad is an application that will enable its "Company Nomads" book thei
 3. `cd` into the project directory
 4. Run `npm install` in the terminal to install all dependencies
 5. To run the application in development mode, run `npm run start`<br />
-Then open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 
 ### production mode
  npm run start:prod
