@@ -53,4 +53,6 @@ $ npm run test:cov
   <img src="https://contrib.rocks/image?repo=atlp-rwanda/bravo-bn-fe" />
 </a>
 
+## deployment link
+https://bravo-bn-fe.vercel.app/
 
