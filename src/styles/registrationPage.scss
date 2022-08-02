@@ -1,0 +1,111 @@
+@import './variables.scss';
+
+.reg-area{
+    min-height: 100vh;
+    display: flex;
+    .slice-a{
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background:  $secondaryColor;
+        padding: 20px;
+        img{
+            width: 100%;
+        }
+        .welcome-text{
+            text-align: center;
+            color: $primaryColor;
+            p{
+                font-size: 13px;
+            }
+        } 
+    }
+    .slice-b{
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px ;
+        .logo{
+            padding: 20px 0;
+        }
+        .no-account{
+            color: $fouthColor;
+            span{
+                color: $secondaryColor;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+        .form-content{
+            justify-content: center;
+            margin:  auto 0;
+            h2{
+                font-size: 20px;
+                text-align: center;
+            }
+            .input-group{
+                height: 25px;
+                border: 1px solid $fouthColor;
+                margin: 10px 0;
+                width: 400px;
+                border-radius: 5px;
+                padding:  5px;
+                cursor: pointer;
+                ion-icon{
+                    margin: auto 0 auto auto;
+                    color: $fouthColor;
+                }
+            }
+            
+            form{
+                padding: 10px 0;
+                .input-group{
+                    display: flex;
+                    input{ 
+                        width: 100%;
+                        border: none;
+                        padding: 0;
+                    }
+                    input:focus{
+                        outline: none;
+                    }
+                }
+                .forgot-p{
+                    font-size: 10px;
+                    text-align: end;
+                    cursor: pointer;
+                    padding-bottom: 5px;
+                    color: $secondaryColor;
+                }
+            }
+
+            .button{
+                background: $secondaryColor;
+                border: none !important;
+                input{
+                    cursor: pointer;
+                    background: none;
+                    color: $primaryColor;
+                }
+            }
+
+            .social-m{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                p{
+                    font-size: 12px;
+                    padding: 0 5px;
+                    color: $fouthColor;
+                }
+                img{
+                    width: 20px;
+                }
+            }
+        }
+        
+    }
+}
