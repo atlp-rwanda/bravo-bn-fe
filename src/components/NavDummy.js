@@ -1,14 +1,26 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+
 export default function Nav() {
     return (
-
-        <nav>
-            <span>
-                <Link className="nav-link active" aria-current="page" to="/Home">home</Link> <br></br>
-                <Link className="nav-link" to="/Login">login</Link>
-            </span>
-        </nav>
-
+        <>
+            <nav className="nav-bar">
+                <ul>
+                    <li>
+                        <Link to="home"> Home</Link>
+                    </li>
+                    <li>
+                        <Link to="about"> About</Link>
+                    </li>
+                    <li>
+                        <Link to="login"> Log In</Link>
+                    </li>
+                    <li>
+                        <Link to="signup"> Sign Up</Link>
+                    </li>
+                </ul>
+            </nav>
+            <Outlet />
+        </>
     );
 }

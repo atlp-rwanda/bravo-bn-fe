@@ -5,6 +5,8 @@ import App from '../App.js';
 import Home from '../views/Home'
 import Login from '../views/Login'
 import Nav from '../components/NavDummy'
+import SignUp from '../views/Signup.js';
+import About from '../views/About'
 
 afterEach(cleanup);
 test('renders react component', async () => {
@@ -13,6 +15,8 @@ test('renders react component', async () => {
       <App />
       <Home />
       <Login />
+      <About />
+      <SignUp />
       <Nav />
     </Router>,
   );
