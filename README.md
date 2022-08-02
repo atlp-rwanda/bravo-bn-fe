@@ -22,6 +22,19 @@ Barefoot Nomad is an application that will enable its "Company Nomads" book thei
 ### production mode
  npm run start:prod
  
+ ## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
+ 
  ## technologies used
 1. React :  a JavaScript library for building user interfaces
 2. Redux :  Predictable state container for JavaScript apps
@@ -33,17 +46,7 @@ Barefoot Nomad is an application that will enable its "Company Nomads" book thei
 8. Npm Used as the package manager for the app. A fast, reliable, and secure dependency management system.
 
 
-## Test
 
-bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 
 ## contributors
 <a href="https://github.com/atlp-rwanda/bravo-bn-fe/graphs/contributors">
