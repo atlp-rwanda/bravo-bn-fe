@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./styles/button.scss";
+import "../styles/stories/button.scss";
 
 /**
  * Primary UI component for user interaction

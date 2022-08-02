@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/Btn.scss";
+import "../styles/stories/Btn.scss";
 
 function Button(props) {
   const { variant = "primary", children, ...rest } = props;
