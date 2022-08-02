@@ -10,17 +10,10 @@ import SignUp from '../views/Signup';
 
 export default function Router() {
     let element = useRoutes([
-        {
-            path: "/",
-            element: <Nav />,
-            children: [
-                { path: "home", element: <Home /> },
-                { path: "about", element: <About /> },
-                { path: "signup", element: <SignUp /> },
-                { path: "login", element: <Login /> },
-            ]
-        }
-
+        { path: "/home", element: <Home /> },
+        { path: "/about", element: <About /> },
+        { path: "/signup", element: <SignUp /> },
+        { path: "/login", element: <Login /> },
 
     ]);
 
