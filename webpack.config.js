@@ -9,31 +9,40 @@ module.exports = {
     filename: 'index_bundle.js'
   },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_module/,
-        use: {
-          loader: 'babel-loader'
-        }
+   rules: [
+    {
+      test: /\.(js|jsx)$/,
+      exclude:/node_module/,
+      resolve: {
+        extensions: [".js", ".jsx"]
       },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
-        ],
+      use: {
+        loader :'babel-loader'
+      }
+    },{
+      test: /\.(jpe?g|gif|png|svg)$/i,
+      loader: 'url-loader',
+      options: {
+        limit: 25000,
       },
-    ]
-
+    },
+    {
+      test: /\.s[ac]ss$/i,
+      use: [
+        // Creates `style` nodes from JS strings
+        "style-loader",
+        // Translates CSS into CommonJS
+        "css-loader",
+        // Compiles Sass to CSS
+        "sass-loader",
+      ],
+    },
+   ]
   },
   plugins: [
     new HtmlWebpackPlugin(
       {
+        favicon: "./src/assets/barefoot_small_logo.png",
         template: './src/index.html',
       }
     )
