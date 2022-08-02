@@ -6,25 +6,23 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/11711f7444ef6ee2b8fa/maintainability)](https://codeclimate.com/github/atlp-rwanda/bravo-bn-fe/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/11711f7444ef6ee2b8fa/test_coverage)](https://codeclimate.com/github/atlp-rwanda/bravo-bn-fe/test_coverage)
 
+## Description
+
+Barefoot Nomad is an application that will enable its "Company Nomads" book their travel and accommodation easily and conveniently across all the locations/centers where the company has its operations.
+ 
+
 
 ## Installation
 
-```bash
-$ npm install
-```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
+ Install [Node js]()
+ To clone, run git clone https://github.com/atlp-rwanda/bravo-bn-fe.git
+ cd into the project directory
+ Run npm install in the terminal
+ To run the application in development mode, run `npm run start`
+ Then open [http://localhost:3000](http://localhost:3000) to view it in the browser
 
 # production mode
-$ npm run start:prod
-```
+ npm run start:prod
 
 ## Test
 
