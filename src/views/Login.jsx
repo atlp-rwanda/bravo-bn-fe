@@ -9,7 +9,8 @@ import facebookIcon from "../assets/facebook_icon.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+function LoginForm(props) {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -95,6 +96,7 @@ export default function Login() {
         swal.fire("Oops...", `${err.response.data.message}`, "error");
       });
   };
+
   return (
     <div className="reg-area">
       <div className="slice-a">
@@ -162,17 +164,17 @@ export default function Login() {
             </div>
           </form>
           <div className="form-group">
-            <div className="input-group social-m">
-              <img src={googleIcon} alt="" />
-              <p>Sign in with Google</p>
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="input-group social-m">
-              <img src={facebookIcon} alt="" />
-              <p>Sign in with Facebook</p>
-            </div>
-          </div>
+          <a className="input-group social-m" data-testid="google-button" href={process.env.GOOGLE_BACKEND_API_URL}>
+            <img src={googleIcon} alt="" />
+            <p>Sign in with Google</p>
+          </a>
+                        </div>
+                        <div className="form-group">
+          <a className="input-group social-m" data-testid="facebook-button" href={process.env.FACEBOOK_BACKEND_API_URL}>
+            <img src={facebookIcon} alt="" />
+            <p>Sign in with Facebook</p>
+          </a>
+                        </div>
         </div>
         <p className="no-account">
           Don't have an account yet? <span className="signup-btn">Sign Up</span>
@@ -181,3 +183,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default LoginForm;

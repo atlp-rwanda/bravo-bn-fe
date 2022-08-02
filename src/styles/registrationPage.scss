@@ -1,122 +1,119 @@
 @import "./variables.scss";
 
 .reg-area {
-    min-height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  .slice-a {
     display: flex;
-    .slice-a {
-        display: flex;
-        flex: 1;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        background: $secondaryColor;
-        padding: 20px;
-        img {
-            width: 100%;
-        }
-        .welcome-text {
-            text-align: center;
-            color: $primaryColor;
-            width: 80%;
-            p{
-                font-size: 13px;
-            }
-        }
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: $secondaryColor;
+    padding: 20px;
+    img {
+      width: 100%;
     }
-    .slice-b {
-        flex: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 30px;
-        .logo {
-            padding: 20px 0;
-        }
-        .no-account {
-            color: $fouthColor;
-            span {
-                color: $secondaryColor;
-                font-weight: bold;
-                cursor: pointer;
+    .welcome-text {
+      text-align: center;
+      color: $primaryColor;
+      p {
+        font-size: 13px;
+      }
+    }
+  }
+  .slice-b {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    .logo {
+      padding: 20px 0;
+    }
+    .no-account {
+      color: $fouthColor;
+      .signup-btn {
+        color: $secondaryColor;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+
+      }
+    }
+    .form-content {
+      @import "./input.component.scss";
+      justify-content: center;
+      margin: auto 0;
+      h2 {
+        font-size: 20px;
+        text-align: center;
+      }
+      .form-group{
+        margin: 10px 0;
+    
+        .input-group{
+            height: 35px;
+            border: 1px solid $fouthColor;
+            width: 400px;
+            border-radius: 5px;
+            padding:  5px;
+            cursor: pointer;
+            ion-icon{
+                margin: auto 0 auto auto;
+                color: $fouthColor;
             }
         }
-        .form-content {
-            justify-content: center;
+        .error{
+            color: $errorColor;
+            font-size: 14px;
             margin: auto 0;
-            h2 {
-                font-size: 20px;
-                text-align: center;
-            }
-            .form-group{
-                margin: 10px 0;
-            
-                .input-group{
-                    height: 35px;
-                    border: 1px solid $fouthColor;
-                    width: 400px;
-                    border-radius: 5px;
-                    padding:  5px;
-                    cursor: pointer;
-                    ion-icon{
-                        margin: auto 0 auto auto;
-                        color: $fouthColor;
-                    }
-                }
-                .errorBoredr {
-                    border: 1px solid $errorColor;
-                }
-                .error {
-                    color: $errorColor;
-                    font-size: 14px;
-                    margin: auto 0;
-                }
-            }
-
-            form {
-                padding: 10px 0;
-                .input-group {
-                    display: flex;
-                    input {
-                        width: 100%;
-                        border: none;
-                        padding: 0;
-                    }
-                    input:focus{
-                        outline: none;   
-                    }
-                }
-                .forgot-p{
-                    font-size: 14px;
-                    text-align: end;
-                    cursor: pointer;
-                    padding-bottom: 5px;
-                    color: $secondaryColor;
-                }
-            }
-
-            .button {
-                background: $secondaryColor;
-                border: none !important;
-                input {
-                    cursor: pointer;
-                    background: none;
-                    color: $primaryColor;
-                }
-            }
-
-            .social-m {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                p {
-                    font-size: 12px;
-                    padding: 0 5px;
-                    color: $fouthColor;
-                }
-                img {
-                    width: 20px;
-                }
-            }
+            display: none;
         }
     }
+    
+      form {
+        padding: 10px 0;
+        .input-group {
+          display: flex;
+          input {
+            width: 100%;
+            border: none;
+            padding: 0;
+          }
+          input:focus {
+            outline: none;
+          }
+        }
+        .error{
+          color: $errorColor;
+          font-size: 14px;
+          margin: auto 0;
+          display: none;
+      }
+        .forgot-p {
+          font-size: 10px;
+          text-align: end;
+          cursor: pointer;
+          padding-bottom: 5px;
+          color: $secondaryColor;
+        }
+      }
+
+      .social-m {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        p {
+          font-size: 12px;
+          padding: 0 5px;
+          color: $fouthColor;
+        }
+        img {
+          width: 25px;
+        }
+      }
+    }
+  }
 }
