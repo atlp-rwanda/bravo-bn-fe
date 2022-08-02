@@ -6,6 +6,7 @@ body
   background-color: $primaryColor;
   margin: 0;
   padding: 0;
+  @import './buttonDisable.scss';
   @import './landingPage.scss';
   @import './counter.scss';
   @import './registrationPage.scss';

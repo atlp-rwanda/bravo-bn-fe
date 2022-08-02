@@ -1,0 +1,8 @@
+.button-disable{
+    background: $fouthColor !important;
+    cursor: not-allowed !important;
+
+    input{
+        cursor: not-allowed !important;
+    }
+}

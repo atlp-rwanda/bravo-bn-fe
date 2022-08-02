@@ -49,10 +49,10 @@
         font-size: 20px;
         text-align: center;
       }
+      
       .form-group{
-        margin: 10px 0;
     
-        .input-group{
+        .input-group,select{
             height: 35px;
             border: 1px solid $fouthColor;
             width: 400px;

@@ -49,7 +49,6 @@ test('renders react component', async () => {
   render(
      <Router>
       <Provider store={store}>
-
       <Home />    
       </Provider>
       </Router>
