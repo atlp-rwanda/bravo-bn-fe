@@ -1,0 +1,9 @@
+$medium: 750px;
+
+.reg-area{
+    @media (max-width:$medium){
+        .slice-a{
+            display: none !important;
+        }
+    }
+}
