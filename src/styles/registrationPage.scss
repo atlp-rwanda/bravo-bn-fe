@@ -17,6 +17,7 @@
         .welcome-text{
             text-align: center;
             color: $primaryColor;
+            width: 80%;
             p{
                 font-size: 13px;
             }
@@ -46,17 +47,26 @@
                 font-size: 20px;
                 text-align: center;
             }
-            .input-group{
-                height: 25px;
-                border: 1px solid $fouthColor;
+            .form-group{
                 margin: 10px 0;
-                width: 400px;
-                border-radius: 5px;
-                padding:  5px;
-                cursor: pointer;
-                ion-icon{
-                    margin: auto 0 auto auto;
-                    color: $fouthColor;
+            
+                .input-group{
+                    height: 35px;
+                    border: 1px solid $fouthColor;
+                    width: 400px;
+                    border-radius: 5px;
+                    padding:  5px;
+                    cursor: pointer;
+                    ion-icon{
+                        margin: auto 0 auto auto;
+                        color: $fouthColor;
+                    }
+                }
+                .error{
+                    color: $errorColor;
+                    font-size: 14px;
+                    margin: auto 0;
+                    display: none;
                 }
             }
             
@@ -70,11 +80,11 @@
                         padding: 0;
                     }
                     input:focus{
-                        outline: none;
+                        outline: none;   
                     }
                 }
                 .forgot-p{
-                    font-size: 10px;
+                    font-size: 14px;
                     text-align: end;
                     cursor: pointer;
                     padding-bottom: 5px;

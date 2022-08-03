@@ -1,5 +1,5 @@
-import React from 'react';
-import LoginForm from './LoginForm'
+// import React from 'react';
+// import LoginForm from '../views/Login';
 
-const App = () => <LoginForm />;
-export default App; 
+// const App = () => <LoginForm />;
+// export default App; 
