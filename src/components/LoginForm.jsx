@@ -5,6 +5,12 @@ import facebookIcon from "../assets/facebook_icon.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
 
 function SignupForm(props) {
+    const googleAuth = ()=>{
+        window.open('https://bravo-bfn-be.herokuapp.com/api/v1/user/auth/google/',"_self");
+    }
+    const facebookAuth = ()=>{
+        window.open('https://bravo-bfn-be.herokuapp.com/api/v1/user/auth/facebook/',"_self");
+    }
     return (
         <div className="reg-area">
             <div className="slice-a">
@@ -35,11 +41,11 @@ function SignupForm(props) {
                         <input type="submit" value="Login"/>
                     </div>
                 </form>
-                <div className="input-group social-m">
+                <div className="input-group social-m" onClick={googleAuth}>
                     <img src={googleIcon} alt=""/>
                     <p>Sign in with Google</p>
                 </div>
-                <div className="input-group social-m">
+                <div className="input-group social-m" onClick={facebookAuth}>
                     <img src={facebookIcon} alt=""/>
                     <p>Sign in with Facebook</p>
                 </div>

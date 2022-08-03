@@ -1,5 +1,5 @@
 import React from 'react';
-import SignupForm from './SignupForm'
+import LoginForm from './LoginForm'
 
-const App = () => <SignupForm />;
+const App = () => <LoginForm />;
 export default App; 
