@@ -29,23 +29,23 @@ function Signup(props) {
                         <input type="text" name="" id="" placeholder="Username"/>
                     </div>
                     <div className="input-group">
-                        <select name="role" id="role" width="1000px">
-                            <option value="role">Requester</option>
-                            <option value="role">manager</option>
+                        <select name="" id="">
+                            <option value="requister">Requister</option>
+                            <option value="other">manager</option>
                         </select>
                     </div>
                     <div className="input-group">
-                        <input type="text" name="" id="" placeholder="Phone number"/>
+                        <input type="text" name="" id="" placeholder="Phone number" required/>
                     </div>
                     <div className="input-group">
-                        <input type="email" name="" id="" placeholder="Email"/>
+                        <input type="email" name="" id="" placeholder="Email" required/>
                         <ion-icon name="at-circle-outline"></ion-icon>
                     </div>
                     <div className="input-group">
-                        <input type="text" name="" id="" placeholder="Password"/>
+                        <input type="password" name="" id="" placeholder="Password" required/>
                     </div>
                     <div className="input-group">
-                        <input type="text" name="" id="" placeholder="Repeat Password"/>
+                        <input type="password" name="" id="" placeholder="Repeat Password" required/>
                     </div> <br />
                     <div className="radio">
                     <h3>Gender</h3>
@@ -53,7 +53,7 @@ function Signup(props) {
                     <input type="radio" value="Female" name="gender" /> Female
                     </div>
                     <div className="input-group button">
-                        <input type="submit" value="Register"/>
+                        <input type="submit" value="Register" required/>
                     </div>
                 </form>
                 <div className='paragraph'>
