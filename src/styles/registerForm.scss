@@ -16,8 +16,9 @@
         .welcome-text{
             text-align: center;
             color: $primaryColor;
+            font-size: 12px;
             p{
-                font-size: 13px;
+                font-size: 9px;
             }
         } 
     }
@@ -26,12 +27,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 40px ;
+        padding: 10px ;
+        margin-left: 120px;
         .logo{
-            padding: 14px 0;
+            padding: 12px 0;
+            margin-right: 110px;
         }
         .no-account{
             color: $fouthColor;
+            margin-top: 0px;
             span{
                 color: $secondaryColor;
                 font-weight: bold;
@@ -41,9 +45,13 @@
         .form-content{
             justify-content: center;
             margin:  auto 0;
-            h2{
-                font-size: 12px;
+            h1{
+                font-size: 25px;
                 text-align: center;
+                margin-right: 110px;
+            }
+            .paragraph{
+                margin-top: -120px;
             }
             .input-group{
                 height: 20px;
@@ -63,7 +71,16 @@
             
             form{
                 padding: 1px 0;
+                .radio{
+                    text-align: center;
+                    padding: 160px;
+                    margin-left: -600px; 
+                    h3{
+                        margin-right: 65px;
+                    }                   
+                }
                 .input-group{
+                    margin-right: 10px;
                     display: flex;
                     input{ 
                         width: 100%;
@@ -73,19 +90,16 @@
                     input:focus{
                         outline: none;
                     }
+                    #role{
+                        outline: none;
+                        border: none;
+                    }
                 }
-                .forgot-p{
-                    font-size: 10px;
-                    text-align: end;
-                    cursor: pointer;
-                    padding-bottom: 5px;
-                    color: $secondaryColor;
-                }
-                
             }
 
             .button{
                 background: $secondaryColor;
+                margin-top: -150px;
                 border: none !important;
                 input{
                     cursor: pointer;
@@ -93,21 +107,6 @@
                     color: $primaryColor;
                 }
             }
-
-            .social-m{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                p{
-                    font-size: 7px;
-                    padding: 0 5px;
-                    color: $fouthColor;
-                }
-                img{
-                    width: 20px;
-                }
-            }
         }
-        
     }
 }

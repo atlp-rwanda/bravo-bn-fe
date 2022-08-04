@@ -1,22 +1,23 @@
 import React from 'react';
 import svg from "../assets/undraw_fill_form_re_cwyf 1.svg";
-import barefootLogo from "../assets/Group 48.png";
+import barefootLogo from "../assets/Barefoot. Nomad.svg";
 
 function Signup(props) {
     return (
         <div className="reg-area">
             <div className="slice-a">
-                <img src={svg} alt="Login svg"/>
+            <div className="welcome-text">
+            <h2>Welcome we are happy <br /> to have you <br /> here</h2>
+            </div>
+                <img src={svg} alt="Login svg" width="400px" height="350px"/>
                 <div className="welcome-text">
-                    <h2>Welcome we are happy to have you here</h2>
                     <p>“Every moment and every event of every man’s life on earth plants something in his soul”</p>
                 </div>
             </div>
             <div className="slice-b">
                 <img src={barefootLogo} className="logo" alt="Barefoot logo"/>
                 <div className="form-content">
-
-                <h2>Sign Up To Create an account</h2>
+                <h1>Sign Up To Create an <br /> account</h1>
                 <form action="" className="reg-form">
                 <div className="input-group">
                         <input type="text" name="" id="" placeholder="First name"/>
@@ -28,13 +29,16 @@ function Signup(props) {
                         <input type="text" name="" id="" placeholder="Username"/>
                     </div>
                     <div className="input-group">
-                        <input type="text" name="" id="" placeholder="Role"/>
+                        <select name="role" id="role" width="1000px">
+                            <option value="role">Requester</option>
+                            <option value="role">manager</option>
+                        </select>
                     </div>
                     <div className="input-group">
                         <input type="text" name="" id="" placeholder="Phone number"/>
                     </div>
                     <div className="input-group">
-                        <input type="text" name="" id="" placeholder="Email"/>
+                        <input type="email" name="" id="" placeholder="Email"/>
                         <ion-icon name="at-circle-outline"></ion-icon>
                     </div>
                     <div className="input-group">
@@ -42,13 +46,20 @@ function Signup(props) {
                     </div>
                     <div className="input-group">
                         <input type="text" name="" id="" placeholder="Repeat Password"/>
+                    </div> <br />
+                    <div className="radio">
+                    <h3>Gender</h3>
+                    <input type="radio" value="Male" name="gender" /> Male
+                    <input type="radio" value="Female" name="gender" /> Female
                     </div>
                     <div className="input-group button">
                         <input type="submit" value="Register"/>
                     </div>
                 </form>
+                <div className='paragraph'>
+                <p>Have an account? <a href='#'>Log In</a></p>
                 </div>
-                <p className="no-account">Have an account? <span className="signup-btn">Log In</span></p>
+                </div>
             </div>
         </div>
     );
