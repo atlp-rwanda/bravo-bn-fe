@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { composeStory } from "@storybook/testing-react";
 import "@testing-library/jest-dom";
-import Meta, { Primary as PrimaryStory } from "../stories/Button.stories.jsx";
-import { Email as EmailInput } from "../stories/Input.stories.jsx";
+import Meta, { Primary as PrimaryStory } from "../stories/Button.stories";
+import { Email as EmailInput } from "../stories/Input.stories";
 
 const Primary = composeStory(PrimaryStory, Meta);
 
