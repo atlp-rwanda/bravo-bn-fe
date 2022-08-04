@@ -1,8 +1,6 @@
 import React from 'react';
 import { render, cleanup } from "@testing-library/react";
 import { BrowserRouter as Router } from 'react-router-dom';
-import { store } from "../redux/store";
-import { Provider } from "react-redux";
 import App from '../App.js';
 import Home from '../views/Home'
 import Login from '../views/Login'
@@ -14,12 +12,7 @@ afterEach(cleanup);
 test('renders react component', async () => {
   render(
     <Router>
-
-      <Provider store={store}>
-        {" "}
-        <App />
-      </Provider>
-
+      <App />
       <Home />
       <Login />
       <About />
