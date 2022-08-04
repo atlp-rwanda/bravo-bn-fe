@@ -20,16 +20,16 @@ function Signup(props) {
                 <h1>Sign Up To Create an <br /> account</h1>
                 <form action="" className="reg-form">
                 <div className="input-group">
-                        <input type="text" name="" id="" placeholder="First name"/>
+                        <input type="text" name="" id="" placeholder="First name" required/>
                     </div>
                     <div className="input-group">
-                        <input type="text" name="" id="" placeholder="Second name"/>
+                        <input type="text" name="" id="" placeholder="Second name" required/>
                     </div>
                     <div className="input-group">
-                        <input type="text" name="" id="" placeholder="Username"/>
+                        <input type="text" name="" id="" placeholder="Username" required/>
                     </div>
                     <div className="input-group">
-                        <select name="" id="">
+                        <select name="role" id="role">
                             <option value="requister">Requister</option>
                             <option value="other">manager</option>
                         </select>
