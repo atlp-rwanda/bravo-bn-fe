@@ -1,12 +1,12 @@
-
-.container{
+.container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
   flex-direction: column;
-  h1{
+
+  h1 {
     color: $secondaryColor;
   }
- }
+}

@@ -1,17 +1,25 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import App from "../components/App";
-import { store } from "../redux/store";
-import { Provider } from "react-redux";
+import React from 'react';
+import { render, cleanup } from "@testing-library/react";
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from '../App.js';
+import Home from '../views/Home'
+import Login from '../views/Login'
+import Nav from '../components/NavDummy'
+import SignUp from '../views/Signup.js';
+import About from '../views/About'
+import Btn from '../components/Btn'
+afterEach(cleanup);
+test('renders react component', async () => {
+  render(
+    <Router>
+      <App />
+      <Home />
+      <Login />
+      <About />
+      <SignUp />
+      <Nav />
+      <Btn />
+    </Router>,
+  );
+})
 
-it("renders correctly", () => {
-  const tree = renderer
-    .create(
-      <Provider store={store}>
-        {" "}
-        <App />
-      </Provider>
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});

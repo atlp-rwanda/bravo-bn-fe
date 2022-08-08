@@ -1,4 +1,5 @@
 node_modules
+coverage
 src/tests/__snapshots__
 .env
 dist
