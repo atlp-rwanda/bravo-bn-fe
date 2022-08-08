@@ -27,8 +27,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 10px ;
-        margin-left: 120px;
+        padding: 82px ;
+        margin-left: 130px;
         .logo{
             padding: 12px 0;
             margin-right: 110px;
@@ -57,8 +57,8 @@
                 height: 20px;
                 float: left;
                 border: 1px solid $fouthColor;
-                margin: 9px 0;
-                width: 260px;
+                margin: 6px 0;
+                width: 300px;
                 border-radius: 5px;
                 padding:  5px;
                 display: block;
@@ -74,13 +74,13 @@
                 .radio{
                     text-align: center;
                     padding: 160px;
-                    margin-left: -600px; 
+                    margin-left: -700px; 
                     h3{
-                        margin-right: 65px;
+                        margin-right: 70px;
                     }                   
                 }
                 .input-group{
-                    margin-right: 10px;
+                    margin-right: 30px;
                     display: flex;
                     input{ 
                         width: 100%;
