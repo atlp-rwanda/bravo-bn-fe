@@ -1,5 +1,10 @@
 @import './variables.scss';
 
+*{
+  padding: 0px;
+  margin: 0px;
+}
+
 body
 {
   font-family: 'Montserrat';
@@ -7,9 +12,18 @@ body
   margin: 0;
   padding: 0;
   @import './buttonDisable.scss';
-  @import './landingPage.scss';
   @import './registrationPage.scss';
   @import './signup.scss';
   @import './responsive.scss';
+  @import './registrationPage.scss';
+  @import './responsive.scss';
+  @import './Contents.scss';
+  @import './Navbar.scss';
+  @import './Sidebar.scss';
+  @import './Users.scss';
+  @import './footer.scss';
+  @import './responsiveness.scss';
+  @import './details.scss';
+  @import './dashboard.scss';
 
 }

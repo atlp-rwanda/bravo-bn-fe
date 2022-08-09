@@ -2,8 +2,8 @@ import { Navigate } from 'react-router-dom'
 import React from 'react'
 import jwt_decode from 'jwt-decode'
 import { useDispatch, useSelector } from "react-redux";
-import { authActions} from '../redux/authSlice'
-import Nav from '../components/NavDummy';
+import { authActions} from '../redux/auth/authSilce';
+import Dashboard from '../views/Dashboard';
 
 const PrivateRoutes = () => {
   function get(n) {
@@ -26,7 +26,7 @@ const PrivateRoutes = () => {
         let decodedToken = jwt_decode(isLoggedIn);
         
         if(decodedToken.exp * 1000 > currentDate.getTime()){
-         return  <Nav/>
+         return  <Dashboard />
         }
       }else{
         

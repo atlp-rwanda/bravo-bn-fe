@@ -1,0 +1,40 @@
+@import './variables.scss';
+
+.footer-content {
+ display : flex;
+ background-color: $thirdColor;
+ color: $primaryColor;
+position: relative;
+bottom: 0;
+margin-top: 25px;
+width: 100vw;
+justify-content: center;
+div{
+  flex: 1;
+  margin: 0px 50px;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  &:last-child{
+    display: flex;
+    flex-direction: column;
+    
+  }
+}
+
+//  div{
+//  display : grid;
+//  margin-left: 10em;
+ 
+//  span{
+//     font-size: 15px;
+//  }
+//  p{
+//    display: flex;
+//    align-content: flex-end;
+//    margin-top: 5em;
+//  }
+ 
+//  }
+
+}

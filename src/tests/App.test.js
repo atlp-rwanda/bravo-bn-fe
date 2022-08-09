@@ -6,9 +6,9 @@ import store from "../redux/store";
 import App from '../App.js';
 import LoginForm from '../views/Login';
 import Home from '../views/Home'
-import Nav from '../components/NavDummy'
+import Nav from '../components/NavDummy';
+import Btn from '../components/Btn';
 import About from '../views/About'
-import Btn from '../components/Btn'
 
 afterEach(cleanup);
 
@@ -86,5 +86,4 @@ test('renders react component', async () => {
       </Router>
   );
 })
- 
 
