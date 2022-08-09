@@ -1,0 +1,14 @@
+.contents-container{
+    display: flex;
+    height: 90vh;
+    width: 100vw;
+    .sidebar{
+        background-color:white;
+        width:250px;
+        margin-right: 10px;
+        color:black;
+    }
+    .contents{
+        width: 100%;
+    }
+}
