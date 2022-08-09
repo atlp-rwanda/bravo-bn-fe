@@ -28,41 +28,6 @@ configure({ adapter: new Adapter() });
         repeat_password: 'heritier',
       };
     });
-
-    it('creates SIGNUP_SUCCESS when creating user', () => {
-        const user = {
-          firstName: 'hishamunda',
-          lastname: 'heritier',
-          username: 'hiheritier',
-          role: 'requester',
-          phoneNumber: '0789164181',
-          gender: 'male',
-          email: 'hishamunda221015883@gmail.com',
-          password: 'heritier',
-          repeat_password: 'heritier',
-        };
-      });
-
-      it('creates SIGNUP_SUCCESS when creating user', () => {
-        const user = {
-          firstName: 'hishamunda',
-          lastname: 'heritier',
-          username: 'hiheritier',
-          role: 'requester',
-          phoneNumber: '0789164181',
-          gender: 'male',
-          email: 'hishamunda221015883@gmail.com',
-          password: 'heritier',
-          repeat_password: 'heritier',
-        };
-      });
-
-      it('check password', () => {
-        const user = {
-          password: 'heritier',
-          repeat_password: 'heritier',
-        };
-      });
   });
 
 
