@@ -1,7 +1,6 @@
-// eslint-disable-next-line no-unused-vars
+// // eslint-disable-next-line no-unused-vars
 import React from "react";
-import Counter from "./Counter.js";
-import Dashboard from "./dashboard/dashboard.js";
+import Dashboard from "../views/Dashboard.js";
 const App = () => {
   return (
     <div className="container">

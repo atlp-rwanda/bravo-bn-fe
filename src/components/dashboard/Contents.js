@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
-import "./Contents.scss";
 
-import Sidebar from '../Sidebar/Sidebar';
-import ContentElements from "../contentElements/ContentElements";
+
+import Sidebar from './Sidebar';
+import ContentElements from "./ContentElements";
 const Contents = () => {
 
     const [activeTab,setActiveTab] = useState("");
