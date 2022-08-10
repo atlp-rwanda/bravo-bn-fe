@@ -1,6 +1,5 @@
 import React from 'react';
-import Contents from './Contents/Contents';
-import Dash from "./dash/Dash";
+import Dash from "../components/dashboard/Dash";
 
 const Dashboard = () => {
     return ( 

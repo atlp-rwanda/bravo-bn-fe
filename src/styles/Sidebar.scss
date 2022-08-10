@@ -12,8 +12,8 @@
             margin-left: 10px;
         }
         &:hover{
-            background-color: #046CC6;
-            color: white;
+            background-color: $secondaryColor;
+            color:$primaryColor;
         }
     }
 }

@@ -1,0 +1,13 @@
+$desktop:1200px;
+$laptop :992px;
+$tablet :768px;
+$phone:480px;
+
+.navbar{
+    
+    @media (max-width:$laptop){
+      .center{
+        background-color: red;
+      }
+    }
+}

@@ -1,0 +1,29 @@
+@import './variables.scss';
+
+.footer-content {
+ display : flex;
+ background-color: $thirdColor;
+ color: $primaryColor;
+position: relative;
+bottom: 0;
+
+ div{
+ display : grid;
+ margin-left: 12em;
+ 
+ span{
+    font-size: 15px;
+    Link:hover{
+      color: $secondaryColor;
+      cursor: pointer;
+  
+    }
+ }
+ p{
+   display: flex;
+   align-content: flex-end;
+   margin-top: 5em;
+ }
+ }
+
+}
