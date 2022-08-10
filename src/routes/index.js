@@ -1,21 +1,24 @@
 import React from 'react';
-import { useRoutes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import Nav from '../components/NavDummy';
 import Home from '../views/Home';
-import Login from '../views/Login';
 import About from '../views/About';
-import SignUp from '../views/Signup';
+import PrivateRoutes from '../utils/PrivateRoutes';
+import Login from '../views/Login';
+import Signup from '../views/Signup';
 
 
-export default function Router() {
-    let element = useRoutes([
-        { path: "/home", element: <Home /> },
-        { path: "/about", element: <About /> },
-        { path: "/signup", element: <SignUp /> },
-        { path: "/login", element: <Login /> },
+const routes= () => {
 
-    ]);
-
-    return element;
+  return (
+      <Routes>
+      <Route  element={<PrivateRoutes/>}>
+        <Route exact path="/" element={<Home/>}/>
+        <Route exact path="/about" component={<About/>}/>
+      </Route >
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/signup' element={<Signup/>}/>
+    </Routes>
+  );
 }
+export default routes;
