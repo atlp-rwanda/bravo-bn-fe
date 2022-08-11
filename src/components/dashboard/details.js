@@ -1,7 +1,10 @@
-import React from "react";
 import Button from "../Btn"
+import React,{useEffect,useState} from 'react';
+import axios from 'axios';
 
 const Details  = ({setOpenpopup,openPopup}) => {
+
+   
 
 
     const styles = {
@@ -10,9 +13,11 @@ const Details  = ({setOpenpopup,openPopup}) => {
     }
 
     return (
+        
     
         <div className={`container`} style={styles}>
-            <div>
+            
+                <div>
                 <div>
                     <img src="https://media-exp1.licdn.com/dms/image/C4E03AQGls0evv2rK2Q/profile-displayphoto-shrink_800_800/0/1584021640268?e=1665619200&v=beta&t=uO5zwr2Fb3xIvgCRLaT-U9OLTlSrt8W7Fi9bYpk2zSI" alt="Avatar"/>
                 </div>
@@ -32,11 +37,15 @@ const Details  = ({setOpenpopup,openPopup}) => {
                         </span>
                 </div>
             </div>
+            
+            
             <div className="buttons">
                 <Button variant="primary">Save</Button>
                 <Button variant="secondary" onClick={() => setOpenpopup(false)}>Close</Button>
             </div>
         </div>
+
+
       );
 }
  
