@@ -3,7 +3,7 @@ import React,{useState} from 'react';
 
 import Sidebar from './Sidebar';
 import ContentElements from "./ContentElements";
-const Contents = () => {
+const Contents = ({openPopup,setOpenpopup}) => {
 
     const [activeTab,setActiveTab] = useState("");
 
@@ -11,7 +11,7 @@ const Contents = () => {
             <div className="contents-container">
                 <div className="sidebar"><Sidebar /> </div>
                  <div className="contents">
-                    <ContentElements />
+                    <ContentElements openPopup={openPopup} setOpenpopup={setOpenpopup} />
                  </div>
             </div>
      );

@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 // import { useState } from '@storybook/addons';
 
-const Users = () => {
+const Users = ({openPopup,setOpenpopup}) => {
     const [users,setUsers]=useState([]);
     useEffect(() => {
         const renderState = async () => {
@@ -10,11 +10,12 @@ const Users = () => {
             `https://bravo-bfn-be.herokuapp.com/api/v1/user/`
           );
         const {data}=res.data;
-        console.log(data[13]);
+        
         setUsers(data)
         };
         renderState();
       }, []);
+      console.log(openPopup)
     return ( 
         <div className='users'>
             <span>Users</span>
@@ -27,7 +28,7 @@ const Users = () => {
                     <span>Verified</span>
                 </div>
                 {users.map(user=>(
-                    <div className='user-content' key={user.id}>
+                    <div className='user-content' key={user.id} onClick={() => setOpenpopup(true)}>
                     <span>
                         <img src="{user.image}" alt="profile" />
                         <span>{user.username}</span>
@@ -35,7 +36,7 @@ const Users = () => {
                     <span>{user.email}</span>
                     <span>{user.role}</span>
                     <span>{user.gender}</span>
-                    <span>{user.isVerified == true? user.isVerified:null}</span>
+                    <span>{user.isVerified ? 'true':'false' }</span>
                 </div>
    
                 ))}

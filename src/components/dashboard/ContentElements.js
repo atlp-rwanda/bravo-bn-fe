@@ -1,10 +1,10 @@
 import React from 'react';
 import Users from './Users';
 
-const ContentElements = () => {
+const ContentElements = ({openPopup,setOpenpopup}) => {
     return ( 
         <div>
-          <Users/>
+          <Users openPopup={openPopup} setOpenpopup={setOpenpopup}/>
         </div>
         
      );

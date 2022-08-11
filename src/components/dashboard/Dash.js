@@ -2,23 +2,22 @@ import React,{useState} from 'react';
 import Contents from './Contents';
 import Navbar from './Navbar';
 import Footer from './footer';
-import "./dashboard.scss";
+import Details from './details';
+
 const Dash = () => {
 
-    const [activeTab,setActiveTab] = useState("");
+    const [openPopup,setOpenpopup] = useState(false);
 
 
     return ( 
         <div className='dashboard-container'>
-             <div>
-                <Navbar/>
-             </div>
-             
-            <Contents />
+            <Navbar/>
+            <Contents openPopup={openPopup} setOpenpopup={setOpenpopup}/>
             <Footer/>
+            <div className='popup-container' style={{display:`${openPopup ? "flex" : "none"}`}} >
+                <Details openPopup={openPopup} setOpenpopup={setOpenpopup} />
+            </div>
         </div>
-       
-      
      );
 }
  

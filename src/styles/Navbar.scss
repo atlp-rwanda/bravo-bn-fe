@@ -20,17 +20,7 @@
             }
         }
      }
-     .center{
-        span{
-            padding: 0px 15px;
-            font-size: 12px;
-            font-weight: 600;
-            &:hover{
-                color: $secondaryColor;
-                cursor: pointer;
-            }
-        }
-     }
+  
     .right{
         display: flex;
         justify-content: flex-end;
