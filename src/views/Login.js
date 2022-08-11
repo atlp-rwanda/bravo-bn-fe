@@ -3,7 +3,6 @@ import axios from "axios";
 import swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { logginUser } from "../redux/auth/loginSlice";
-import { authActions } from "../redux/auth/authSilce";
 import svg from "../assets/mobile_login.svg";
 import googleIcon from "../assets/google_icon.svg";
 import facebookIcon from "../assets/facebook_icon.svg";
@@ -29,7 +28,6 @@ export default function Login() {
     switch (name) {
       case "email":
         let emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        emailValid && setEmail(value);
         setEmailError({
           ...emailError,
           ["isValid"]: emailValid ? true : false,
@@ -39,7 +37,6 @@ export default function Login() {
         break;
       case "password":
         let passwordValid = value.length >= 6;
-        passwordValid && setPassword(value);
         setPasswordError({
           ...passwordError,
           ["isValid"]: passwordValid ? true : false,
@@ -77,7 +74,6 @@ export default function Login() {
       }
       return false;
     }
-
     axios
       .post(`${process.env.API_URL}/user/login`, {
         email,
@@ -128,6 +124,7 @@ export default function Login() {
                   name="email"
                   placeholder="Email"
                   value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   onBlur={(e) => handleChange(e)}
                 />
                 <ion-icon name="at-circle-outline"></ion-icon>
@@ -146,6 +143,7 @@ export default function Login() {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
                   onBlur={(e) => handleChange(e)}
                 />
                 <ion-icon name="lock-closed-outline"></ion-icon>
