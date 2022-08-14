@@ -1,10 +1,19 @@
 import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 import { DataGrid } from "@mui/x-data-grid"
+import Avatar from "@mui/material/Avatar";
     
       const columns = [
+        { field: "image", headerName: "Profile", width: 300 ,
+        renderCell: (params) => {
+          return (
+            <>
+              <Avatar src={params.image} />
+              {params.username}
+            </>
+          );
+        } },
   { field: "username", headerName: "Username", width: 300 },
-  { field: "image", headerName: "Profile", width: 300 },
   { field: "email", headerName: "Email", width: 300 },
   { field: "role", headerName: "Role", width: 200 },
   { field: "gender", headerName: "Gender", width: 100 },
@@ -28,7 +37,7 @@ const Users = ({openPopup,setOpenpopup}) => {
       }, []);
     return ( 
        
-         <div style={{ margin: "10px", height: 600, width: "80%" }}
+         <div style={{ margin: "10px", height: 600, width: "80%" ,cursor:"pointer"} } onClick={() => setOpenpopup(true)}
          >
            <DataGrid
          data-testid="requests-table"
@@ -36,7 +45,6 @@ const Users = ({openPopup,setOpenpopup}) => {
          columns={columns}
          pageSize={15}
          rowsPerPageOptions={[15]}
-         checkboxSelection
          sx={{
            height: "100%",
            width: "100%",

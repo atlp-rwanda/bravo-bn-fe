@@ -57,6 +57,10 @@ module.exports = {
     }),
     new webpack.DefinePlugin(envKeys)
   ],
+  devServer: {
+    historyApiFallback: true,
+  }
+
 };
 
 {
