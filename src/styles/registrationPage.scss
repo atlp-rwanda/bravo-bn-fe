@@ -1,49 +1,49 @@
-@import './variables.scss';
+@import "./variables.scss";
 
-.reg-area{
+.reg-area {
     min-height: 100vh;
     display: flex;
-    .slice-a{
+    .slice-a {
         display: flex;
         flex: 1;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        background:  $secondaryColor;
+        background: $secondaryColor;
         padding: 20px;
-        img{
+        img {
             width: 100%;
         }
-        .welcome-text{
+        .welcome-text {
             text-align: center;
             color: $primaryColor;
             width: 80%;
             p{
                 font-size: 13px;
             }
-        } 
+        }
     }
-    .slice-b{
+    .slice-b {
         flex: 2;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px ;
-        .logo{
+        padding: 30px;
+        .logo {
             padding: 20px 0;
         }
-        .no-account{
+        .no-account {
             color: $fouthColor;
-            span{
+            span {
                 color: $secondaryColor;
                 font-weight: bold;
                 cursor: pointer;
             }
         }
-        .form-content{
+        .form-content {
             justify-content: center;
-            margin:  auto 0;
-            h2{
+            margin: auto 0;
+            h2 {
                 font-size: 20px;
                 text-align: center;
             }
@@ -62,19 +62,21 @@
                         color: $fouthColor;
                     }
                 }
-                .error{
+                .errorBoredr {
+                    border: 1px solid $errorColor;
+                }
+                .error {
                     color: $errorColor;
                     font-size: 14px;
                     margin: auto 0;
-                    display: none;
                 }
             }
-            
-            form{
+
+            form {
                 padding: 10px 0;
-                .input-group{
+                .input-group {
                     display: flex;
-                    input{ 
+                    input {
                         width: 100%;
                         border: none;
                         padding: 0;
@@ -92,30 +94,29 @@
                 }
             }
 
-            .button{
+            .button {
                 background: $secondaryColor;
                 border: none !important;
-                input{
+                input {
                     cursor: pointer;
                     background: none;
                     color: $primaryColor;
                 }
             }
 
-            .social-m{
+            .social-m {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                p{
+                p {
                     font-size: 12px;
                     padding: 0 5px;
                     color: $fouthColor;
                 }
-                img{
+                img {
                     width: 20px;
                 }
             }
         }
-        
     }
 }
