@@ -3,8 +3,11 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Stack, Typography } from '@mui/material';
-import CardContent from '@mui/material/CardContent';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import TextField from '@mui/material/TextField';
+import CardContent from '@mui/material/CardContent';
+import { DateTimePicker,LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +28,119 @@ const style = {
   borderRadius: 2,
   boxShadow: 24,
 };
+
+
+export function UpdateModal(props) {
+  const tripId = useSelector(state=> state.trips.tripRequest);
+  const [loading, setLoading] = React.useState(false);
+  const token= useSelector(state=> state.auth.token);
+  const allTrips = useSelector(state=> state.trips.trips);
+  const trip =  typeof(tripId) == 'number' ? allTrips[tripId] : '';
+  const [updateTrip,setUpdateTrip] = React.useState({leavingFrom:'', travelReason:'', travelDate:''})
+  const dispatch = useDispatch();
+
+  React.useEffect(()=>{
+    if(typeof(tripId) == 'number'){
+      setUpdateTrip({leavingFrom:trip.leavingFrom, travelReason:trip.travelReason, travelDate:trip.travelDate})
+    }
+  },[tripId])
+
+  const submitUpdates = (e)=>{
+    e.preventDefault();
+    setLoading(true)
+    axios.patch(`${process.env.API_URL}/user/trip/update/${allTrips[tripId]['id']}`,{
+     ...updateTrip
+    }, {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((res)=>{
+      setLoading(false)
+      dispatch(
+      alertActions.success({message:'Trip request updated succesfully'})
+      )
+      setTimeout(()=>{
+        dispatch(
+          alertActions.success({message: 'none'}));
+        },10000)
+      }).catch(err=> {
+        console.log(err)
+        setLoading(false)
+        dispatch(
+          alertActions.error({message: err.response.data.message })
+          );
+        })
+setTimeout(()=>{
+  dispatch(
+    alertActions.error({message: 'none'}));
+  },10000)
+  }
+
+  return (
+
+         <Modal
+        open={props.open}
+        onClose={props.onClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <CardContent sx={{ background: '#046CC6',  padding:'10px 20px'}}>
+          <Typography id="modal-modal-title" sx={{ color:'#fff', fontSize:'1rem'}} variant="h5" >
+          Update trip request
+          </Typography>
+        </CardContent>
+
+          <CardContent sx={{  padding:'20px 20px 0 20px'}}>
+          <form >
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+        <TextField
+          style={{ width:'-webkit-fill-available',  margin: "5px" }}
+          type="text"
+          label="Leaving from"
+          variant="outlined"
+          value={updateTrip.leavingFrom}
+          onChange={(e)=>{setUpdateTrip({...updateTrip, leavingFrom: e.target.value})}}
+        />
+        <br />
+        
+
+        <DateTimePicker
+          label="Travel date"
+          
+          value={updateTrip.travelDate}
+          onChange={(e)=>{ setUpdateTrip({...updateTrip, travelDate:e})}}
+          renderInput={(params) => <TextField sx={{ width:'-webkit-fill-available',  margin: "5px" }} {...params} />}
+          />
+        <br />
+        <TextareaAutosize
+      aria-label="minimum height"
+      minRows={1}
+      placeholder="Travel reason"
+      value={updateTrip.travelReason}
+      onChange={(e)=>{setUpdateTrip({...updateTrip, travelReason: e.target.value})}}
+      style={{ width: '-webkit-fill-available',    margin: '5px',
+      border: '1px solid #d7d7d7',
+      padding: '20px',
+      outline: 'none',
+      borderRadius: '5px',
+      background: '#fff',
+      height: '50px', }}
+      />
+
+      </LocalizationProvider>
+      </form>
+          </CardContent>
+          <CardContent sx={{  margin:'20px 0'}}>
+          <Button variant="outlined" size="medium" onClick={props.onClose} sx={{ ml:2, float:'right',textTransform:'none', lineHeight:'normal'}}>
+          Close
+        </Button>
+          <Button onClick={submitUpdates} variant="contained" size="medium"  sx={{ float:'right',textTransform:'none', lineHeight:'normal'}}>
+          {loading ? <PreLoaderSmall/> : 'Update'}
+        </Button>
+          </CardContent>
+        </Box>
+      </Modal>
+  );
+}
 
 export  function CommentsModal(props) {
   const [newComment, setNewComment] = React.useState('');
@@ -168,3 +284,62 @@ export  function CommentsModal(props) {
   );
 }
  
+
+export function DetailsModal(props) {
+
+  const tripId = useSelector(state=> state.trips.tripRequest);
+  const allTrips = useSelector(state=> state.trips.trips);
+
+  const trip =  typeof(tripId) == 'number' ? allTrips[tripId] : '';
+    return (
+         
+         <Modal
+        open={props.open}
+        onClose={props.onClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <CardContent sx={{ background: '#046CC6',  padding:'10px 20px'}}>
+          <Typography id="modal-modal-title" sx={{ color:'#fff', fontSize:'1rem'}} variant="h5" >
+          Trip request datails
+          </Typography>
+        </CardContent>
+
+          <CardContent sx={{  padding:'20px 20px'}}>
+            <Box sx={{display:'flex', pb:1}}>
+            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3, whiteSpace: 'nowrap'}} variant="h5" >Leaving from:</Typography>
+            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem',flex:'4'}} variant="h5" >{trip.leavingFrom}</Typography>
+            </Box>
+            <Box sx={{display:'flex', pb:1}}>
+            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3,whiteSpace: 'nowrap'}} variant="h5" >Going to:</Typography>
+            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem'}} variant="h5" > {trip.location}</Typography>
+            </Box>
+            <Box sx={{display:'flex', pb:1}}>
+            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3,whiteSpace: 'nowrap'}} variant="h5" >Travel date:</Typography>
+            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem'}} variant="h5" >{trip.travelDate}</Typography>
+            </Box>
+            <Box sx={{display:'flex', pb:1}}>
+            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3,whiteSpace: 'nowrap'}} variant="h5" >Returning date:</Typography>
+            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem'}} variant="h5" >{trip.returnDate}</Typography>
+            </Box>
+            <Box sx={{display:'flex', pb:1}}>
+            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3,whiteSpace: 'nowrap'}} variant="h5" >Trip type:</Typography>
+            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem'}} variant="h5" > {trip.tripType}</Typography>
+            </Box>
+            <Box sx={{display:'flex', pb:1}}>
+            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3,whiteSpace: 'nowrap'}} variant="h5" >Trip reason:</Typography>
+            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem'}} variant="h5" >{trip.travelReason}</Typography>
+            </Box>
+
+          </CardContent>
+          <CardContent sx={{  margin:'20px 0'}}>
+          <Button variant="contained" size="medium" onClick={props.onClose}  sx={{ float:'right',textTransform:'none', lineHeight:'normal'}}>
+          Close
+        </Button>
+          </CardContent>
+        </Box>
+      </Modal>
+        
+  );
+}
