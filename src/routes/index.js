@@ -11,6 +11,7 @@ import PopupModal from "../components/Modal/Modal.js"
 import Booking from '../views/Book';
 import Home from '../views/Home';
 import CreateRequest from '../views/CreateRequest';
+import RequestsTable from '../components/dashboard/RequestsTable';
 
 
 const routes= () => {
@@ -19,6 +20,7 @@ const routes= () => {
       <Routes>
       <Route  element={<PrivateRoutes/>}>
         <Route exact path="/about" component={<About/>}/>
+        <Route exact path="/dashboard/requests" element={<RequestsTable/>}/>
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/about" element={<About/>}/>
         <Route exact path="/trip-requests" element={<Booking/>}/>
