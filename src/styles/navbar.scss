@@ -1,0 +1,49 @@
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
+    background-color:$primaryColor;
+    height: 70px;
+    margin-bottom: 10px;
+    padding: 3px 0px;
+    width: 100vw;
+
+    div{
+        flex: 1; 
+     }
+     .left{
+        margin-left: 30px;
+        span{
+            font-weight: bolder;
+            &:last-child{
+                color: $secondaryColor;
+            }
+        }
+     }
+  
+    .right{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 30px;
+        img{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            padding: 0px 15px;
+            cursor: pointer;
+        }
+    }
+    
+     
+}
+
+@media (max-width:780px) {
+ .navbar{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+ }
+}
