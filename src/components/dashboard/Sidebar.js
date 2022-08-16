@@ -1,5 +1,6 @@
 import React from 'react';
 import Users from './Users';
+import {Link,NavLink} from 'react-router-dom'
 
 const Sidebar = () => {
     return ( 
@@ -11,8 +12,7 @@ const Sidebar = () => {
             <div >
                 <span class="iconify" data-icon="clarity:users-solid"></span>
                 <span>
-                    <a href={Users} />
-                    Users
+                    <Link to="/dashboard">Users</Link>
                     </span>
                     
             </div>

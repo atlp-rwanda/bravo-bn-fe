@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 export default function Nav() {
     return (
         <>
-            <nav className="nav-bar">
+            {/* <nav className="nav-bar">
                 <ul>
                     <li>
                         <Link to="/"> Home</Link>
@@ -16,7 +16,7 @@ export default function Nav() {
                         <Link to="dashboard"> Dashboard </Link>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
             <Outlet />
         </>
     );
