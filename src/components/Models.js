@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import { Stack, Typography } from '@mui/material';
+import CardContent from '@mui/material/CardContent';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import CardContent from '@mui/material/CardContent';
 import { DateTimePicker,LocalizationProvider } from '@mui/x-date-pickers';
@@ -231,7 +231,7 @@ setTimeout(()=>{
             }, {
               headers: { Authorization: `Bearer ${token}` },
             }).then((res)=>{
-              dispatch(tripsActions.fetchComments({getComments:true}));
+
               let date = new Date().toISOString();
               setNewComment('')
 
@@ -344,66 +344,6 @@ setTimeout(()=>{
         </Box>
       </Modal>
          
-        
-  );
-}
- 
-
-export function DetailsModal(props) {
-
-  const tripId = useSelector(state=> state.trips.tripRequest);
-  const allTrips = useSelector(state=> state.trips.trips);
-
-  const trip =  typeof(tripId) == 'number' ? allTrips[tripId] : '';
-    return (
-         
-         <Modal
-        open={props.open}
-        onClose={props.onClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-        <CardContent sx={{ background: '#046CC6',  padding:'10px 20px'}}>
-          <Typography id="modal-modal-title" sx={{ color:'#fff', fontSize:'1rem'}} variant="h5" >
-          Trip request datails
-          </Typography>
-        </CardContent>
-
-          <CardContent sx={{  padding:'20px 20px'}}>
-            <Box sx={{display:'flex', pb:1}}>
-            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3, whiteSpace: 'nowrap'}} variant="h5" >Leaving from:</Typography>
-            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem',flex:'4'}} variant="h5" >{trip.leavingFrom}</Typography>
-            </Box>
-            <Box sx={{display:'flex', pb:1}}>
-            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3,whiteSpace: 'nowrap'}} variant="h5" >Going to:</Typography>
-            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem'}} variant="h5" > {trip.location}</Typography>
-            </Box>
-            <Box sx={{display:'flex', pb:1}}>
-            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3,whiteSpace: 'nowrap'}} variant="h5" >Travel date:</Typography>
-            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem'}} variant="h5" >{trip.travelDate}</Typography>
-            </Box>
-            <Box sx={{display:'flex', pb:1}}>
-            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3,whiteSpace: 'nowrap'}} variant="h5" >Returning date:</Typography>
-            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem'}} variant="h5" >{trip.returnDate}</Typography>
-            </Box>
-            <Box sx={{display:'flex', pb:1}}>
-            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3,whiteSpace: 'nowrap'}} variant="h5" >Trip type:</Typography>
-            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem'}} variant="h5" > {trip.tripType}</Typography>
-            </Box>
-            <Box sx={{display:'flex', pb:1}}>
-            <Typography id="modal-modal-title" sx={{  fontWeight:'900', fontSize:'0.8rem', pr:3,whiteSpace: 'nowrap'}} variant="h5" >Trip reason:</Typography>
-            <Typography id="modal-modal-title" sx={{   fontSize:'0.8rem'}} variant="h5" >{trip.travelReason}</Typography>
-            </Box>
-
-          </CardContent>
-          <CardContent sx={{  margin:'20px 0'}}>
-          <Button variant="contained" size="medium" onClick={props.onClose}  sx={{ float:'right',textTransform:'none', lineHeight:'normal'}}>
-          Close
-        </Button>
-          </CardContent>
-        </Box>
-      </Modal>
         
   );
 }

@@ -14,7 +14,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import NotificationPopover from './Notifications/NotificationPopover'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -22,11 +22,9 @@ import PopupModal from './Profile/ViewProfileModel';
 import { authActions } from "../redux/auth/authSlice";
 
 const Nav = () => {
-  const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [invisible, setInvisible] = React.useState(false);
-  const [Logout, setLogout] = React.useState("");
+  const [invisible, setInvisible] = React.useState(true);
   const user = useSelector((state) => state.login.user);
   const [open, setOpen] = React.useState(false)
   const navigate = useNavigate();
@@ -34,8 +32,8 @@ const Nav = () => {
   const pages = [
     ["Home", "/"],
     [
-      `${user.role == "requester" ? "Trip requests" : "Dashboard"}`,
-      `${user.role == "requester" ? "/trip-requests" : "/dashboard"}`,
+      `${user.role == "requester" ? "Booking" : "Dashboard"}`,
+      `${user.role == "requester" ? "/booking" : "/dashboard"}`,
     ],
     ["About Us", "/about"],
   ];
@@ -58,9 +56,6 @@ const Nav = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  function deleteAllCookies() {
-    var cookies = document.cookie.split(";");
-
     for (var i = 0; i < cookies.length; i++) {
       var cookie = cookies[i];
       var eqPos = cookie.indexOf("=");
@@ -86,7 +81,6 @@ const Nav = () => {
     } catch (error) {
       console.log(error);
     }
-  };
 
   return (
     <>
@@ -192,7 +186,8 @@ const Nav = () => {
                 sx={{ margin: "0 20px" }}
                 invisible={invisible}
               >
-                <NotificationsIcon className="notification-icon" />
+                {/* <NotificationsIcon className="notification-icon" /> */}
+                <NotificationPopover />
               </Badge>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -228,6 +223,7 @@ const Nav = () => {
                     >
                       {setting[0]}
                     </Typography>
+                    <Typography textAlign="center">{setting[0]}</Typography>
                   </MenuItem>
                 ))}
               </Menu>

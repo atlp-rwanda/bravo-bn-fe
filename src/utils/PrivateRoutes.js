@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode'
 import { useDispatch, useSelector } from "react-redux";
 import { authActions} from '../redux/auth/authSlice'
 import Nav from '../components/NavDummy';
+import Dashboard from '../views/Dashboard';
 import axios from 'axios';
 import { logginUser } from '../redux/auth/loginSlice';
 import Swal from 'sweetalert2';
