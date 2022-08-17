@@ -89,7 +89,11 @@ export default function Login() {
           "Welcome to Barefoot Nomad",
           "success"
         );
+        if(user.role === "super admin"){
+          navigate("/dashboard");
+        }else{
         navigate("/");
+        }
       })
       .catch((err) => {
         swal.fire("Oops...", `${err.response.data.message}`, "error");

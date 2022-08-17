@@ -36,7 +36,6 @@ const changeRole =async()=>{
     if(status==200){
         setOpenpopup(false)
     }
-
 }
 
     return (
@@ -47,9 +46,10 @@ const changeRole =async()=>{
                 <div>
                     <img src={users.image} alt="Avatar"/>
                 </div>
-                <div class="card-content">
-                        <span>Email:{users.email}</span>
-                        <span>Phone Number:{users.phoneNumber}</span>
+                <div className="card-content"  >
+                    <span>User</span>
+                        <span  >Email:{users.email}</span>
+                        <span  >Phone Number:{users.phoneNumber}</span>
                         <span>Gender:{users.gender}</span>
                         <span>username:{users.username}</span>
                         <span>Birthdate:{users.birthDate}</span>
@@ -68,8 +68,8 @@ const changeRole =async()=>{
 
 
             <div className="buttons">
-                <Button variant="primary" onClick={() => changeRole()}>Save</Button>
-                <Button variant="secondary" onClick={() => setOpenpopup(false)}>Close</Button>
+                <Button  data-testid="btn1" variant="primary" onClick={() => changeRole()}>Save</Button>
+                <Button  data-testid="btn2" variant="secondary" onClick={() => setOpenpopup(false)}>Close</Button>
             </div>
         </div>
 
