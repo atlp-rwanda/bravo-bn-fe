@@ -71,5 +71,8 @@ describe("Users table", () => {
     expect(rowBody).toHaveTextContent(text);
   });
   afterEach(cleanup);
+
 });
+
+
 
