@@ -162,17 +162,17 @@ export default function Login() {
             </div>
           </form>
           <div className="form-group">
-            <div className="input-group social-m">
-              <img src={googleIcon} alt="" />
-              <p>Sign in with Google</p>
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="input-group social-m">
-              <img src={facebookIcon} alt="" />
-              <p>Sign in with Facebook</p>
-            </div>
-          </div>
+          <a className="input-group social-m" data-testid="google-button" href={process.env.GOOGLE_BACKEND_API_URL}>
+            <img src={googleIcon} alt="" />
+            <p>Sign in with Google</p>
+          </a>
+                        </div>
+                        <div className="form-group">
+          <a className="input-group social-m" data-testid="facebook-button" href={process.env.FACEBOOK_BACKEND_API_URL}>
+            <img src={facebookIcon} alt="" />
+            <p>Sign in with Facebook</p>
+          </a>
+                        </div>
         </div>
         <p className="no-account">
           Don't have an account yet? <span className="signup-btn">Sign Up</span>
