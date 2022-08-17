@@ -48,10 +48,11 @@ const Users = ({ setOpenpopup, setRowId, openPopup }) => {
 
 
     <div style={{ margin: "10px", height: 600, width: "80%", cursor: "pointer" }}
+    data-testid="users-table"
+
     >
 
       <DataGrid
-        data-testid="users-table"
         rows={users}
         columns={columns}
         getRowId={(row) => row.id}

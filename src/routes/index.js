@@ -15,7 +15,7 @@ const routes= () => {
       <Route exact path="/dashboard" element={<Dashboard/>}/>
       </Route >
       <Route path='/login' element={<Login/>}/>
-      <Route path='/signup' element={<Signup/>}/>
+    
 
     </Routes>
   );

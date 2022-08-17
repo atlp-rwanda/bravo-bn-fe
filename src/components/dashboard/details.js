@@ -36,7 +36,6 @@ const changeRole =async()=>{
     if(status==200){
         setOpenpopup(false)
     }
-
 }
 
     return (
