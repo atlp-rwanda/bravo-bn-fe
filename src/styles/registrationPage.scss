@@ -64,11 +64,13 @@
                 color: $fouthColor;
             }
         }
+        .errorBoredr {
+          border: 1px solid $errorColor;
+      }
         .error{
             color: $errorColor;
             font-size: 14px;
             margin: auto 0;
-            display: none;
         }
     }
     
@@ -85,12 +87,6 @@
             outline: none;
           }
         }
-        .error{
-          color: $errorColor;
-          font-size: 14px;
-          margin: auto 0;
-          display: none;
-      }
         .forgot-p {
           font-size: 10px;
           text-align: end;

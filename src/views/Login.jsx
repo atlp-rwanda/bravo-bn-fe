@@ -9,8 +9,7 @@ import facebookIcon from "../assets/facebook_icon.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
 import { useNavigate } from "react-router-dom";
 
-function LoginForm(props) {
-
+export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -96,7 +95,6 @@ function LoginForm(props) {
         swal.fire("Oops...", `${err.response.data.message}`, "error");
       });
   };
-
   return (
     <div className="reg-area">
       <div className="slice-a">
@@ -183,5 +181,3 @@ function LoginForm(props) {
     </div>
   );
 }
-
-export default LoginForm;
