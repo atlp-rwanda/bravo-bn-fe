@@ -11,8 +11,8 @@ const PrivateRoutes = () => {
     return half !== undefined ? decodeURIComponent(half.split('&')[0]) : null;
 }
     let token = get('token');
-    token ? localStorage.setItem("jwt", `${token}`):'';
-    let jwtToken = localStorage.getItem("jwt");
+    token ? document.cookie = `jwt=${token}` :'';
+    let jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
     const dispatch = useDispatch();
     dispatch(
      authActions.login({
