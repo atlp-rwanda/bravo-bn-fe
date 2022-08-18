@@ -13,7 +13,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState({
     isValid: true,
     message: "",

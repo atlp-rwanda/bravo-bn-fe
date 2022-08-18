@@ -1,9 +1,8 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, fireEvent, screen, waitFor } from './jest.setup';
-import userEvent from '@testing-library/user-event';
 import Details from '../components/dashboard/details'
-import Users from "../components/dashboard/Users";
+
  
 describe("<details />", () => {
     test('shows proper span when rendered', () => {
@@ -12,16 +11,14 @@ describe("<details />", () => {
         expect(span).toBeInTheDocument()
       });
 
-  test('save on click', async () => {
+  test('save on click',  () => {
     render(<Details />)
-    
-
     const button =screen.getByTestId("btn1");
-    await fireEvent.click(button)
+     fireEvent.click(button)
     expect(button).toHaveTextContent('Save')
   })
 
-  test('close on click', async () => {
+  test('close on click', () => {
     render(<Details />)
     const button = screen.getByTestId("btn2");
     expect(button).toHaveTextContent('Close')
