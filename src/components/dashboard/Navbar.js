@@ -1,7 +1,6 @@
 import React from "react";
 import barefootLogo from "../../assets/Barefoot. Nomads.svg";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
 const Navbar = () => {
   return (
     <div className="navbar">

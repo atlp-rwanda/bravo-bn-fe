@@ -2,17 +2,19 @@ import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./auth/authSilce";
 import loginReducer from "./auth/loginSlice";
 import requestSlice from "./requests/requestSlice";
+import selectedRequestSlice from "./requests/selectedRequestSlice";
 
 export const reducers = {
   auth: authSlice.reducer,
   login: loginReducer,
-  request: requestSlice
-}
+  request: requestSlice,
+  selectedRequest: selectedRequestSlice,
+};
 
- const store = configureStore({
+const store = configureStore({
   reducer: {
     ...reducers,
-    devTools: process.env.NODE_ENV !== 'production',
+    devTools: process.env.NODE_ENV !== "production",
   },
 });
 
