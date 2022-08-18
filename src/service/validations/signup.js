@@ -140,6 +140,7 @@ const passwordInput = document.getElementById('password');
 const usernameInput = document.getElementById('username');
 const phonenumberError = document.getElementById('phonenumber-error');
 const phonenumberInput = document.getElementById('phonenumber');
+const usernameError = document.getElementById('username-error');
 
 emailError.style.display = 'none';
 emailInput.style.border = '1px solid #ced4da';

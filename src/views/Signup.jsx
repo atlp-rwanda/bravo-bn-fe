@@ -17,7 +17,6 @@ const Signup = () =>{
 
   const submitHandle = (e) => {
      e.preventDefault();
-     console.log(email, passwords.password,passwords.repeatPassword,phoneNumber,names.userName,names.firstName,names.lastName,gender)
      if (signupValidation(email, passwords.password,passwords.repeatPassword,phoneNumber,names.userName,names.firstName,names.lastName,gender)) {
       setButtonDisable(true)
       axios.post(`${process.env.API_URL}/user/auth/signup`, {
@@ -43,7 +42,6 @@ const Signup = () =>{
           setButtonDisable(false)
 
           if(err.message == "Network Error") return swal.fire('Oops...', `Network Error`, 'error');
-          console.log(err);
            if(err.response.status == 422 || err.response.status == 409){
 
             if(err.response.data.message.includes('non alphanumeric')) return responseValidator('password',`${err.response.data.message}`);

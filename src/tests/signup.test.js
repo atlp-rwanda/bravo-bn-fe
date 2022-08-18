@@ -56,7 +56,7 @@ test('Signup a user after clicking creat account button button', async () => {
       target: { value: "123456" },
     });
     fireEvent.click(screen.getByRole('button', { name: /Create account/i }));
-    expect(screen.queryByText(/Please enter your phone number/i)).toBeInTheDocument(); 
+    expect(screen.queryByText(/Phone number must have 10 digits./i)).toBeInTheDocument(); 
 
     fireEvent.change(screen.getByPlaceholderText('Phone number'), {
       target: { value: "1234567890" },
