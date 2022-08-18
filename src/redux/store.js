@@ -7,7 +7,6 @@ import tripsSlice from "./tripsSlice";
 import accommodationsSlice from "./accommodationsSlice";
 import selectedRequestSlice from "./requests/selectedRequestSlice";
 
-
 export const reducers = {
   auth: authSlice.reducer,
   alert: alertSlice.reducer,

@@ -8,7 +8,7 @@ const TripsContainer = () => {
 
   return (
     <div className="dashboard-container">
-     
+
       <Contents
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}

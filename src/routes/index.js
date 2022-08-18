@@ -16,6 +16,7 @@ import NotFound from '../views/NotFound';
 
 
 
+
 const routes = () => {
   return (
     <Routes>
@@ -37,5 +38,4 @@ const routes = () => {
     </Routes>
   );
 }
-
 export default routes;
