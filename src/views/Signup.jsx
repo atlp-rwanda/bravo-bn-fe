@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert2';
 import {signupValidation,responseValidator} from '../service/validations/signup';
+import { Input,Select } from "../components/Input";
 
 const Signup = () =>{
   const navigate = useNavigate('');
@@ -53,6 +54,8 @@ const Signup = () =>{
         });
     }
   }; 
+
+  const options=[{name:"gender",value:'select'},{name:"Male",value:'male'},{name:"Female",value:'female'}]
  
   return (
     <div className="reg-area">
@@ -72,79 +75,122 @@ const Signup = () =>{
           <h2>Sign up to create an account</h2>
           <form action="" className="reg-form" onSubmit={submitHandle}>
             <div className="input-align">
-                        <div className="form-group">
-                            <div className="input-group input-resize" id='firstname'>
-                                <input autoComplete="new-password" type="text" name="" placeholder="First name" value={names.firstName} onChange={(event)=> setNames({...names,firstName: event.target.value})}  />
-                                <ion-icon name="person"></ion-icon>
-                            </div>
-                            <small id="firstname-error" className="error"></small>
-                        </div>
-                        <div className="form-group input-left">
-                            <div className="input-group input-resize " id='lastname'>
-                                <input autoComplete="new-password" type="text" name="" placeholder="Last name" value={names.lastName} onChange={(event)=> setNames({...names,lastName: event.target.value})}  />
-                                <ion-icon name="person"></ion-icon>
-                            </div>
-                            <small id="lastname-error" className="error"></small>
-                        </div>
-                        </div>
-            <div className="input-align">
-                        <div className="form-group">
-                            <div className="input-group input-resize" id='username'>
-                                <input autoComplete="new-password" type="text" name="" placeholder="Username" value={names.username} onChange={(event)=> setNames({...names,userName: event.target.value})}  />
-                                <ion-icon name="person"></ion-icon>
-                            </div>
-                            <small id="username-error" className="error"></small>
-                        </div>
-                        <div className="form-group input-left">
-                            <div className="input-group input-resize  " id='email'>
-                                <input autoComplete="new-password" type="email" name="" placeholder="Email" value={email} onChange={(event)=> setEmail( event.target.value)}  />
-                                <ion-icon name="at-circle-outline"></ion-icon>
-                            </div>
-                            <small id="email-error" className="error"></small>
-                        </div>
-                        </div>
-            <div className="input-align">
- 
-                        <div className="form-group">
-                            <div className="input-group input-resize" id="password">
-                                <input autoComplete="new-password" type="password" name="" placeholder="Password" value={passwords.password} onChange={(event)=> setPasswords({...passwords,password: event.target.value})} />
-                                <ion-icon name="lock-closed-outline"></ion-icon>
-                            </div>
-                        <small id="password-error" className="error"></small>
-                        </div>
-                        <div className="form-group input-left">
-                            <div className="input-group input-resize " id="repeatpassword">
-                                <input autoComplete="new-password" type="password" name="" placeholder="Repeat password" value={passwords.repeatPassword} onChange={(event)=> setPasswords({...passwords,repeatPassword: event.target.value})} />
-                                <ion-icon name="lock-closed-outline"></ion-icon>
-                            </div>
-                        <small id="repeatpassword-error" className="error"></small>
-                        </div>
+                        <Input 
+                        inputFor="firstname"
+                        parentClass="form-group"
+                        childClass="input-group input-resize"
+                        placeholder="First name"
+                        type="text"
+                        value= {names.firstName}
+                        onChange={(event)=> setNames({...names,firstName: event.target.value})}
+                        icon="person"
+                        errorType='firstname-error'
+                        errorClass="error"
+                        />
+                        <Input 
+                        inputFor="lastname"
+                        parentClass="form-group input-left"
+                        childClass="input-group input-resize"
+                        placeholder="Last name"
+                        type="text"
+                        value={names.lastName} 
+                        onChange={(event)=> setNames({...names,lastName: event.target.value})} 
+                        icon="person"
+                        errorType='lastname-error'
+                        errorClass="error"
+                        />
+
                         </div>
             <div className="input-align">
 
-                        <div className="form-group">
-                            <div className="input-group input-resize" id='phonenumber'>
-                                <input autoComplete="new-password" type="number" name="" placeholder="Phone number" value={phoneNumber} onChange={(event)=> setPhoneNumber( event.target.value)}  />
-                                <ion-icon name="call"></ion-icon>
-                            </div>
-                            <small id="phonenumber-error" className="error"></small>
+                        <Input 
+                        inputFor="username"
+                        parentClass="form-group"
+                        childClass="input-group input-resize"
+                        placeholder="Username"
+                        type="text"
+                        value={names.username} 
+                        onChange={(event)=> setNames({...names,userName: event.target.value})} 
+                        icon="person"
+                        errorType='username-error'
+                        errorClass="error"
+                        />
+                        <Input 
+                        inputFor="email"
+                        parentClass="form-group input-left"
+                        childClass="input-group input-resize"
+                        placeholder="Email"
+                        type="email"
+                        value={email} 
+                        onChange={(event)=> setEmail( event.target.value)}
+                        icon="at-circle-outline"
+                        errorType='email-error'
+                        errorClass="error"
+                        />
+     
                         </div>
-                        <div className="form-group input-left">
-                            <div className="input-group input-resize " id="gender">
-                              <select data-testid="select" name="gender" value={gender}  onChange={(event)=> setGender( event.target.value)}>
-                                <option data-testid="select-option" value="select">Gender</option>
-                                <option data-testid="select-option" value="male">Male</option>
-                                <option data-testid="select-option" value="female">Female</option>
-                              </select>
-                            </div>
-                        <small id="gender-error" className="error"></small>
+            <div className="input-align">
+ 
+
+                        
+                        <Input 
+                        inputFor="password"
+                        parentClass="form-group"
+                        childClass="input-group input-resize"
+                        placeholder="Password"
+                        type="password"
+                        value={passwords.password} 
+                        onChange={(event)=> setPasswords({...passwords,password: event.target.value})}
+                        icon="lock-closed-outline"
+                        errorType='password-error'
+                        errorClass="error"
+                        />
+                        <Input 
+                        inputFor="repeatpassword"
+                        parentClass="form-group input-left"
+                        childClass="input-group input-resize"
+                        placeholder="Repeat password"
+                        type="password"
+                        value={passwords.repeatPassword} 
+                        onChange={(event)=> setPasswords({...passwords,repeatPassword: event.target.value})}
+                        icon="lock-closed-outline"
+                        errorType='repeatpassword-error'
+                        errorClass="error"
+                        />
                         </div>
+            <div className="input-align">
+
+                        <Input 
+                        inputFor="phonenumber"
+                        parentClass="form-group"
+                        childClass="input-group input-resize"
+                        placeholder="Phone number"
+                        type="number"
+                        value={phoneNumber} 
+                        onChange={(event)=> setPhoneNumber( event.target.value)}  
+                        icon="call"
+                        errorType='phonenumber-error'
+                        errorClass="error"
+                        />
+                          <Select 
+                          inputFor="gender"
+                          parentClass="form-group input-left"
+                          childClass="input-group input-resize"
+                          value={gender} 
+                          name="gender"
+                          onChange={(event)=> setGender( event.target.value)}  
+                          icon="call"
+                          errorType='gender-error'
+                          errorClass="error"
+                          options= {options}
+                          />
                         </div>
-                        <div className="form-group input-align">
-                            <div className={buttonDisable? "input-group input-resize button button-disable": "input-group input-resize button"}>
-                                <input autoComplete="new-password" type="submit" value="Create account"/>
-                            </div>
-                        </div>
+                        <Input 
+                        parentClass="form-group input-align"
+                        childClass={buttonDisable? "input-group input-resize button button-disable": "input-group input-resize button"}
+                        type="submit"
+                        value="Create account"
+                        />
                     </form>
         <p className="no-account">
           Already have an account? <Link to='/login' className="signup-btn">Login</Link>
