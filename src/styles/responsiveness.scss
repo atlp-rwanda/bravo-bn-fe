@@ -1,0 +1,52 @@
+$desktop:1200px;
+$laptop :992px;
+$tablet :768px;
+$phone:480px;
+
+
+.dashboard-container{
+  @media (max-width:$tablet) {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+.sidebar-contents{
+  @media (max-width:$tablet) {
+    width: auto;
+    div{
+      span{
+        &:last-child{
+          display: none;
+        }
+      }
+    }
+    
+  }
+}
+
+.contents-container{
+  @media (max-width:$tablet) {
+    width: 100%;
+    margin: 0px auto;
+  }
+}
+
+.users{
+  @media (max-width:$tablet) {
+    .user-container{
+      margin-left: 8px;
+      background-color: #fff;
+    }
+    
+  }
+}
+
+.navbar{
+    
+    @media (max-width:$tablet){
+      .right{
+        // justify-content: center;
+      }
+    }
+}

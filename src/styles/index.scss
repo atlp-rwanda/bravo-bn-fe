@@ -1,4 +1,9 @@
-@import './variables.scss';
+@import "./variables.scss";
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
 
 body
 {
@@ -11,5 +16,10 @@ body
   @import './registrationPage.scss';
   @import './signup.scss';
   @import './responsive.scss';
-
+  @import './Contents.scss';
+  @import './Navbar.scss';
+  @import './Sidebar.scss';
+  @import './footer.scss';
+  @import './responsiveness.scss';
+  @import './dashboard.scss';
 }
