@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "lint": "eslint src/**/*.js",
     "lintFix": "eslint --fix --ext src/**/*.js",
-    "test": "react-scripts test --setupFiles ./setupFiles.jsx",
+    "test": "react-scripts test --setupFiles ./setupFiles.js",
     "test:cov": "react-scripts test --coverage",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
