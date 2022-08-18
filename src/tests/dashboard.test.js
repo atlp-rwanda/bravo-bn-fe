@@ -72,4 +72,3 @@ describe("Users table", () => {
   });
   afterEach(cleanup);
 });
-

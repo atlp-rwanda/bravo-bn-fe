@@ -20,7 +20,7 @@ const Details  = ({setOpenpopup,setRowId,openPopup,rowId}) => {
 
     useEffect(() => {
         setusers(users);
-    },[role])
+    },[role,users])
 
 const changeRole =async()=>{
     const res = await axios.put(
