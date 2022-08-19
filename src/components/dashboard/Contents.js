@@ -1,17 +1,18 @@
 import React,{useState} from 'react';
-
-
 import Sidebar from './Sidebar';
 import ContentElements from "./ContentElements";
-const Contents = ({openPopup, setOpenpopup, setRowId, rowId}) => {
 
-    const [activeTab,setActiveTab] = useState("");
+const Contents = () => {
 
     return ( 
             <div className="contents-container">
-                <div className="sidebar"><Sidebar /> </div>
+                <div className="sidebar">
+                    <Sidebar /> {""}
+                    </div>
                  <div className="contents">
-                    <ContentElements openPopup={openPopup} setOpenpopup={setOpenpopup} setRowId={setRowId} rowId={rowId} />
+                    <ContentElements 
+                   
+                     />
                  </div>
             </div>
      );
