@@ -1,14 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
 import { DataGrid } from "@mui/x-data-grid"
 import Avatar from "@mui/material/Avatar";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getUsersAsync,
+  showUser
+} from "../../redux/users/userSlice";
+import UserDetailsModal from './UserDetailsModal';
 
 
-const Users = ({ setOpenpopup, setRowId, openPopup }) => {
-
-  const [users, setUsers] = useState([]);
-
-  const columns = useMemo(()=>[
+  const columns =[
     { field: "id", headerName: "id", width: 200 },
       {field: "image", headerName: "Profile", width: 100,
       renderCell: (params) => {
@@ -25,41 +26,49 @@ const Users = ({ setOpenpopup, setRowId, openPopup }) => {
     {field: "role", headerName: "Role", width: 200, },
     { field: "gender", headerName: "Gender", width: 100 },
     { field: "isVerified", headerName: "Verified", width: 100 }
-  ], []);
+  ]
+
+  
+export default function UsersTable() {
+
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users.users)
+  const [open, setOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
 
   useEffect(() => {
-    const renderState = async () => {
-      const res = await axios.get(
-        `https://bravo-bfn-be.herokuapp.com/api/v1/user/`
-      );
-      const { data } = res.data;
-
-      setUsers(data)
-    };
-    renderState();
+    dispatch(getUsersAsync());
   }, []);
 
+  
   const checkPopup = (e) => {
-    setOpenpopup(true);
-    setRowId(e.id);
-  }
+    setSelectedUser(e.row);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
 
 
-    <div style={{ margin: "10px", height: 600, width: "80%", cursor: "pointer" }}
-    data-testid="users-table"
-
+    <div
+      data-testid="Users-table"
+      style={{ marginLeft: "500", height: 600, width: "80%" }}
     >
-
-      <DataGrid
-        rows={users}
+      <h1 style={{ textAlign: "center" }}>Users</h1>
+     <DataGrid
+        data-testid="Users-table"
+        rows={users.length ? users : []}
         columns={columns}
-        getRowId={(row) => row.id}
-        onRowClick={(e) => {checkPopup(e);}}
         pageSize={15}
+        onRowClick={(e) => {
+          checkPopup(e);
+        }}
         rowsPerPageOptions={[15]}
-        sx={{
+        sx={{ 
           height: "100%",
           width: "100%",
           "& .MuiDataGrid-columnHeaderTitle": {
@@ -85,11 +94,13 @@ const Users = ({ setOpenpopup, setRowId, openPopup }) => {
             alignItems: "start",
           },
         }}
-        onCellEditCommit={(params) => setRowId(params.id)}
+      />
+
+      <UserDetailsModal
+        selectedValue={selectedUser}
+        open={open}
+        onClose={handleClose}
       />
     </div>
-
   );
 }
-
-export default Users;
