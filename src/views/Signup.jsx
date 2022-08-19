@@ -137,9 +137,9 @@ const Signup = () =>{
 
 
   const submitHandle = (e) => {
-     e.preventDefault();
+    e.preventDefault();
 
-     if (!email || !passwords.password || !passwords.repeatPassword || !phoneNumber || !names.userName || !names.firstName || !names.lastName || gender != 'select') {
+     if (!email || !passwords.password || !passwords.repeatPassword || !phoneNumber || !names.userName || !names.firstName || !names.lastName || gender == 'select') {
        if(!phoneNumber) return handleChange({target:{name:'phonenumber', value:''}})
        if(!passwords.password) return handleChange({target:{name:'password', value:''}});
        if(passwords.password != passwords.repeatPassword) return handleChange({target:{name:'repeatpassword', value:' '}});
@@ -186,7 +186,7 @@ const Signup = () =>{
               ["isValid"]:  false,
               ["message"]:  `${err.response.data.message}`,
             });
-            if(err.response.data.message.includes('Email')) return setEmailError({
+            if(err.response.data.message.includes('Email') || err.response.data.message.includes('email')) return setEmailError({
               ...emailError,
               ["isValid"]:  false,
               ["message"]: `${err.response.data.message}`,
