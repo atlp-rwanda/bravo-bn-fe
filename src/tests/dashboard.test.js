@@ -114,9 +114,15 @@ describe("users redux state tests", () => {
     expect(state.users.users).toEqual([]);
   });
 
+  it("Should  set users loading to true ", () => {
+    const state = store.getState();
+    expect(state.users.loading).toEqual(true);
+  });
+
   beforeAll(() => {
     mockNetworkResponse()
   })
+
   it('Should be able to fetch users', async () => {
     let user;
     const res = await axios.get("/user/get")
@@ -126,4 +132,6 @@ describe("users redux state tests", () => {
     expect(user[0]).toEqual(getListResponse[0])
     expect(state).toEqual([ user[0] ] )
   })
+
+
 });
