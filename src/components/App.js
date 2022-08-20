@@ -4,8 +4,7 @@ import Dashboard from "../views/Dashboard.js";
 const App = () => {
   return (
     <div className="container">
-      {/* <h1>Welcome to Barefoot Nomad Frontend</h1> 
-       <Counter /> */}
+    
        <Dashboard />
     </div>
   );

@@ -13,7 +13,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState({
     isValid: true,
     message: "",
@@ -114,7 +114,7 @@ export default function Login() {
       <div className="slice-b">
         <img src={barefootLogo} className="logo" alt="Barefoot logo" />
         <div className="form-content">
-          <h2>Log in to your account</h2>
+          <h2>Log in into your account</h2>
           <form action="" className="reg-form" onSubmit={submitHandle}>
             <div className="form-group">
               <div
