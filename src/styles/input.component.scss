@@ -3,7 +3,7 @@
 .input-group {
   height: 25px;
   border: 1px solid $fouthColor;
-  margin: 10px 0;
+  margin: 25px 0 0 0;
   width: 400px;
   border-radius: 5px;
   padding: 12px;
@@ -13,10 +13,12 @@
     margin: auto 0 auto auto;
     color: $fouthColor;
   }
-  input {
+  input,select {
     width: 100%;
-    border: none;
+    border: none !important;
     padding: 0;
+    outline: none;
+
   }
   input:focus {
     outline: none;

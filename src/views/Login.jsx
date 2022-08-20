@@ -7,7 +7,7 @@ import svg from "../assets/mobile_login.svg";
 import googleIcon from "../assets/google_icon.svg";
 import facebookIcon from "../assets/facebook_icon.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -175,7 +175,7 @@ export default function Login() {
                         </div>
         </div>
         <p className="no-account">
-          Don't have an account yet? <span className="signup-btn">Sign Up</span>
+          Don't have an account yet? <Link to="/signup" className="signup-btn">Sign Up</Link>
         </p>
       </div>
     </div>

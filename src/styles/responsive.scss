@@ -6,4 +6,17 @@ $medium: 750px;
             display: none !important;
         }
     }
+    @media (max-width:970px){
+        .slice-a-signup{
+            display: none !important;
+        }
+    }
+    @media (max-width:650px){
+        .input-align{
+            display: block !important;
+        }
+        .input-left{
+            margin-left: 0 !important;
+        }
+    }
 }
