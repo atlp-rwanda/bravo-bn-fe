@@ -9,6 +9,15 @@ import Home from '../views/Home'
 import Nav from '../components/NavDummy'
 import About from '../views/About'
 import Btn from '../components/Btn'
+import Contents from '../components/dashboard/Contents'
+import Navbar from '../components/dashboard/Navbar'
+import Sidebar from '../components/dashboard/Sidebar'
+import Footer from '../components/dashboard/Footer'
+import UserDetailsModal from '../components/dashboard/UserDetailsModal'
+import Users from '../components/dashboard/Users'
+import Dashboard from '../views/Dashboard'
+
+
 
 afterEach(cleanup);
 
@@ -86,5 +95,65 @@ test('renders react component', async () => {
       </Router>
   );
 })
- 
+test('renders react component', async () => {
+  render(
+     <Router>
+      <Provider store={store}>
+
+      <Contents />    
+      </Provider>
+      </Router>
+  );
+})
+test('renders react component', async () => {
+  render(
+     <Router>
+      <Provider store={store}>
+
+      <Footer />    
+      </Provider>
+      </Router>
+  );
+})
+test('renders react component', async () => {
+  render(
+     <Router>
+      <Provider store={store}>
+
+      <UserDetailsModal/>    
+      </Provider>
+      </Router>
+  );
+})
+test('renders react component', async () => {
+  render(
+     <Router>
+      <Provider store={store}>
+
+      <Sidebar />    
+      </Provider>
+      </Router>
+  );
+})
+test('renders react component', async () => {
+  render(
+     <Router>
+      <Provider store={store}>
+
+      <Navbar />    
+      </Provider>
+      </Router>
+  );
+})
+test('renders react component', async () => {
+  render(
+     <Router>
+      <Provider store={store}>
+
+      <Users />    
+      </Provider>
+      </Router>
+  );
+})
+
 
