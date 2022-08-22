@@ -35,7 +35,7 @@ const  UserDetailsModal = (props) => {
     return (
       <Dialog onClose={onClose} open={open}  fullWidth={true} maxWidth={"md"} style={{ padding: 10}}>
         <DialogTitle>
-        <Typography variant="h3" component="h2" style={{ textAlign:'center', color: '#046CC6'}}>
+        <Typography variant="h3" component="h2" style={{ textAlign:'center', color: '#046CC6'}} data-testid="title" >
                 User details
         </Typography>
         </DialogTitle>

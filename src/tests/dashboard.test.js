@@ -132,6 +132,9 @@ describe("users redux state tests", () => {
     expect(user[0]).toEqual(getListResponse[0])
     expect(state).toEqual([ user[0] ] )
   })
-
+  it("Should initially set selectedUser to an empty string", () => {
+    const state = store.getState().selectedUser;
+    expect(state.data).toEqual("");
+  });
 
 });

@@ -15,7 +15,8 @@ import Sidebar from '../components/dashboard/Sidebar'
 import Footer from '../components/dashboard/Footer'
 import UserDetailsModal from '../components/dashboard/UserDetailsModal'
 import Users from '../components/dashboard/Users'
-import Dashboard from '../views/Dashboard'
+import ContentElement from '../components/dashboard/ContentElements'
+import Dash from '../components/dashboard/Dash'
 
 
 
@@ -151,6 +152,26 @@ test('renders react component', async () => {
       <Provider store={store}>
 
       <Users />    
+      </Provider>
+      </Router>
+  );
+})
+test('renders react component', async () => {
+  render(
+     <Router>
+      <Provider store={store}>
+
+      <ContentElement />    
+      </Provider>
+      </Router>
+  );
+})
+test('renders react component', async () => {
+  render(
+     <Router>
+      <Provider store={store}>
+
+      <Dash />    
       </Provider>
       </Router>
   );
