@@ -58,7 +58,7 @@ export default function UsersTable() {
       data-testid="Users-table"
       style={{ marginLeft: "500", height: 600, width: "80%" }}
     >
-      <h1 style={{ textAlign: "center" }}>Users</h1>
+      <h1 style={{ textAlign: "left" }}>Users</h1>
      <DataGrid
         data-testid="Users-table"
         rows={users.length ? users : []}
@@ -95,8 +95,7 @@ export default function UsersTable() {
           },
         }}
       />
-
-      <UserDetailsModal
+       <UserDetailsModal
         selectedValue={selectedUser}
         open={open}
         onClose={handleClose}

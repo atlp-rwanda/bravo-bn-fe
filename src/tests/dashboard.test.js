@@ -5,9 +5,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Users from "../components/dashboard/Users";
 import { Provider } from "react-redux";
 import store from "../redux/store";
-import { getUsersAsync } from "../redux/users/userSlice";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
+import UserDetailsModal from "../components/dashboard/UserDetailsModal";
 
 
 const getListResponse = [
@@ -136,5 +136,76 @@ describe("users redux state tests", () => {
     const state = store.getState().selectedUser;
     expect(state.data).toEqual("");
   });
+
+  test("UserDetails should have email", () => {
+    render(
+      <Router>
+        <Provider store={store}>
+          <UserDetailsModal />
+        </Provider>
+      </Router>
+    );
+    const Email = screen.getByTestId("email");
+    expect(Email).toBeInTheDocument();
+  });
+
+  test("UserDetails should have status", () => {
+    render(
+      <Router>
+        <Provider store={store}>
+          <UserDetailsModal />
+        </Provider>
+      </Router>
+    );
+    const verified = screen.getByTestId("Verified");
+    expect(verified).toBeInTheDocument();
+  });
+
+  test("UserDetails should have username", () => {
+    render(
+      <Router>
+        <Provider store={store}>
+          <UserDetailsModal />
+        </Provider>
+      </Router>
+    );
+    const Username = screen.getByTestId("username");
+    expect(Username).toBeInTheDocument();
+  });
+  test("UserDetails should have gender", () => {
+    render(
+      <Router>
+        <Provider store={store}>
+          <UserDetailsModal />
+        </Provider>
+      </Router>
+    );
+    const Gender= screen.getByTestId("gender");
+    expect(Gender).toBeInTheDocument();
+  });
+  test("UserDetails should have Phone Number", () => {
+    render(
+      <Router>
+        <Provider store={store}>
+          <UserDetailsModal />
+        </Provider>
+      </Router>
+    );
+    const Phone= screen.getByTestId("phoneNumber");
+    expect(Phone).toBeInTheDocument();
+  });
+
+  test("UserDetails sholud have save button", () => {
+    render(
+      <Router>
+        <Provider store={store}>
+          <UserDetailsModal />
+        </Provider>
+      </Router>
+    );
+    const save= screen.getByTestId("btn1");
+    expect(save).toBeInTheDocument();
+
+    });
 
 });

@@ -84,11 +84,6 @@ export default function Login() {
         const { user } = res.data.data;
         document.cookie = `jwt=${token}`;
         dispatch(logginUser(user));
-        swal.fire(
-          `Hey ${user.username}`,
-          "Welcome to Barefoot Nomad",
-          "success"
-        );
         if(user.role === "super admin"){
           navigate("/dashboard/users");
         }else{

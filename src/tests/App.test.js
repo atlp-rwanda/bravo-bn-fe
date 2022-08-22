@@ -19,7 +19,6 @@ import ContentElement from '../components/dashboard/ContentElements'
 import Dash from '../components/dashboard/Dash'
 
 
-
 afterEach(cleanup);
 
 test('renders App on non registered user',  () => {

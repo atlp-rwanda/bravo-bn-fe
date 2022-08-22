@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import Contents from './Contents';
 import Navbar from './Navbar';
 import Footer from './Footer';
-
+import UserDetailsModal from './UserDetailsModal';
 
 const Dash = () => {
 
@@ -11,6 +11,7 @@ const Dash = () => {
             <Navbar/>
             <Contents  
             />
+           
             
             <Footer/>
         </div>

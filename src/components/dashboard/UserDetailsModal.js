@@ -1,18 +1,10 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
-import Avatar from '@mui/material/Avatar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import Stack from '@mui/material/Stack';
 import MenuItem from '@mui/material/MenuItem';
 import { useDispatch } from 'react-redux';
 import { updateUserRoleAsync } from '../../redux/users/userSlice';
-import Typography from '@mui/material/Typography';
+
 
 const  UserDetailsModal = (props) => {
     const { onClose, selectedValue, open } = props;
@@ -32,66 +24,48 @@ const  UserDetailsModal = (props) => {
         onClose()
     }
 
+
     return (
-      <Dialog onClose={onClose} open={open}  fullWidth={true} maxWidth={"md"} style={{ padding: 10}}>
-        <DialogTitle>
-        <Typography variant="h3" component="h2" style={{ textAlign:'center', color: '#046CC6'}} data-testid="title" >
-                User details
-        </Typography>
-        </DialogTitle>
-        <List sx={{ pt: 0 }}>
-          <ListItem autoFocus button >
-            <ListItemAvatar>
-              <Avatar/>
-            </ListItemAvatar>
-          </ListItem>
-          <ListItem autoFocus button  spacing={5}>
-            <ListItemText primary={"First name :"} style={{width: '1.7rem', textAlign:'left'}} />
-            <ListItemText primary={selectedValue?.firstName} style={{width: '1.7rem', textAlign:'left'}} />
-          </ListItem>
-          <ListItem autoFocus button >
-            <ListItemText primary={"Last name :"} style={{width: '1.7rem', textAlign:'left'}} />
-            <ListItemText primary={selectedValue?.lastName} style={{width: '1.7rem', textAlign:'left'}}  />
-          </ListItem>
-          <ListItem autoFocus button >
-            <ListItemText primary={"Email :"}  style={{width: '1.7rem', textAlign:'left'}} />
-            <ListItemText primary={selectedValue?.email} style={{width: '1.7rem', textAlign:'left'}}  />
-          </ListItem>
-          <ListItem autoFocus button >
-            <ListItemText primary={"Gender :"}  style={{width: '1.7rem', textAlign:'left'}} />
-            <ListItemText primary={selectedValue?.gender} style={{width: '1.7rem', textAlign:'left'}} />
-          </ListItem>
-
-          <ListItem autoFocus button >
-          <Stack spacing={50} direction="row">
-            <ListItemText primary={"Verified:"} style={{width: '1.7rem', textAlign:'left'}}  />
-            {selectedValue?.isVerified ?  (<Button variant='contained' color="success"> Yes</Button>) :  (<Button variant='contained' color="error">No</Button>) }
-         </Stack>
+        <div className={`popup-container`} style={{display:`${open == true ? 'flex' : 'none'}`}}>
             
-          </ListItem>
-          <ListItem autoFocus >
-          <Stack spacing={42} direction="row">
-            <ListItemText primary={"Role :"} />
-            <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={role || ''}
-                label="Role"
-                onChange={handleChange}
-            >
-                <MenuItem value={""}>Select</MenuItem>
-                <MenuItem value={"super admin"}>Super admin</MenuItem>
-                <MenuItem value={"travel admin"}>Travel admin</MenuItem>
-                <MenuItem value={"manager"}>Manager</MenuItem>
-                <MenuItem value={"requester"}>Requester</MenuItem>
-            </Select>
-            </Stack>
-
-          </ListItem>
-        </List>
-        <Button variant='contained'  onClick={() => { onSubmit()}} style={{margin:30}}> Save</Button>
-      </Dialog>
+      <div className={`container`}  style={{ transform:'translateY(0%)', transition: 'all 1s ease'}}>
+       
+                
+       <div>
+   <div>
+       <img src={selectedValue?.image} alt="Avatar"/>
+   </div>
+   <div className="card-content"  >
+       <span>{selectedValue?.firstname}</span>
+           <span data-testid="email">Email:{selectedValue?.email}</span>
+           <span data-testid="phoneNumber" >Phone Number:{selectedValue?.phoneNumber}</span>
+           <span data-testid="gender">Gender:{selectedValue?.gender}</span>
+           <span data-testid="username">username:{selectedValue?.username}</span>
+           <span data-testid="Verified">Verified:{selectedValue?.isVerified ?  (<Button variant='contained' color="success"> Yes</Button>) :  (<Button variant='contained' color="error" size="small">No</Button>) }</span>
+           <span>Role:{selectedValue?.role}
+           <Select
+   labelId="demo-simple-select-label"
+   id="demo-simple-select"
+   value={role || ''}
+   label="Role"
+   onChange={handleChange}
+>
+   <MenuItem value={""}>Select</MenuItem>
+   <MenuItem value={"super admin"}>Super admin</MenuItem>
+   <MenuItem value={"travel admin"}>Travel admin</MenuItem>
+   <MenuItem value={"manager"}>Manager</MenuItem>
+   <MenuItem value={"requester"}>Requester</MenuItem>
+</Select>
+           </span>
+   </div>
+</div>
+<div className="buttons">
+   <Button  data-testid="btn1"variant='contained'  onClick={() => { onSubmit()}} > Save</Button>
+   <Button  data-testid="btn2"  variant="outlined"  onClick={() => {onClose()}}>Close</Button>
+</div>
+</div>
+        </div>
     );
-  }
+    }
 
   export default UserDetailsModal;
