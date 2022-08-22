@@ -90,7 +90,7 @@ export default function Login() {
           "success"
         );
         if(user.role === "super admin"){
-          navigate("/dashboard");
+          navigate("/dashboard/users");
         }else{
         navigate("/");
         }
