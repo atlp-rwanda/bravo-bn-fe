@@ -1,8 +1,22 @@
+
 import React from 'react';
 import Users from './Users';
 import {Link,NavLink} from 'react-router-dom'
 
 const Sidebar = () => {
+  let activeStyle = {
+    textDecoration: "none",
+    color: "white",
+    borderRadius: 8,
+    cursor: "pointer",
+    backgroundColor: "#046CC6"
+  };
+
+  let inActive = {
+    paddingLeft: 6,
+    color: "black",
+    textDecoration: "none",
+  };
     return ( 
         <div className="sidebar-contents">
               <div>
@@ -24,6 +38,10 @@ const Sidebar = () => {
                 <span class="iconify" data-icon="entypo:location"></span>
                 <span>Locations</span>
             </div>
+            <NavLink
+        to="/dashboard/requests"
+        style={({ isActive }) => (isActive ? activeStyle : inActive)}
+      ></NavLink>
             <div >
                 <span><i class="fa-solid fa-plane"></i></span>
                 <span>Trip requests</span>
@@ -33,3 +51,4 @@ const Sidebar = () => {
 }
  
 export default Sidebar;
+

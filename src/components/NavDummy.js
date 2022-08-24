@@ -13,7 +13,11 @@ export default function Nav() {
                         <Link to="/about"> About</Link>
                     </li>
                     <li>
+
                         <Link to="dashboard"> Dashboard </Link>
+
+                        <Link to="/dashboard"> dashboard</Link>
+
                     </li>
                 </ul>
             </nav> */}

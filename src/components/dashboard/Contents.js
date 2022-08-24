@@ -6,13 +6,13 @@ const Contents = () => {
 
     return ( 
             <div className="contents-container">
-                <div className="sidebar">
-                    <Sidebar /> {""}
-                    </div>
+
+             
+
+                <div className="sidebar"><Sidebar /> </div>
                  <div className="contents">
-                    <ContentElements 
-                   
-                     />
+                    <ContentElements />
+
                  </div>
             </div>
      );
