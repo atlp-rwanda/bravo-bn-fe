@@ -12,6 +12,9 @@ export default function Nav() {
                     <li>
                         <Link to="/about"> About</Link>
                     </li>
+                    <li>
+                        <Link to="/dashboard"> dashboard</Link>
+                    </li>
                 </ul>
             </nav>
             <Outlet />
