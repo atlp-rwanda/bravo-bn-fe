@@ -1,0 +1,17 @@
+.thank { 
+    height:100vh;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgba(248, 229, 229, 0.9);;
+    opacity: 5;
+    .result{
+        height:50vh;
+        width:50%;
+        background-color: aqua;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+}

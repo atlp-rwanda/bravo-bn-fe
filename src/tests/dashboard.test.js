@@ -9,7 +9,6 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import UserDetailsModal from "../components/dashboard/UserDetailsModal";
 
-
 const getListResponse = [
   {
     "id": 2,
@@ -136,6 +135,7 @@ describe("users redux state tests", () => {
     const state = store.getState().selectedUser;
     expect(state.data).toEqual("");
   });
+})
 
   test("UserDetails should have email", () => {
     render(
@@ -207,5 +207,17 @@ describe("users redux state tests", () => {
     expect(save).toBeInTheDocument();
 
     });
+    test("UserDetails sholud have close button", () => {
+      render(
+        <Router>
+          <Provider store={store}>
+            <UserDetailsModal />
+          </Provider>
+        </Router>
+      );
+      const close= screen.getByTestId("btn2");
+      expect(close).toBeInTheDocument();
+  
+      });
 
-});
+

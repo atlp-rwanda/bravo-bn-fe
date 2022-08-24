@@ -3,7 +3,6 @@ import React from 'react'
 import jwt_decode from 'jwt-decode'
 import { useDispatch, useSelector } from "react-redux";
 import { authActions} from '../redux/authSlice'
-import Nav from '../components/NavDummy';
 import Dashboard from '../views/Dashboard';
 
 const PrivateRoutes = () => {

@@ -1,0 +1,308 @@
+.reset {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+
+    .left {
+        background-color: $secondaryColor;
+        width: 455px;
+        justify-content: center;
+        align-items: center;
+
+        h2 {
+            color: $primaryColor;
+            align-content: center;
+            text-align: center;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .left--paragraph {
+            color: $primaryColor;
+            text-align: center;
+        }
+
+        img {
+            height: 434px;
+            width: 400px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2rem;
+            object-fit: fit;
+
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+    }
+
+    .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+
+
+        h3 {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-size: 1.3rem;
+            font-family: Inter;
+        }
+
+        .nomad {
+            color: $secondaryColor;
+        }
+
+        .right-paragraph {
+            width: 518px;
+            height: 48px;
+            font-size: 1.2rem;
+            font-family: Inter;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            line-height: 1.3rem;
+            font-weight: 400;
+            padding: 0;
+            margin-right: 0px;
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4rem;
+
+            .icon-inside {
+                position: relative;
+
+                ion-icon {
+                    position: absolute;
+                    right: 0;
+                    font-size: 1.2rem;
+                    top: 0px;
+                    padding: 1.2rem;
+
+                }
+            }
+
+            .input {
+                width: 470px;
+                height: 50px;
+                font-size: 1.2em;
+                padding-left: 1rem;
+                border-radius: 0.3125rem;
+                margin-bottom: 1rem;
+
+            }
+
+            .icon-circle {
+                position: absolute;
+                right: 0;
+                top: 10px;
+                color: #30A3F1;
+            }
+
+            .errors {
+                margin-top: 1rem;
+                color: $errorColor;
+                text-align: start;
+            }
+
+            .borderError {
+                margin-bottom: 10px;
+                width: 470px;
+                height: 50px;
+                font-size: 1.2em;
+                padding-left: 1rem;
+                border-radius: 0.3125rem;
+                color: $errorColor;
+                border: 2px solid $errorColor !important;
+            }
+
+            button {
+                width: 490px;
+                height: 42px;
+                background-color: $secondaryColor;
+                color: $primaryColor;
+                font-family: 100% $font-stack;
+                font-style: bold;
+                border-radius: 0.3125rem;
+            }
+        }
+
+        .right--login {
+            text-align: center;
+            margin-bottom: 9rem;
+            font-size: 0.95rem;
+        }
+
+        .right--footer {
+            text-align: center;
+            margin-bottom: 1.8125rem;
+            font-weight: medium;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media screen and (min-width: 1440px) {
+        .left {
+
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+
+    @media screen and (min-width:601px)and (max-width: 1020px) {
+        .left {
+            width: 16rem;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            h2 {
+                margin-top: 1rem;
+            }
+
+            img {
+                height: 240px;
+                width: 220px;
+            }
+
+            .left--paragraph {
+                font-size: 0.9rem;
+            }
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+            height: 100vh;
+
+            .right-paragraph {
+                width: 350px;
+                height: 48px;
+                font-size: 0.8em;
+
+            }
+
+            form {
+                margin-bottom: 0.5rem;
+                .icon-inside {
+                    ion-icon {
+                        font-size: 1.2rem;
+                        padding: 0.8rem;
+    
+                    }
+                }
+                
+
+                .input {
+                    width: 300px;
+                    height: 40px;
+                    font-size: 1rem;
+          
+                }
+
+                button {
+                    width: 325px;
+                    height: 42px;
+                }
+
+                .borderError {
+                    width: 300px;
+                    height: 40px;
+                    margin-bottom: 0;
+                }
+
+                .errors {
+                    align-self: start;
+
+                }
+
+            }
+
+            .right--login {
+
+                margin-bottom: 12rem;
+            }
+        }
+
+    }
+
+    @media screen and (min-width:320px) and (max-width: 600px) {
+        .left {
+            display: none;
+        }
+
+        .right {
+            h3 {
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+            }
+            .right-paragraph {
+                width: 320px;
+                height: 35px;
+                font-size: 0.7em;
+            }
+
+
+            form {
+                align-items: center;
+                margin-bottom: 2rem;
+                .icon-inside {  
+                    ion-icon {
+                        font-size: 1.1em;
+                        top: 0px;
+                        padding: 0.7rem;
+    
+                    }
+                }
+
+                .input {
+                    font-size: 0.8em;
+                    width: 260px;
+                    height: 35px;
+                }
+
+                .borderError {
+                    width: 260px;
+                    height: 35px;
+                    font-size: 0.8em;
+                }
+
+                .errors {
+                    align-self: start;
+                    font-size: 0.8em;
+                }
+
+                button {
+                    width: 280px;
+                    height: 35px;
+                }
+            }
+
+            .right--login {
+                font-size: 0.8em;
+                margin-bottom: 12rem;
+            }
+        }
+
+    }
+
+}

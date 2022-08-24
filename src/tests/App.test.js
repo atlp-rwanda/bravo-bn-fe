@@ -6,7 +6,6 @@ import store from "../redux/store";
 import App from '../App.js';
 import LoginForm from '../views/Login';
 import Home from '../views/Home'
-import Nav from '../components/NavDummy'
 import About from '../views/About'
 import Btn from '../components/Btn'
 import Contents from '../components/dashboard/Contents'
@@ -19,6 +18,7 @@ import ContentElement from '../components/dashboard/ContentElements'
 import Dash from '../components/dashboard/Dash'
 import Dashboard from "../views/Dashboard";
 import RequestsTable from "../components/dashboard/RequestsTable";
+import Apps from '../components/App'
 
 
 afterEach(cleanup);
@@ -68,16 +68,16 @@ test("renders react component", async () => {
     </Router>
   );
 });
-
 test("renders react component", async () => {
   render(
     <Router>
       <Provider store={store}>
-        <Nav />
+        <Apps/>
       </Provider>
     </Router>
   );
 });
+
 
 test("renders react component", async () => {
   render(
