@@ -10,7 +10,7 @@ export const reducers = {
   alert: alertSlice.reducer,
   login: loginReducer,
   request: requestSlice,
-  trips: tripsSlice.reducer
+  trips: tripsSlice.reducer,
 }
 
  const store = configureStore({

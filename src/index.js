@@ -17,7 +17,6 @@ const container = document.getElementById('app');
 const root = createRoot(container);
 root.render(
   <ThemeProvider theme={THEME}>
-
   <Router>
     <Provider store={store}>
     <App />

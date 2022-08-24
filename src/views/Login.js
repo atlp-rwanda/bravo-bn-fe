@@ -1,17 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logginUser } from "../redux/auth/loginSlice";
 import svg from "../assets/mobile_login.svg";
 import googleIcon from "../assets/google_icon.svg";
 import facebookIcon from "../assets/facebook_icon.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { ErrorAlert, InfoAlert, SuccessAlert, WarnAlert } from '../components/Alerts';
+import { Stack } from "@mui/material";
+import { alertActions } from "../redux/alertSlice";
+
+const alertStyle = {
+  position: 'fixed', zIndex: '2000',right: '3%', bottom: '30px',
+  transition: 'all 300ms linear 0s'
+};
+
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
+
+  useEffect(()=>{
+
+    dispatch(
+      alertActions.error({message: "Error message" })
+      );
+      dispatch(
+        alertActions.warning({message: "Warning message" })
+        );
+        dispatch(
+          alertActions.info({message: "Info message" })
+          );
+          dispatch(
+            alertActions.success({message: "Success message" })
+            );
+            
+            
+  },[])
 
   const [email, setEmail] = useState();
   const [emailError, setEmailError] = useState({
@@ -97,6 +125,12 @@ export default function Login() {
   };
   return (
     <div className="reg-area">
+      <Stack sx={alertStyle} spacing={2} >
+        { warnMessage  && <WarnAlert /> }
+        { infoMessage  && <InfoAlert /> }
+        { successMessage && <SuccessAlert/> }
+        { errorMessage && <ErrorAlert /> }
+      </Stack>
       <div className="slice-a">
         <img src={svg} alt="Login svg" />
         <div className="welcome-text">
