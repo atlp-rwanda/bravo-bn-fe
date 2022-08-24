@@ -14,7 +14,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import {  Typography } from '@mui/material';
-import { CommentsModal, DetailsModal, UpdateModal } from '../components/Models';
 import { TripRequest } from '../components/TripRequest';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -83,13 +82,8 @@ const Search = styled('div')(({ theme }) => ({
 
 
 export default function Booking() {
-    const [comments, setComments] = React.useState(false);
-    const [details, setDetails] = React.useState(false);
-    const [update, setUpdate] = React.useState(false);
     const [searchValue, setSearchValue] = React.useState('');
-    const [loading, setLoading] = React.useState(false);
     const [searchLoading, setSearchLoading] = React.useState(false);
-    const [filterLoading, setFilterLoading] = React.useState(false);
     const [filter, setFilter] = React.useState({year:'',month:'',day:''});
     const dispatch = useDispatch();
     const days = [];
@@ -124,8 +118,8 @@ export default function Booking() {
     const closeDetails=() => setDetails(false);
     const token= useSelector(state=> state.auth.token);
     const trips= useSelector(state=> state.trips.trips);
-    const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
-
+    const { errorMessage }= useSelector(state=> state.alert);
+ 
     React.useEffect(()=>{
       if(!trips || trips.length == 0 && searchValue.length ==0 ){
 
@@ -146,7 +140,7 @@ export default function Booking() {
                 alertActions.error({message: 'none'}));
               },10000)
         }
-    },[trips,comments,searchValue,searchLoading]);
+    },[trips,searchValue,searchLoading]);
 
     
 
@@ -204,87 +198,10 @@ export default function Booking() {
           })
     }
 
-    const filterTerm = ()=>{
-      console.log('outside')
-      if(filter.year|| filter.month || filter.day) {
-
-        console.log('inside')
-        setFilterLoading(true)
-      axios.post(`${process.env.API_URL}/user/trip/status/`,{
-        year:filter.year,month:filter.month,day:filter.day
-      }, {
-        headers: { Authorization: `Bearer ${token}` },
-      }).then(async(res)=>{
-        try{
-          let allTrips = await axios.get(`${process.env.API_URL}/user/trip/get`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          console.log(res)
-         /*  let retrievedData =[]
-          res.data.data.tripss.rows.map(el => retrievedData.push(el.id));
-          let searchFilter = allTrips.data.data.filter( trip => retrievedData.includes(trip.id) );
-          dispatch(
-            tripsActions.getTripRequests({trips: searchFilter})
-            ); */
-            setFilterLoading(false)
-          }catch(err){
-            setFilterLoading(false)
-            console.log(err)
-          }
-        }).catch(err=> {
-          setFilterLoading(false)
-          dispatch(
-            alertActions.error({message: err.response.data.message })
-            );
-            setTimeout(()=>{
-              dispatch(
-                alertActions.error({message: 'none'}));
-              },10000)
-            })
-          }
-        };
-
-    const deleteTrip= (id,index)=>{
-      if(trips[index]) {
-
-        setLoading(true)
-        
-        axios.delete(`${process.env.API_URL}/user/trip/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      }).then(()=>{
-        let newArray = trips.filter( el => el.id !== id );
-        dispatch(
-          tripsActions.getTripRequests({trips: newArray })
-          );
-        dispatch(
-          alertActions.success({message: 'Trip request was deleted successfully' })
-          );
-          setLoading(false)
-          setTimeout(()=>{
-            dispatch(
-              alertActions.success({message: 'none'}));
-            },8000)
-          }).catch(err=> {
-            console.log(err)
-          setLoading(false)
-          dispatch(
-            alertActions.error({message: err.response.data.message })
-            );
-            setTimeout(()=>{
-              dispatch(
-                alertActions.error({message: 'none'}));
-              },10000)
-            })
-          }
-        }
-
   return (
     <Container maxWidth="xl"  className="book-container" >
       <Stack sx={alertStyle} spacing={2} >
-        { warnMessage && warnMessage != 'none' && <WarnAlert message={warnMessage}/> }
-        { infoMessage && infoMessage != 'none' && <InfoAlert message={infoMessage}/> }
         { errorMessage &&  errorMessage != 'none' && <ErrorAlert message={errorMessage}/> }
-        { successMessage && successMessage != 'none' && <SuccessAlert message={successMessage}/> }
       </Stack>
 
          <CommentsModal
@@ -329,7 +246,6 @@ return(
   key={index}
   location={trip.location}
   status={trip.status}
-  loading={loading}
   commentsCount = {trip.commentsCount}
   accomodation={trip.accomodation}
 
@@ -427,7 +343,7 @@ No records
             shrink: true,
           }}
         /></Box>
-        <Box sx={{ gridArea: 'button' }}><Button variant="contained" className='button' onClick={filterTerm} fullWidth>{ filterLoading? <PreLoaderSmall/> : 'Filter'}</Button></Box>
+        <Box sx={{ gridArea: 'button' }}><Button variant="contained" className='button' fullWidth>Filter</Button></Box>
       </Box>
     </Box>
     </Box>
