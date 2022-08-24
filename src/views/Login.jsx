@@ -7,13 +7,14 @@ import svg from "../assets/mobile_login.svg";
 import googleIcon from "../assets/google_icon.svg";
 import facebookIcon from "../assets/facebook_icon.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState({
     isValid: true,
     message: "",
@@ -153,7 +154,7 @@ export default function Login() {
               </small>
             </div>
             <div className="forgot-p">
-              <p>Forgot password?</p>
+              <p><Link to="/reset"> Forgot password?</Link></p>
             </div>
             <div className="form-group">
               <div className="input-group button">

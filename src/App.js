@@ -1,8 +1,14 @@
-import React from "react";
-import Routes from "./routes";
+import React from 'react'
+import Router from './routes'
+import Nav from './components/NavDummy';
 
 const App = () => {
-  return <Routes />;
-};
+    return (
+        <>
+            <Nav />
+            <Router />
+        </>
+    );
+}
 
 export default App;

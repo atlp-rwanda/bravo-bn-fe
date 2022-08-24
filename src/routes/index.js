@@ -6,11 +6,15 @@ import Login from '../views/Login';
 import Signup from '../views/Signup';
 import Dashboard from '../views/Dashboard';
 import RequestsTable from '../components/dashboard/RequestsTable';
+import Reset from '../views/Reset';
+import Respassword from '../views/Respassword';
+
+import PopupModal from "../components/Modal/Modal.js"
 
 
 const routes= () => {
-
   return (
+  
       <Routes>
       <Route  element={<PrivateRoutes/>}>
         <Route exact path="/" element={<Dashboard/>}/>
@@ -20,7 +24,11 @@ const routes= () => {
       </Route >
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>
+      <Route path='/reset' element={<Reset/>}/>
+      <Route exact path="/password/:token" element={<Respassword/>}/>
+      <Route path='/modal' element={<PopupModal/>}/>
     </Routes>
+ 
   );
 }
 export default routes;

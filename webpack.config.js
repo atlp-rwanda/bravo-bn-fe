@@ -12,15 +12,13 @@ const vercelEnv = process.env;
     return prev;
   }, {});
 
+
 module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index_bundle.js",
-    publicPath: '/'
-  },
-  devServer: {
-    historyApiFallback: true
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -53,6 +51,7 @@ module.exports = {
         ],
       },
     ],
+
   },
   plugins: [
     new HtmlWebpackPlugin({
