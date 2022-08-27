@@ -1,0 +1,148 @@
+@import "./variables.scss";
+
+.reg-form {
+  button {
+    width: 168px;
+    display: flex;
+    margin-top: 40px;
+    margin-left: auto;
+    text-transform: none;
+  }
+  .calenderInput {
+   width: 86%,
+
+  }
+  .date-picker {
+    width: 100%;
+    margin-top: auto;
+    margin-left: 20px;
+  }
+}
+
+.textarea-reason {
+  .textarea {
+    width: 640px;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+  .error {
+    color: $errorColor;
+    padding-left: 20px;
+    margin-top: -4px;
+  }
+  .errorBorder {
+    border: 1px solid $errorColor;
+  }
+}
+
+.create-request {
+  min-height: 100vh;
+  display: flex;
+  .slice-a {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: $secondaryColor;
+    padding: 20px;
+    img {
+      width: 100%;
+    }
+    .welcome-text {
+      text-align: center;
+      color: $primaryColor;
+      p {
+        font-size: 13px;
+      }
+    }
+  }
+  .slice-b {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    .logo {
+      padding: 20px 0;
+    }
+    .form-content {
+      @import "./input.component.scss";
+      justify-content: center;
+      margin: auto 0;
+      h2 {
+        font-size: 25px;
+        text-align: center;
+      }
+
+      .form-group {
+
+        .input-group {
+          height: 35px;
+          border: 1px solid $fouthColor;
+          width: 400px;
+          border-radius: 5px;
+          padding:  5px;
+          cursor: pointer;
+      }
+
+        .errorBorder {
+          border: 1px solid $errorColor;
+        }
+        .error {
+          color: $errorColor;
+          font-size: 14px;
+          margin: auto 0;
+          position: absolute;
+        }
+      }
+    }
+  }
+}
+
+$medium: 750px;
+
+.create-request {
+  @media (max-width: $medium) {
+    .slice-a {
+      display: none !important;
+    }
+  }
+  @media (max-width: 970px) {
+    .slice-a-signup {
+      display: none !important;
+    }
+
+    .textarea-reason {
+      .textarea {
+        width: 93%;
+        margin: 20px auto;
+      }
+    }
+
+    .reg-form {
+      button {
+        margin-top: 1px;
+        width: 94%;
+      }
+      .date-picker {
+        margin-top: auto;
+        margin-left: auto;
+        .calenderInput {
+          width: 94%;
+          margin: 20px auto;
+          margin-bottom: 1px;
+         }
+      }
+    }
+  }
+  @media (max-width: 650px) {
+    .input-align {
+      display: block !important;
+    }
+    .input-left {
+      margin-left: 0 !important;
+    }
+    
+  }
+}
