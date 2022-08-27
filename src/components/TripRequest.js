@@ -6,7 +6,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CheckIcon from '@mui/icons-material/Check';
-import { PreLoaderSmallDanger } from './PreLoader';
 
 
 export function TripRequest(props) {
@@ -45,17 +44,17 @@ const statusColor = props.status == 'pending' ? '#FFC107' : props.status == 'app
                   </Typography>
                 })}
                 </Box>
-                <Button onClick={props.openDetails} sx={{ width:'120px', textTransform:'none', fontSize:'0.7rem', fontWeight:'600', border:'1px solid #046CC6'}}>Trip details</Button>
+                <Button  sx={{ width:'120px', textTransform:'none', fontSize:'0.7rem', fontWeight:'600', border:'1px solid #046CC6'}}>Trip details</Button>
                 <Box sx={{ display:'flex', justifyContent:'space-between', padding:'20px 0 0 0'}}>
-                <Typography onClick={props.openComments} variant="p" color="text.secondary" component="div" sx={{textAlign:'start', margin:' auto 0 0 0', fontWeight:'600', cursor:'pointer'}}>
+                <Typography  variant="p" color="text.secondary" component="div" sx={{textAlign:'start', margin:' auto 0 0 0', fontWeight:'600', cursor:'pointer'}}>
                    {props.commentsCount} Comments
                   </Typography>
                 <Box>
-                  {props.status == 'pending' ?<><Button onClick={props.openUpdate} variant="contained" size="medium"  sx={{ marginRight:'10px',textTransform:'none'}}>
+                  {props.status == 'pending' ?<><Button  variant="contained" size="medium"  sx={{ marginRight:'10px',textTransform:'none'}}>
                   Update
                 </Button>
                   <Button onClick={props.onDelete}  sx={{ textTransform:'none'}} variant="outlined" color='error' size="medium">
-                  {props.loading ? <PreLoaderSmallDanger /> : 'Delete'}
+                   Delete
                 </Button></>
                 :''}
                 </Box>

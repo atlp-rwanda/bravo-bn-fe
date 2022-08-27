@@ -14,12 +14,11 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import {  Typography } from '@mui/material';
-import { CommentsModal, DetailsModal, UpdateModal } from '../components/Models';
 import { TripRequest } from '../components/TripRequest';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { tripsActions } from '../redux/tripsSlice';
-import PreLoader, { PreLoaderSmall, PreLoaderSmallDanger } from "../components/PreLoader";
+import PreLoader from "../components/PreLoader";
 import { ErrorAlert, InfoAlert, SuccessAlert, WarnAlert } from '../components/Alerts';
 import { alertActions } from '../redux/alertSlice';
 
@@ -52,16 +51,7 @@ const Search = styled('div')(({ theme }) => ({
       width: 'auto',
     },
   }));
-  
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }));
+
   
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
@@ -82,13 +72,6 @@ const Search = styled('div')(({ theme }) => ({
 
 
 export default function Booking() {
-    const [comments, setComments] = React.useState(false);
-    const [details, setDetails] = React.useState(false);
-    const [update, setUpdate] = React.useState(false);
-    const [searchValue, setSearchValue] = React.useState('');
-    const [loading, setLoading] = React.useState(false);
-    const [searchLoading, setSearchLoading] = React.useState(false);
-    const [filterLoading, setFilterLoading] = React.useState(false);
     const [filter, setFilter] = React.useState({year:'',month:'',day:''});
     const dispatch = useDispatch();
     const days = [];
@@ -110,22 +93,13 @@ export default function Booking() {
       {name:'December',value:'dec'}
     ]
 
-    const closeComments = () => {
-      dispatch(
-          tripsActions.comments({comments: null})
-        );
-      dispatch(
-          tripsActions.openTripRequest({value: null})
-        );
-      setComments(false)};
-    const closeUpdate=() => setUpdate(false);
-    const closeDetails=() => setDetails(false);
+
     const token= useSelector(state=> state.auth.token);
     const trips= useSelector(state=> state.trips.trips);
     const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
 
     React.useEffect(()=>{
-      if(!trips || trips.length == 0 && searchValue.length ==0 ){
+      if(!trips || trips.length == 0 ){
 
         axios.get(`${process.env.API_URL}/user/trip/get`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -144,7 +118,7 @@ export default function Booking() {
                 alertActions.error({message: 'none'}));
               },10000)
         }
-    },[trips,comments,searchValue,searchLoading]);
+    },[trips]);
 
     
 
@@ -169,113 +143,6 @@ export default function Booking() {
     }
     
 
-    const searchTerm = ()=>{
-      if(searchValue.trim().length ==0) return;
-      setSearchLoading(true)
-      axios.get(`${process.env.API_URL}/search/${searchValue}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      }).then(async(res)=>{
-        try{
-          let allTrips = await axios.get(`${process.env.API_URL}/user/trip/get`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          let retrievedData =[]
-          res.data.data.tripss.rows.map(el => retrievedData.push(el.id));
-          let searchFilter = allTrips.data.data.filter( trip => retrievedData.includes(trip.id) );
-          dispatch(
-            tripsActions.getTripRequests({trips: searchFilter})
-            );
-            setSearchLoading(false)
-          }catch(err){
-            setSearchLoading(false)
-            console.log(err)
-          }
-        }).catch(err=> {
-          setSearchLoading(false)
-          dispatch(
-            alertActions.error({message: err.response.data.message })
-            );
-            setTimeout(()=>{
-              dispatch(
-                alertActions.error({message: 'none'}));
-              },10000)
-          })
-    }
-
-    const filterTerm = ()=>{
-      console.log('outside')
-      if(filter.year|| filter.month || filter.day) {
-
-        console.log('inside')
-        setFilterLoading(true)
-      axios.post(`${process.env.API_URL}/user/trip/status/`,{
-        year:filter.year,month:filter.month,day:filter.day
-      }, {
-        headers: { Authorization: `Bearer ${token}` },
-      }).then(async(res)=>{
-        try{
-          let allTrips = await axios.get(`${process.env.API_URL}/user/trip/get`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          console.log(res)
-         /*  let retrievedData =[]
-          res.data.data.tripss.rows.map(el => retrievedData.push(el.id));
-          let searchFilter = allTrips.data.data.filter( trip => retrievedData.includes(trip.id) );
-          dispatch(
-            tripsActions.getTripRequests({trips: searchFilter})
-            ); */
-            setFilterLoading(false)
-          }catch(err){
-            setFilterLoading(false)
-            console.log(err)
-          }
-        }).catch(err=> {
-          setFilterLoading(false)
-          dispatch(
-            alertActions.error({message: err.response.data.message })
-            );
-            setTimeout(()=>{
-              dispatch(
-                alertActions.error({message: 'none'}));
-              },10000)
-            })
-          }
-        };
-
-    const deleteTrip= (id,index)=>{
-      if(trips[index]) {
-
-        setLoading(true)
-        
-        axios.delete(`${process.env.API_URL}/user/trip/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      }).then(()=>{
-        let newArray = trips.filter( el => el.id !== id );
-        dispatch(
-          tripsActions.getTripRequests({trips: newArray })
-          );
-        dispatch(
-          alertActions.success({message: 'Trip request was deleted successfully' })
-          );
-          setLoading(false)
-          setTimeout(()=>{
-            dispatch(
-              alertActions.success({message: 'none'}));
-            },8000)
-          }).catch(err=> {
-            console.log(err)
-          setLoading(false)
-          dispatch(
-            alertActions.error({message: err.response.data.message })
-            );
-            setTimeout(()=>{
-              dispatch(
-                alertActions.error({message: 'none'}));
-              },10000)
-            })
-          }
-        }
-
   return (
     <Container maxWidth="xl"  className="book-container" >
       <Stack sx={alertStyle} spacing={2} >
@@ -284,18 +151,7 @@ export default function Booking() {
         { errorMessage &&  errorMessage != 'none' && <ErrorAlert message={errorMessage}/> }
         { successMessage && successMessage != 'none' && <SuccessAlert message={successMessage}/> }
       </Stack>
-         <CommentsModal
-         open={comments}
-         onClose={closeComments}
-         />
-         <DetailsModal
-         open={details}
-         onClose={closeDetails}
-         />
-         <UpdateModal
-         open={update}
-         onClose={closeUpdate}
-         />
+
 
     <Box sx={{ flexGrow: 1 }} >
       <Grid container spacing={3} >
@@ -307,17 +163,15 @@ export default function Booking() {
             <StyledInputBase
               placeholder="search here..."
               inputProps={{ 'aria-label': 'search' }}
-              value={searchValue}
               sx={{padding:'0'}}
-              onChange={(e)=>{setSearchValue(`${e.target.value}`);}}
             />
-              <SearchIcon sx={{cursor:'pointer', mb:'-8px'}} onClick={searchTerm} />
+              <SearchIcon sx={{cursor:'pointer', mb:'-8px'}}/>
           </Search>
     </Stack>
     <Typography variant="h6" component="h6" pt={8} sx={{ textAlign:'start', fontWeight:600}}>
           My trip requests
 </Typography>
-{!trips && !errorMessage || searchLoading ? <PreLoader />:  trips?.length > 0? 
+{!trips && !errorMessage  ? <PreLoader />:  trips?.length > 0? 
 trips.map((trip,index)=>{
   getLocation(trip.accomodation?.locationId,index)
   getComments(trip.id,index)
@@ -326,24 +180,9 @@ return(
   key={index}
   location={trip.location}
   status={trip.status}
-  loading={loading}
   commentsCount = {trip.commentsCount}
   accomodation={trip.accomodation}
-  onDelete = {()=>{
-    deleteTrip(trip.id,index)
-  }}
-   openComments={() => {
-    dispatch(tripsActions.openTripRequest({value: index}) );
-    setComments(true)
-  }}
-   openDetails={() => {
-    dispatch(tripsActions.openTripRequest({value: index}) );
-    setDetails(true)
-  }}
-   openUpdate={() => {
-    dispatch(tripsActions.openTripRequest({value: index}) );
-    setUpdate(true)
-  }}
+
    />
 )
 })
@@ -423,7 +262,7 @@ No records
             shrink: true,
           }}
         /></Box>
-        <Box sx={{ gridArea: 'button' }}><Button variant="contained" className='button' onClick={filterTerm} fullWidth>{ filterLoading? <PreLoaderSmall/> : 'Filter'}</Button></Box>
+        <Box sx={{ gridArea: 'button' }}><Button variant="contained" className='button' fullWidth>Filter</Button></Box>
       </Box>
     </Box>
     </Box>
