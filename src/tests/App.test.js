@@ -1,89 +1,100 @@
-import React from 'react';
-import { render, cleanup, } from "@testing-library/react";
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import React from "react";
+import { render, cleanup } from "@testing-library/react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
 import store from "../redux/store";
-import App from '../App.js';
-import LoginForm from '../views/Login';
-import Home from '../views/Home'
-import Nav from '../components/NavDummy'
-import About from '../views/About'
-import Btn from '../components/Btn'
+import App from "../App.js";
+import LoginForm from "../views/Login";
+import Home from "../views/Home";
+import Nav from "../components/NavDummy";
+import About from "../views/About";
+import Btn from "../components/Btn";
+import CreateRequest from "../views/CreateRequest";
 
 afterEach(cleanup);
 
-test('renders App on non registered user',  () => {
+test("renders App on non registered user", () => {
   localStorage.removeItem("jwt");
   render(
     <Router>
       <Provider store={store}>
-      <App />
+        <App />
       </Provider>
-    </Router>,
+    </Router>
   );
-})
+});
 
-test('renders App on registered user',  () => {
-  localStorage.setItem("jwt", `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjQsImlhdCI6MTY2MDI5MDQ1NCwiZXhwIjoxNjYwMzc2ODU0fQ.4aMwsxSnpIdiXrW5psghb1hHYGdiFIPFA1FiwL7sWh4`);
+test("renders App on registered user", () => {
+  localStorage.setItem(
+    "jwt",
+    `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjQsImlhdCI6MTY2MDI5MDQ1NCwiZXhwIjoxNjYwMzc2ODU0fQ.4aMwsxSnpIdiXrW5psghb1hHYGdiFIPFA1FiwL7sWh4`
+  );
   render(
     <Router>
       <Provider store={store}>
-      <App />    
+        <App />
       </Provider>
-    </Router>,
+    </Router>
   );
-})
+});
 
- test('renders react login page ',  () => {
-   render(<Router>
-    <Provider store={store}>
-    <LoginForm />
-    </Provider>
-  </Router>); 
-
+test("renders react login page ", () => {
+  render(
+    <Router>
+      <Provider store={store}>
+        <LoginForm />
+      </Provider>
+    </Router>
+  );
 
   expect(window.location.href).toBe("http://localhost/login");
-}) 
+});
 
-test('renders react component', async () => {
+test("renders react component", async () => {
   render(
-     <Router>
+    <Router>
       <Provider store={store}>
-      <Home />    
+        <Home />
       </Provider>
-      </Router>
+    </Router>
   );
-})
+});
 
-test('renders react component', async () => {
+test("renders react component", async () => {
   render(
-     <Router>
+    <Router>
       <Provider store={store}>
-
-      <Nav />    
+        <Nav />
       </Provider>
-      </Router>
+    </Router>
   );
-})
+});
 
-test('renders react component', async () => {
+test("renders react component", async () => {
   render(
-     <Router>
+    <Router>
       <Provider store={store}>
-
-      <About />    
+        <About />
       </Provider>
-      </Router>
+    </Router>
   );
-})
-test('renders react component', async () => {
+});
+test("renders react component", async () => {
   render(
-     <Router>
+    <Router>
       <Provider store={store}>
-
-      <Btn />    
+        <Btn />
       </Provider>
-      </Router>
+    </Router>
   );
-})
- 
+});
+test("renders react component", async () => {
+  render(
+    <Router>
+      <Provider store={store}>
+        <CreateRequest />
+      </Provider>
+    </Router>
+  );
+});
+

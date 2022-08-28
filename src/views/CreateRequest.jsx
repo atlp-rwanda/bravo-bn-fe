@@ -55,7 +55,9 @@ const CreateRequest = () => {
 
   const locationNames = [];
   if (locations) {
+    console.log("LOCATIONS", locations)
     locations.forEach((location) => {
+    console.log("LOCATION", location)
       locationNames.push({ name: location.locationName, value: location.id });
     });
   }
@@ -66,7 +68,9 @@ const CreateRequest = () => {
 
   const accomodationsName = [];
   if (accomodations) {
+    console.log("ACCOMODATIONS", accomodations)
     accomodations.forEach((accomodation) => {
+    console.log("ACCOMODATION", accomodation)
       if (accomodation.locationId === tripData.goingTo) {
         accomodationsName.push({
           name: accomodation.name,
@@ -82,7 +86,9 @@ const CreateRequest = () => {
 
   let roomTypes = [];
   if (rooms) {
+    console.log("ROOOMS", rooms)
     rooms.forEach((room) => {
+      console.log("ROOOM", room);
       if (room.accomodationId === tripData.accomodationId && !room.taken) {
         console.log(room.id + "" + room.taken);
         roomTypes.push({ name: room.roomType, value: room.id });
@@ -414,7 +420,6 @@ const CreateRequest = () => {
                     travelReason: e.target.value,
                   });
                 }}
-                errorMessage={reasonError.isValid ? "" : reasonError.message}
               />
               <p
                 style={{ display: reasonError.isValid ? "none" : "block" }}
