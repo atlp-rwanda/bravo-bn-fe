@@ -183,10 +183,6 @@ export default function Booking() {
             tripsActions.getTripRequests({trips: searchFilter})
             );
             setSearchLoading(false)
-            setInterval(()=>{
-              console.log('from search:',trips,searchFilter)
-
-            },5000)
           }catch(err){
             setSearchLoading(false)
             console.log(err)
