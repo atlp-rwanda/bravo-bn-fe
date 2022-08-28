@@ -116,7 +116,6 @@ export default function Booking() {
     const { errorMessage }= useSelector(state=> state.alert);
  
     React.useEffect(()=>{
-      console.log(searchValue.length ==0)
       if(!trips || trips.length == 0 && searchValue.length ==0 ){
 
         axios.get(`${process.env.API_URL}/user/trip/get`, {
@@ -153,14 +152,19 @@ export default function Booking() {
         }
     }
     const getComments = (tripId,index)=>{
+
         axios.get(`${process.env.API_URL}/user/trip/${tripId}/comments`, {
           headers: { Authorization: `Bearer ${token}` },
         }).then((res)=>{
           dispatch(tripsActions.updateTripRequests({index,property:'commentsCount',value:res.data.comments.count}));
-          }).catch(err=> console.log(err))
+        }).catch(err=> console.log(err))
         
     }
     
+    const handleSearch = (e)=>{
+      setSearchValue(`${e.target.value}`);
+     
+   }
 
     const searchTerm = ()=>{
       if(searchValue.trim().length ==0) return;
@@ -176,9 +180,13 @@ export default function Booking() {
           res.data.data.tripss.rows.map(el => retrievedData.push(el.id));
           let searchFilter = allTrips.data.data.filter( trip => retrievedData.includes(trip.id) );
           dispatch(
-            tripsActions.getTripRequests({trips: searchFilter.length >0 ? searchFilter :[]})
+            tripsActions.getTripRequests({trips: searchFilter})
             );
             setSearchLoading(false)
+            setInterval(()=>{
+              console.log('from search:',trips,searchFilter)
+
+            },5000)
           }catch(err){
             setSearchLoading(false)
             console.log(err)
@@ -230,7 +238,7 @@ export default function Booking() {
               inputProps={{ 'aria-label': 'search' }}
               value={searchValue}
               sx={{padding:'0'}}
-              onChange={(e)=>{setSearchValue(`${e.target.value}`);}}
+              onChange={handleSearch}
             />
               <SearchIcon sx={{cursor:'pointer', mb:'-8px'}} onClick={searchTerm} />
           </Search>
@@ -240,8 +248,10 @@ export default function Booking() {
 </Typography>
 {!trips && !errorMessage || searchLoading ? <PreLoader />:  trips?.length > 0 ? 
 trips.map((trip,index)=>{
-  getLocation(trip.accomodation?.locationId,index)
-  getComments(trip.id,index)
+  if(trip.id){
+
+    getLocation(trip.accomodation?.locationId,index)
+    getComments(trip.id,index)
 return(
   <TripRequest
   key={index}
@@ -267,6 +277,7 @@ return(
   }}
    />
 )
+}
 })
 
 :<Typography variant="h5"  sx={{ textAlign:'center', fontWeight:600}}>
