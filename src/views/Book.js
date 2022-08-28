@@ -163,6 +163,9 @@ export default function Booking() {
     
     const handleSearch = (e)=>{
       setSearchValue(`${e.target.value}`);
+      if(e.target.value.length == 0) return dispatch(
+        tripsActions.getTripRequests({trips: null})
+        );
      
    }
 
