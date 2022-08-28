@@ -8,9 +8,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateRequest = () => {
-  // const [ToggleForm, setToggleForm] = useState(1);
   const [rooms, setRooms] = useState([]);
   const [locations, setLocations] = useState([]);
   const [accomodations, setAccomodations] = useState([]);
@@ -28,6 +28,8 @@ const CreateRequest = () => {
     status: null,
   });
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const fetchRooms = async () => {
     const res = await axios.get(`${process.env.API_URL}/rooms`);
@@ -207,6 +209,7 @@ const CreateRequest = () => {
           accomodationId: null,
           roomId: null,
         });
+        navigate('/booking')
       }
     } catch (error) {
       setIsLoading(false);
@@ -224,10 +227,10 @@ const CreateRequest = () => {
     <div className="create-request">
       <div className="slice-a-signup slice-a">
         <div className="welcome-text">
-          <h1>Create trip request.</h1>
+          <h2>Create trip request.</h2>
           <p>
-            In publishing and graphic design, Lorem ipsum is a placeholder text
-            commonly used to
+            Barefoot Nomad is an application that will enable its "Company
+            Nomads" book their travel and accommodation easily
           </p>
         </div>
         <img style={{ paddingTop: 80 }} src={svg} alt="Login svg" />
@@ -236,10 +239,7 @@ const CreateRequest = () => {
         <img src={barefootLogo} className="logo" alt="Barefoot logo" />
         <div className="form-content">
           <h2>Fill the trip request information</h2>
-          <p>
-            In publishing and graphic design, Lorem ipsum is a placeholder text
-            commonly used to
-          </p>
+          <p>book your travel and accommodation easily and conveniently</p>
 
           <form action="" className="reg-form" onSubmit={submitRequest}>
             <div className="input-align">

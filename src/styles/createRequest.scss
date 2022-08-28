@@ -19,6 +19,13 @@
   }
 }
 
+h2 {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 24px;
+}
+
 .textarea-reason {
   .textarea {
     width: 640px;
@@ -70,11 +77,12 @@
       @import "./input.component.scss";
       justify-content: center;
       margin: auto 0;
-      h2 {
-        font-size: 25px;
-        text-align: center;
-      }
 
+      p {
+        color: gray;
+        text-align: center;
+        padding-bottom: 34px;
+      }
       .form-group {
 
         .input-group {
@@ -119,7 +127,6 @@ $medium: 750px;
         margin: 20px auto;
       }
     }
-
     .reg-form {
       button {
         margin-top: 1px;
