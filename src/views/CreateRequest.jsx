@@ -1,6 +1,5 @@
 import svg from "../assets/request_svg.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
-import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { TextField, Button, TextareaAutosize, Alert } from "@mui/material";
 import "../styles/createRequest.scss";
@@ -198,6 +197,17 @@ const CreateRequest = () => {
       setTimeout(() => {
         setAlert({ message: "" });
       }, 2200);
+      if (res.status === 201) {
+        setTripData({
+          leavingFrom: "",
+          goingTo: "",
+          travelDate: null,
+          returnDate: null,
+          travelReason: "",
+          accomodationId: null,
+          roomId: null,
+        });
+      }
     } catch (error) {
       setIsLoading(false);
       setAlert({
@@ -248,6 +258,7 @@ const CreateRequest = () => {
                     goingTo: parseInt(e.target.value),
                   });
                 }}
+                value={tripData.goingTo}
                 errorClass="error"
                 errorMessage={
                   locationError.isValid ? "" : locationError.message
@@ -282,6 +293,7 @@ const CreateRequest = () => {
             <div className="input-align">
               <Select
                 inputFor="accomodation"
+                value={tripData.accomodationId}
                 parentClass="form-group input-left"
                 childClass={`input-group input-resize ${
                   accomodationError.isValid ? "" : "errorBorder"
@@ -328,6 +340,7 @@ const CreateRequest = () => {
             <div className="input-align">
               <Select
                 inputFor="room"
+                value={tripData.roomId}
                 parentClass="form-group input-left"
                 childClass={`input-group input-resize ${
                   roomError.isValid ? "" : "errorBorder"
@@ -346,6 +359,7 @@ const CreateRequest = () => {
               />
               <Input
                 inputFor="leavingfrom"
+                value={tripData.leavingFrom}
                 parentClass="form-group input-left"
                 childClass={`input-group input-resize ${
                   leavingFromError.isValid ? "" : "errorBorder"
@@ -378,7 +392,7 @@ const CreateRequest = () => {
               <TextareaAutosize
                 aria-label="minimum height"
                 minRows={4}
-                // style={{ width: 640 }}
+                value={tripData.travelReason}
                 className={`textarea ${
                   reasonError.isValid ? "" : "errorBorder"
                 }`}
