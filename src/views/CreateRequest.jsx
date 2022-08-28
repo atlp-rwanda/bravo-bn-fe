@@ -54,7 +54,8 @@ const CreateRequest = () => {
   console.log(tripData);
 
   const locationNames = [];
-  if (locations) {
+  if (locations.length) {
+    console.log(locations.length !== 0)
     console.log("LOCATIONS", locations)
     locations.forEach((location) => {
     console.log("LOCATION", location)
@@ -67,7 +68,7 @@ const CreateRequest = () => {
   ];
 
   const accomodationsName = [];
-  if (accomodations) {
+  if (accomodations.length) {
     console.log("ACCOMODATIONS", accomodations)
     accomodations.forEach((accomodation) => {
     console.log("ACCOMODATION", accomodation)
@@ -85,7 +86,7 @@ const CreateRequest = () => {
   ];
 
   let roomTypes = [];
-  if (rooms) {
+  if (rooms.length) {
     console.log("ROOOMS", rooms)
     rooms.forEach((room) => {
       console.log("ROOOM", room);
