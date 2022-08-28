@@ -53,15 +53,7 @@ const Search = styled('div')(({ theme }) => ({
   }));
 
   
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }));
+
   
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
@@ -85,6 +77,9 @@ export default function Booking() {
     const [searchValue, setSearchValue] = React.useState('');
     const [searchLoading, setSearchLoading] = React.useState(false);
     const [filter, setFilter] = React.useState({year:'',month:'',day:''});
+    const token= useSelector(state=> state.auth.token);
+    const trips= useSelector(state=> state.trips.trips);
+    const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
     const dispatch = useDispatch();
     const days = [];
     for(let a=1 ; a <= 31; a++){
@@ -121,6 +116,7 @@ export default function Booking() {
     const { errorMessage }= useSelector(state=> state.alert);
  
     React.useEffect(()=>{
+      console.log(searchValue.length ==0)
       if(!trips || trips.length == 0 && searchValue.length ==0 ){
 
         axios.get(`${process.env.API_URL}/user/trip/get`, {
@@ -141,6 +137,7 @@ export default function Booking() {
               },10000)
         }
     },[trips,searchValue,searchLoading]);
+
 
     
 
@@ -179,7 +176,7 @@ export default function Booking() {
           res.data.data.tripss.rows.map(el => retrievedData.push(el.id));
           let searchFilter = allTrips.data.data.filter( trip => retrievedData.includes(trip.id) );
           dispatch(
-            tripsActions.getTripRequests({trips: searchFilter})
+            tripsActions.getTripRequests({trips: searchFilter.length >0 ? searchFilter :[]})
             );
             setSearchLoading(false)
           }catch(err){
@@ -198,10 +195,14 @@ export default function Booking() {
           })
     }
 
+
   return (
     <Container maxWidth="xl"  className="book-container" >
       <Stack sx={alertStyle} spacing={2} >
+        { warnMessage && warnMessage != 'none' && <WarnAlert message={warnMessage}/> }
+        { infoMessage && infoMessage != 'none' && <InfoAlert message={infoMessage}/> }
         { errorMessage &&  errorMessage != 'none' && <ErrorAlert message={errorMessage}/> }
+        { successMessage && successMessage != 'none' && <SuccessAlert message={successMessage}/> }
       </Stack>
 
          <CommentsModal
@@ -237,7 +238,7 @@ export default function Booking() {
     <Typography variant="h6" component="h6" pt={8} sx={{ textAlign:'start', fontWeight:600}}>
           My trip requests
 </Typography>
-{!trips && !errorMessage || searchLoading ? <PreLoader />:  trips?.length > 0? 
+{!trips && !errorMessage || searchLoading ? <PreLoader />:  trips?.length > 0 ? 
 trips.map((trip,index)=>{
   getLocation(trip.accomodation?.locationId,index)
   getComments(trip.id,index)
