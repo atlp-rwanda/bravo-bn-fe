@@ -32,17 +32,14 @@ const CreateRequest = () => {
 
   const fetchRooms = async () => {
     const res = await axios.get(`${process.env.API_URL}/rooms`);
-    console.log(res.data.data.rooms);
     setRooms(res.data.data.rooms);
   };
   const fetchLocations = async () => {
     const res = await axios.get(`${process.env.API_URL}/location`);
-    // console.log(res.data.data.locationList.rows);
     setLocations(res.data.data.locationList.rows);
   };
   const fetchAccomodations = async () => {
     const res = await axios.get(`${process.env.API_URL}/accomodation`);
-    // console.log(res.data.data.rows);
     setAccomodations(res.data.data.rows);
   };
 
@@ -51,14 +48,10 @@ const CreateRequest = () => {
     fetchAccomodations();
     fetchRooms();
   }, []);
-  console.log(tripData);
 
   const locationNames = [];
   if (locations.length) {
-    console.log(locations.length !== 0)
-    console.log("LOCATIONS", locations)
     locations.forEach((location) => {
-    console.log("LOCATION", location)
       locationNames.push({ name: location.locationName, value: location.id });
     });
   }
@@ -69,9 +62,7 @@ const CreateRequest = () => {
 
   const accomodationsName = [];
   if (accomodations.length) {
-    console.log("ACCOMODATIONS", accomodations)
     accomodations.forEach((accomodation) => {
-    console.log("ACCOMODATION", accomodation)
       if (accomodation.locationId === tripData.goingTo) {
         accomodationsName.push({
           name: accomodation.name,
@@ -87,11 +78,8 @@ const CreateRequest = () => {
 
   let roomTypes = [];
   if (rooms.length) {
-    console.log("ROOOMS", rooms)
     rooms.forEach((room) => {
-      console.log("ROOOM", room);
       if (room.accomodationId === tripData.accomodationId && !room.taken) {
-        console.log(room.id + "" + room.taken);
         roomTypes.push({ name: room.roomType, value: room.id });
       }
     });
@@ -121,7 +109,6 @@ const CreateRequest = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(e.target.name);
     switch (name) {
       case "location":
         let location = value != "select";
@@ -167,10 +154,8 @@ const CreateRequest = () => {
         break;
     }
   };
-  console.log(locationError);
 
   const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
-  console.log(jwtToken);
 
   const submitRequest = async (e) => {
     e.preventDefault();
@@ -195,7 +180,6 @@ const CreateRequest = () => {
       });
 
     setIsLoading(true);
-    console.log("submit bout to happen here");
     try {
       const res = await axios.post(
         `${process.env.API_URL}/user/trip`,
@@ -207,7 +191,6 @@ const CreateRequest = () => {
         }
       );
       setIsLoading(false);
-      console.log(res);
       setAlert({
         message: res.statusText,
         status: res.status,
@@ -217,9 +200,6 @@ const CreateRequest = () => {
       }, 2200);
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
-      console.log(error.message);
-      console.log(error.response.data.message);
       setAlert({
         message: error.response.data.message,
         status: error.response.status,
@@ -279,7 +259,6 @@ const CreateRequest = () => {
                     label="Travel Date"
                     name="travelDate"
                     value={tripData.travelDate}
-                    onBlur={(e) => console.log("hello")}
                     onChange={(newValue) => {
                       setTripData({
                         ...tripData,
@@ -384,7 +363,6 @@ const CreateRequest = () => {
                 onBlur={(e) => {
                   handleChange(e);
                   if (e.target.value.length != 0) {
-                    console.log("hahahahha");
                     setLeavingFromError({
                       isValid: true,
                       message: "",
