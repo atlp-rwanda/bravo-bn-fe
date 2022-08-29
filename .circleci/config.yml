@@ -27,9 +27,6 @@ jobs:
           name: Run tests
           command: npm run test
       - run:
-          name: coverage
-          command: npm run test:cov
-      - run:
           name: Report After Build
           command: ./cc-test-reporter after-build -t lcov
 
