@@ -26,24 +26,6 @@ jobs:
       - run:
           name: Run tests
           command: npm run test
-      - run:
-          name: coverage
-          command: npm run test:cov
-      - run:
-          name: Report After Build
-          command: ./cc-test-reporter after-build -t lcov
-
-      - coveralls/upload:
-          path_to_lcov: ./coverage/lcov.info
-
-      - store_artifacts:
-          path: test-results
-
-      - store_artifacts:
-          path: coverage
-
-      - store_test_results:
-          path: test-result
 
 workflows:
   sample:
