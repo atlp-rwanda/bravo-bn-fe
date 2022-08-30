@@ -1,10 +1,10 @@
 import React from "react";
-import RequestsTable from "./RequestsTable";
+import LandingDashboard from "../../views/LandingDashboard";
 
 const ContentElements = () => {
   return (
     <div>
-        <RequestsTable />
+      <LandingDashboard />
     </div>
   );
 };

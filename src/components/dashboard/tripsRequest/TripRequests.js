@@ -20,7 +20,6 @@ const columns = [
   { field: "returnDate", headerName: "returnDate", width: 160 },
   { field: "tripType", headerName: "type", width: 140 },
   { field: "status", headerName: "Status", width: 140 },
-  { field: "goingTo", headerName: "Destination", width: 220 },
 ];
 
 export default function TripRequests() {

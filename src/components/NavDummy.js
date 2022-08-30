@@ -73,11 +73,10 @@ const Nav = () => {
       const res = await axios.get(`${process.env.API_URL}/user/auth/logout`, {
         headers: { Authorization: `Bearer ${jwtToken}` },
       });
-      console.log(res);
       if (res) {
         deleteAllCookies();
+        localStorage.clear()
         navigate("/login");
-
       }
     } catch (error) {
       console.log(error);

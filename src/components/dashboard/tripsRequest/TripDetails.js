@@ -12,6 +12,7 @@ import { Alert } from "@mui/material";
 import { useEffect } from "react";
 import ConfirmDialog from "./ConfirmDialog";
 
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -28,14 +29,14 @@ const style = {
 export default function Details({ open, setOpen, getData }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
-  const { data } = useSelector((state) => state.selectedRequest);
-  const token = useSelector(state => state.auth.token);
-  const [requester, setRequester] = React.useState("")
   const [confirmOpen, setConfirmOpen] = React.useState(false);
+  const { data } = useSelector((state) => state.selectedRequest);
+  const [requester, setRequester] = React.useState("")
   const [alert, setAlert] = React.useState({
     message: "",
     status: null,
   });
+  const token = useSelector(state => state.auth.token);
 
   const getUser = () => {
     axios.get(`${process.env.API_URL}/user/${data.requesterId}`, {
@@ -99,6 +100,7 @@ export default function Details({ open, setOpen, getData }) {
       >
         Are you sure you want to Reject this Trip Request?
       </ConfirmDialog>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -188,7 +190,6 @@ export default function Details({ open, setOpen, getData }) {
               </div>
             </div>
           </CardContent>
-
         </Box>
       </Modal>
     </div>
