@@ -14,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import {  Typography } from '@mui/material';
+import { CommentsModal } from '../components/Models';
 import { TripRequest } from '../components/TripRequest';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,6 +54,7 @@ const Search = styled('div')(({ theme }) => ({
   }));
 
   
+  
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
@@ -72,6 +74,8 @@ const Search = styled('div')(({ theme }) => ({
 
 
 export default function Booking() {
+    const [comments, setComments] = React.useState(false);
+    const [searchValue, setSearchValue] = React.useState('');
     const [filter, setFilter] = React.useState({year:'',month:'',day:''});
     const dispatch = useDispatch();
     const days = [];
@@ -94,12 +98,20 @@ export default function Booking() {
     ]
 
 
+    const closeComments = () => {
+      dispatch(
+          tripsActions.comments({comments: null})
+        );
+      dispatch(
+          tripsActions.openTripRequest({value: null})
+        );
+      setComments(false)};
     const token= useSelector(state=> state.auth.token);
     const trips= useSelector(state=> state.trips.trips);
     const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
 
     React.useEffect(()=>{
-      if(!trips || trips.length == 0 ){
+      if(!trips || trips.length == 0 && searchValue.length ==0 ){
 
         axios.get(`${process.env.API_URL}/user/trip/get`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -118,7 +130,7 @@ export default function Booking() {
                 alertActions.error({message: 'none'}));
               },10000)
         }
-    },[trips]);
+    },[trips,comments,searchValue]);
 
     
 
@@ -152,6 +164,10 @@ export default function Booking() {
         { successMessage && successMessage != 'none' && <SuccessAlert message={successMessage}/> }
       </Stack>
 
+         <CommentsModal
+         open={comments}
+         onClose={closeComments}
+         />
 
     <Box sx={{ flexGrow: 1 }} >
       <Grid container spacing={3} >
@@ -163,15 +179,17 @@ export default function Booking() {
             <StyledInputBase
               placeholder="search here..."
               inputProps={{ 'aria-label': 'search' }}
+              value={searchValue}
               sx={{padding:'0'}}
+              onChange={(e)=>{setSearchValue(`${e.target.value}`);}}
             />
-              <SearchIcon sx={{cursor:'pointer', mb:'-8px'}}/>
+              <SearchIcon sx={{cursor:'pointer', mb:'-8px'}} />
           </Search>
     </Stack>
     <Typography variant="h6" component="h6" pt={8} sx={{ textAlign:'start', fontWeight:600}}>
           My trip requests
 </Typography>
-{!trips && !errorMessage  ? <PreLoader />:  trips?.length > 0? 
+{!trips && !errorMessage ? <PreLoader />:  trips?.length > 0? 
 trips.map((trip,index)=>{
   getLocation(trip.accomodation?.locationId,index)
   getComments(trip.id,index)
@@ -183,6 +201,10 @@ return(
   commentsCount = {trip.commentsCount}
   accomodation={trip.accomodation}
 
+   openComments={() => {
+    dispatch(tripsActions.openTripRequest({value: index}) );
+    setComments(true)
+  }}
    />
 )
 })
