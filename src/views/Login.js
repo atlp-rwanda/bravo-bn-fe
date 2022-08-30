@@ -85,11 +85,7 @@ export default function Login() {
         const { user } = res.data.data;
         document.cookie = `jwt=${token}`;
         dispatch(logginUser(user));
-        if(user.role === "super admin"){
-          navigate("/dashboard/users");
-        }else{
         navigate("/");
-        }
       })
       .catch((err) => {
         swal.fire("Oops...", `${err.response.data.message}`, "error");

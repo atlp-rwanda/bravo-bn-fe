@@ -3,8 +3,7 @@ import React from 'react'
 import jwt_decode from 'jwt-decode'
 import { useDispatch, useSelector } from "react-redux";
 import { authActions} from '../redux/authSlice'
-import Dashboard from '../views/Dashboard';
-
+import Nav from "../components/NavDummy"
 const PrivateRoutes = () => {
   function get(n) {
     var half = location.search.split(n + '=')[1];
@@ -24,17 +23,15 @@ const PrivateRoutes = () => {
 
     console.log(isLoggedIn)
 
-      if(isLoggedIn){
-        let decodedToken = jwt_decode(isLoggedIn);
-        
-        if(decodedToken.exp * 1000 > currentDate.getTime()){
-         return  <Dashboard/>
-        }
-      }else{
-        
-      return  <Navigate to="/login" />
+    if(isLoggedIn){
+      let decodedToken = jwt_decode(isLoggedIn);
+      if(decodedToken.exp * 1000 > currentDate.getTime()){
+        return <Nav/> 
       }
-    
+    }else{
+      
+    return  <Navigate to="/login" />
+    }
 }
 
 export default PrivateRoutes;
