@@ -16,6 +16,7 @@ export const Input = (props) => {
             placeholder={props.placeholder}
             onChange={props.onChange}
             onBlur={props.onBlur}
+            className={props.borderClass}
             />
             <ion-icon name={props.icon}></ion-icon>
         </div>
@@ -28,7 +29,7 @@ export const Select = (props) => {
   return (
     <div className={props.parentClass}>
         <div className={props.childClass} id={props.inputFor}>
-        <select data-testid="select" name={props.name} value={props.value} onChange={props.onChange} onBlur={props.onBlur}>
+        <select className={props.borderClass} data-testid="select" name={props.name} value={props.value} onChange={props.onChange} onBlur={props.onBlur}>
           { props.options.map( (option)=>{
             
             return <option data-testid="select-option" key={option.value} value={option.value}>{option.name}</option>

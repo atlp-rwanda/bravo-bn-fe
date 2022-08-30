@@ -1,51 +1,24 @@
 @import "./variables.scss";
 
-.reg-form {
-  button {
-    width: 168px;
-    display: flex;
-    margin-top: 40px;
-    margin-left: auto;
-    text-transform: none;
-  }
-  .calenderInput {
-   width: 86%,
-
-  }
-  .date-picker {
-    width: 100%;
-    margin-top: auto;
-    margin-left: 20px;
-  }
-}
-
-h2 {
-  font-size: 20px;
-  text-align: center;
-  font-weight: 600;
-  padding-bottom: 24px;
-}
-
-.textarea-reason {
-  .textarea {
-    width: 640px;
-    margin-top: 20px;
-    margin-left: 20px;
-  }
+.create-request {
   .error {
     color: $errorColor;
-    padding-left: 20px;
-    margin-top: -4px;
   }
   .errorBorder {
-    border: 1px solid $errorColor;
+    border: 2px solid $errorColor;
   }
-}
 
-.create-request {
+  p {
+    padding: 24px;
+  }
+
+  .center-p {
+    color: gray;
+  }
+
   min-height: 100vh;
   display: flex;
-  .slice-a {
+  .side-a {
     display: flex;
     flex: 1;
     align-items: center;
@@ -70,38 +43,51 @@ h2 {
     flex-direction: column;
     align-items: center;
     padding: 30px;
-    .logo {
-      padding: 20px 0;
-    }
+    text-align: center;
     .form-content {
       @import "./input.component.scss";
+      width: 100% !important;
       justify-content: center;
       margin: auto 0;
+      .create-form {
+        max-width: 800px;
+        margin: auto;
+        padding: 10px;
 
-      p {
-        color: gray;
-        text-align: center;
-        padding-bottom: 34px;
-      }
-      .form-group {
-
-        .input-group {
-          height: 35px;
-          border: 1px solid $fouthColor;
-          width: 400px;
-          border-radius: 5px;
-          padding:  5px;
-          cursor: pointer;
-      }
-
-        .errorBorder {
-          border: 1px solid $errorColor;
+        .submit-btn {
+          width: 168px;
+          margin-top: 14px;
+          margin-left: auto;
+          text-transform: none;
         }
-        .error {
-          color: $errorColor;
-          font-size: 14px;
-          margin: auto 0;
-          position: absolute;
+
+        .create-input {
+          display: flex;
+          gap: 24px;
+          width: 100%;
+          padding: 14px;
+        }
+        .form-input {
+          width: 100%;
+          input,
+          select,
+          div {
+            width: 100%;
+            height: 100%;
+            button {
+              height: 10px;
+              margin-left: auto;
+              text-transform: none;
+            }
+            button:hover {
+              background: none;
+            }
+          }
+          input,
+          select,
+          div:focus {
+            outline: none;
+          }
         }
       }
     }
@@ -109,47 +95,26 @@ h2 {
 }
 
 $medium: 750px;
-
-.create-request {
-  @media (max-width: $medium) {
-    .slice-a {
-      display: none !important;
+@media (max-width: $medium) {
+  .create-request {
+    .side-a {
+      display: none;
     }
   }
-  @media (max-width: 970px) {
-    .slice-a-signup {
-      display: none !important;
+  .create-input {
+    flex-direction: column;
+    input, select, div {
+      height: 60px;
     }
-
-    .textarea-reason {
-      .textarea {
-        width: 93%;
-        margin: 20px auto;
-      }
-    }
-    .reg-form {
-      button {
-        margin-top: 1px;
-        width: 94%;
-      }
-      .date-picker {
-        margin-top: auto;
-        margin-left: auto;
-        .calenderInput {
-          width: 94%;
-          margin: 20px auto;
-          margin-bottom: 1px;
-         }
-      }
-    }
-  }
-  @media (max-width: 650px) {
-    .input-align {
-      display: block !important;
-    }
-    .input-left {
-      margin-left: 0 !important;
-    }
-    
   }
 }
+
+@media (max-width: 970px) {
+  .create-request {
+    .side-a {
+      display: none;
+    }
+  }
+}
+// @media (max-width: 650px) {
+// }
