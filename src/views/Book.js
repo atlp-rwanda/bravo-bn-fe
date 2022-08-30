@@ -111,9 +111,6 @@ export default function Booking() {
       setComments(false)};
     const closeUpdate=() => setUpdate(false);
     const closeDetails=() => setDetails(false);
-    const token= useSelector(state=> state.auth.token);
-    const trips= useSelector(state=> state.trips.trips);
-    const { errorMessage }= useSelector(state=> state.alert);
  
     React.useEffect(()=>{
       if(!trips || trips.length == 0 && searchValue.length ==0 ){
@@ -212,18 +209,6 @@ export default function Booking() {
         { successMessage && successMessage != 'none' && <SuccessAlert message={successMessage}/> }
       </Stack>
 
-         <CommentsModal
-         open={comments}
-         onClose={closeComments}
-         />
-         <DetailsModal
-         open={details}
-         onClose={closeDetails}
-         />
-         <UpdateModal
-         open={update}
-         onClose={closeUpdate}
-         />
 
     <Box sx={{ flexGrow: 1 }} >
       <Grid container spacing={3} >
