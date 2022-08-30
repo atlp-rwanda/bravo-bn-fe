@@ -197,7 +197,7 @@ export  function CommentsModal(props) {
             }, {
               headers: { Authorization: `Bearer ${token}` },
             }).then((res)=>{
-
+              dispatch(tripsActions.fetchComments({getComments:true}));
               let date = new Date().toISOString();
               setNewComment('')
 

@@ -22,8 +22,8 @@ const routes= () => {
         <Route exact path="/about" component={<About/>}/>
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/about" element={<About/>}/>
-        {user.role =="requester"? <Route exact path="/booking" element={<Booking/>}/> : <Route exact path="/dashboard" element={<Dashboard/>}/>}
-        
+        <Route exact path="/booking" element={<Booking/>}/>
+        <Route exact path="/dashboard" element={<Dashboard/>}/>        
       </Route >
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>

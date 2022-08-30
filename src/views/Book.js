@@ -79,6 +79,8 @@ export default function Booking() {
     const [filter, setFilter] = React.useState({year:'',month:'',day:''});
     const token= useSelector(state=> state.auth.token);
     const trips= useSelector(state=> state.trips.trips);
+    const getComments= useSelector(state=> state.trips.getComments);
+    const getLocation= useSelector(state=> state.trips.getLocation);
     const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
     const dispatch = useDispatch();
     const days = [];
@@ -137,24 +139,29 @@ export default function Booking() {
 
     
 
-    const getLocation = (locationId,index)=>{
+    const getAllLocation = (locationId,index)=>{
+      if(getLocation){
       if(!trips[index]['location']){
 
         axios.get(`${process.env.API_URL}/location/${locationId}`, {
           headers: { Authorization: `Bearer ${token}` },
         }).then((res)=>{
-          dispatch(
-            tripsActions.updateTripRequests({index,property:'location',value:res.data.data?.location.locationName}));
-          }).catch(err=> console.log(err))
-        }
+          dispatch(tripsActions.updateTripRequests({index,property:'location',value:res.data.data?.location.locationName}));
+          dispatch(tripsActions.fetchLocation({getLocation:false}));
+        }).catch(err=> console.log(err))
+      }
     }
-    const getComments = (tripId,index)=>{
-
-        axios.get(`${process.env.API_URL}/user/trip/${tripId}/comments`, {
-          headers: { Authorization: `Bearer ${token}` },
-        }).then((res)=>{
+  }
+  const getAllComments = (tripId,index)=>{
+    if(getComments){
+      
+      axios.get(`${process.env.API_URL}/user/trip/${tripId}/comments`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).then((res)=>{
+          dispatch(tripsActions.fetchComments({getComments:false}));
           dispatch(tripsActions.updateTripRequests({index,property:'commentsCount',value:res.data.comments.count}));
         }).catch(err=> console.log(err))
+      }
         
     }
     
@@ -234,8 +241,8 @@ export default function Booking() {
 trips.map((trip,index)=>{
   if(trip.id){
 
-    getLocation(trip.accomodation?.locationId,index)
-    getComments(trip.id,index)
+    getAllLocation(trip.accomodation?.locationId,index)
+    getAllComments(trip.id,index)
 return(
   <TripRequest
   key={index}
