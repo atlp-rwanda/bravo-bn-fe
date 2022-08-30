@@ -85,11 +85,12 @@ export default function Login() {
         const { user } = res.data.data;
         document.cookie = `jwt=${token}`;
         dispatch(logginUser(user));
-        if(user.role === "super admin"){
-          navigate("/dashboard/users");
-        }else{
+        swal.fire(
+          `Hey ${user.username}`,
+          "Welcome to Barefoot Nomad",
+          "success"
+        );
         navigate("/");
-        }
       })
       .catch((err) => {
         swal.fire("Oops...", `${err.response.data.message}`, "error");
@@ -110,7 +111,7 @@ export default function Login() {
       <div className="slice-b">
         <img src={barefootLogo} className="logo" alt="Barefoot logo" />
         <div className="form-content">
-          <h2>Log in into your account</h2>
+          <h2>Log in to your account</h2>
           <form action="" className="reg-form" onSubmit={submitHandle}>
             <div className="form-group">
               <div
