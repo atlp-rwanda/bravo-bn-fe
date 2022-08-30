@@ -2,6 +2,7 @@ import React from "react";
 import "../../views/Home";
 import { Link } from "react-router-dom";
 import barefootLogo from "../../assets/Barefoot. Nomad.svg";
+
 const footer = () => {
   return (
     <div className="footer-content">
@@ -15,14 +16,21 @@ const footer = () => {
         </span>
         <p className="footer__copy">&#169; Barefoot Nomad 2022</p>
       </div>
-      <div className="footer-menu">
-        <span className="title">contact info</span>
+      <div className="footer-center">
+        <span>contact info</span>
         <span>+25078888888</span>
         <span>184 Main KG Street Down-town</span>
         <span>Mon – Sat 8.00 – 18.00 Sunday CLOSED</span>
       </div>
-      <div className="footer-menu">
-        <span className="title">quick links</span>
+
+      <div className="footer-right">
+        <span>quick links</span>
+        <span>
+          <Link to="home"> Home</Link>
+        </span>
+        <span>
+          <Link to="booking"> booking</Link>
+        </span>
         <span>
           <Link to="about"> About Us</Link>
         </span>
@@ -36,4 +44,5 @@ const footer = () => {
     </div>
   );
 };
+
 export default footer;
