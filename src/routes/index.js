@@ -10,11 +10,9 @@ import Respassword from '../views/Respassword';
 import PopupModal from "../components/Modal/Modal.js"
 import Booking from '../views/Book';
 import Home from '../views/Home';
-import { useSelector } from 'react-redux';
 
 
 const routes= () => {
-  const user= useSelector(state=> state.login.user);
   return (
   
       <Routes>

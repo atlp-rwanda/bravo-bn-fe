@@ -120,6 +120,8 @@ export default function Booking() {
         axios.get(`${process.env.API_URL}/user/trip/get`, {
           headers: { Authorization: `Bearer ${token}` },
         }).then((res)=>{
+          dispatch(tripsActions.fetchLocation({getLocation:true}));
+          dispatch(tripsActions.fetchComments({getComments:true}));
           dispatch(
             tripsActions.getTripRequests({trips: res.data.data})
             );
@@ -165,16 +167,15 @@ export default function Booking() {
         
     }
     
-    const handleSearch = (e)=>{
+
+    const searchTerm = (e)=>{
       setSearchValue(`${e.target.value}`);
+      if(searchValue.trim().length ==0) return;
       if(e.target.value.length == 0) return dispatch(
         tripsActions.getTripRequests({trips: null})
         );
-     
-   }
+        if(e.target.value.length >=3 ){
 
-    const searchTerm = ()=>{
-      if(searchValue.trim().length ==0) return;
       setSearchLoading(true)
       axios.get(`${process.env.API_URL}/search/${searchValue}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -204,6 +205,7 @@ export default function Booking() {
                 alertActions.error({message: 'none'}));
               },10000)
           })
+        }
     }
 
 
@@ -229,9 +231,9 @@ export default function Booking() {
               inputProps={{ 'aria-label': 'search' }}
               value={searchValue}
               sx={{padding:'0'}}
-              onChange={handleSearch}
+              onChange={searchTerm}
             />
-              <SearchIcon sx={{cursor:'pointer', mb:'-8px'}} onClick={searchTerm} />
+              <SearchIcon sx={{cursor:'pointer', mb:'-8px'}} />
           </Search>
     </Stack>
     <Typography variant="h6" component="h6" pt={8} sx={{ textAlign:'start', fontWeight:600}}>
