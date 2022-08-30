@@ -97,18 +97,18 @@ export default function Login() {
         dispatch(
           alertActions.success({message: `Hey ${user.username}, Welcome to Barefoot Nomad` })
           );
-        setInterval(()=>{
+        setTimeout(()=>{
           dispatch(
             alertActions.success({message: null })
             );
-        },15000)
-        navigate("/");
+            navigate("/");
+        },5000)             
       })
       .catch((err) => {
         dispatch(
           alertActions.error({message:`${err.response.data.message}` })
           );
-          setInterval(()=>{
+          setTimeout(()=>{
             dispatch(
               alertActions.error({message: null })
               );
