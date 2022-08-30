@@ -15,7 +15,7 @@ export const reducers = {
   trips: tripsSlice.reducer,
 }
 
- const store = configureStore({
+const store = configureStore({
   reducer: {
     ...reducers,
     devTools: process.env.NODE_ENV !== 'production',
