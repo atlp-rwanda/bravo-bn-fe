@@ -1,0 +1,17 @@
+.book-container{
+    min-height: 100vh;
+    .button{text-transform: none;}
+    .book-grid{
+        border-radius: 0;
+        padding: 20px;
+        box-shadow: 0 0px 5px rgb(0 0 0 / 15%);
+    }
+
+    .select-input,#outlined-number{
+        font-size: 0.8rem;
+        top: -2px;
+    }
+    #demo-simple-select,#outlined-number{
+        padding: 10px;
+    }
+}
