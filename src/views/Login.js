@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { logginUser } from "../redux/auth/loginSlice";
 import svg from "../assets/mobile_login.svg";
@@ -102,7 +101,7 @@ export default function Login() {
           dispatch(
             alertActions.success({message: null })
             );
-        },8000)
+        },15000)
         navigate("/");
       })
       .catch((err) => {
@@ -113,7 +112,7 @@ export default function Login() {
             dispatch(
               alertActions.error({message: null })
               );
-          },8000)
+          },15000)
       });
   };
   return (
