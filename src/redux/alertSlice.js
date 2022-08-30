@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const alertSlice = createSlice({
-  name: "auth",
+  name: "alerts",
   initialState: {warnMessage:'', infoMessage:'', errorMessage:'',successMessage:'' },
   reducers: {
     warning: (state, action) => {

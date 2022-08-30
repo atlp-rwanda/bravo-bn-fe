@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import swal from "sweetalert2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logginUser } from "../redux/auth/loginSlice";
 import svg from "../assets/mobile_login.svg";
 import googleIcon from "../assets/google_icon.svg";
 import facebookIcon from "../assets/facebook_icon.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { ErrorAlert, InfoAlert, SuccessAlert, WarnAlert } from '../components/Alerts';
+import { Stack } from "@mui/material";
+import { alertActions } from "../redux/alertSlice";
+
+const alertStyle = {
+  position: 'fixed', zIndex: '2000',right: '3%', bottom: '30px',
+  transition: 'all 300ms linear 0s'
+};
+
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
+
 
   const [email, setEmail] = useState();
   const [emailError, setEmailError] = useState({
@@ -84,19 +94,35 @@ export default function Login() {
         const { user } = res.data.data;
         document.cookie = `jwt=${token}`;
         dispatch(logginUser(user));
-        swal.fire(
-          `Hey ${user.username}`,
-          "Welcome to Barefoot Nomad",
-          "success"
-        );
-        navigate("/");
+        dispatch(
+          alertActions.success({message: `Hey ${user.username}, Welcome to Barefoot Nomad` })
+          );
+        setTimeout(()=>{
+          dispatch(
+            alertActions.success({message: null })
+            );
+            navigate("/");
+        },5000)             
       })
       .catch((err) => {
-        swal.fire("Oops...", `${err.response.data.message}`, "error");
+        dispatch(
+          alertActions.error({message:`${err.response.data.message}` })
+          );
+          setTimeout(()=>{
+            dispatch(
+              alertActions.error({message: null })
+              );
+          },15000)
       });
   };
   return (
     <div className="reg-area">
+      <Stack sx={alertStyle} spacing={2} >
+        { warnMessage  && <WarnAlert /> }
+        { infoMessage  && <InfoAlert /> }
+        { successMessage && <SuccessAlert/> }
+        { errorMessage && <ErrorAlert /> }
+      </Stack>
       <div className="slice-a">
         <img src={svg} alt="Login svg" />
         <div className="welcome-text">
