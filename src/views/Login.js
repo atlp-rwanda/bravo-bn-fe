@@ -8,12 +8,20 @@ import googleIcon from "../assets/google_icon.svg";
 import facebookIcon from "../assets/facebook_icon.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { ErrorAlert, InfoAlert, SuccessAlert, WarnAlert } from '../components/Alerts';
+import { Stack } from "@mui/material";
+import { alertActions } from "../redux/alertSlice";
+
+const alertStyle = {
+  position: 'fixed', zIndex: '2000',right: '3%', bottom: '30px',
+  transition: 'all 300ms linear 0s'
+};
 
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
 
 
   const [email, setEmail] = useState();
@@ -87,19 +95,35 @@ export default function Login() {
         const { user } = res.data.data;
         document.cookie = `jwt=${token}`;
         dispatch(logginUser(user));
-        swal.fire(
-          `Hey ${user.username}`,
-          "Welcome to Barefoot Nomad",
-          "success"
-        );
+        dispatch(
+          alertActions.success({message: `Hey ${user.username}, Welcome to Barefoot Nomad` })
+          );
+        setInterval(()=>{
+          dispatch(
+            alertActions.success({message: null })
+            );
+        },8000)
         navigate("/");
       })
       .catch((err) => {
-        swal.fire("Oops...", `${err.response.data.message}`, "error");
+        dispatch(
+          alertActions.error({message:`${err.response.data.message}` })
+          );
+          setInterval(()=>{
+            dispatch(
+              alertActions.error({message: null })
+              );
+          },8000)
       });
   };
   return (
     <div className="reg-area">
+      <Stack sx={alertStyle} spacing={2} >
+        { warnMessage  && <WarnAlert /> }
+        { infoMessage  && <InfoAlert /> }
+        { successMessage && <SuccessAlert/> }
+        { errorMessage && <ErrorAlert /> }
+      </Stack>
       <div className="slice-a">
         <img src={svg} alt="Login svg" />
         <div className="welcome-text">
