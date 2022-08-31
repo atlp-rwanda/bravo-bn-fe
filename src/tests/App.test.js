@@ -9,7 +9,7 @@ import Home from '../views/Home'
 import About from '../views/About'
 import Btn from '../components/Btn'
 import Contents from '../components/dashboard/Contents'
-import Navbar from '../components/dashboard/Navbar'
+import NavDummy from '../components/dashboard/NavDummy'
 import Sidebar from '../components/dashboard/Sidebar'
 import Footer from '../components/dashboard/Footer'
 import UserDetailsModal from '../components/dashboard/UserDetailsModal'
@@ -133,7 +133,7 @@ test('renders react component', async () => {
      <Router>
       <Provider store={store}>
 
-      <Navbar />    
+      <NavDummy />    
       </Provider>
       </Router>
   );

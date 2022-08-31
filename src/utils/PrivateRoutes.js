@@ -1,11 +1,14 @@
-import { Navigate } from 'react-router-dom'
-import React from 'react'
+import {  Navigate, useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import jwt_decode from 'jwt-decode'
 import { useDispatch, useSelector } from "react-redux";
 import { authActions} from '../redux/authSlice'
-import Dashboard from '../views/Dashboard';
+import Nav from '../components/NavDummy';
+import axios from 'axios';
+import { logginUser } from '../redux/auth/loginSlice';
 
 const PrivateRoutes = () => {
+  const navigate = useNavigate();
   function get(n) {
     var half = location.search.split(n + '=')[1];
     return half !== undefined ? decodeURIComponent(half.split('&')[0]) : null;
@@ -19,16 +22,28 @@ const PrivateRoutes = () => {
        token: jwtToken
      })
    );
-    const isLoggedIn= useSelector(state=> state.auth.token);
+
     let currentDate = new Date();
+    const user= useSelector(state=> state.login.user);
+    useEffect(()=>{
+      if(isLoggedIn && !user){
+        const decodedToken = jwt_decode(isLoggedIn);
+        axios.get(`${process.env.API_URL}/user/${decodedToken.id}`, {
+          headers: { Authorization: `Bearer ${isLoggedIn}` },
+        }).then((res)=>{
+          dispatch(logginUser(res.data.data));
+        }).catch(err=> {console.log(err)
+        err.response.status == 401 ? navigate('/login') :''
+        })
+      }
+    })
 
-    console.log(isLoggedIn)
-
+    const isLoggedIn= useSelector(state=> state.auth.token);
+    
       if(isLoggedIn){
         let decodedToken = jwt_decode(isLoggedIn);
-        
         if(decodedToken.exp * 1000 > currentDate.getTime()){
-         return  <Dashboard/>
+          return <Nav/> 
         }
       }else{
         
