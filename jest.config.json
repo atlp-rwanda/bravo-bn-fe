@@ -16,6 +16,9 @@
       "\\.js$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.(js|ts)$": "ts-jest"
     },
+    "testPathIgnorePatterns" : [
+      "<rootDir>/src/index.js" 
+    ],
     "setupFilesAfterEnv": ["./src/test/jest.setup.js"],
     "roots": ["<rootDir>/test"],
     "moduleNameMapper": {

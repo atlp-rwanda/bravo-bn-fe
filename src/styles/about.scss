@@ -1,0 +1,43 @@
+.about-page {
+  display: flex;
+  flex-flow: row-reverse;
+  margin: auto;
+  padding: 20px 100px;
+  .left {
+    width: 50%;
+    margin: auto;
+    .title {
+      color: $secondaryColor;
+      padding-bottom: 40px;
+    }
+    p{
+        padding: 10px;
+    }
+  }
+  .right {
+    width: 50%;
+    img {
+        width: 100%;
+    }
+  }
+}
+
+@media (max-width: 970px) {
+  .about-page {
+    flex-direction: column;
+    align-items: center;
+    flex-flow: column-reverse;
+    padding: 20px;
+    .left {
+      width: 100%;
+      text-align: center;
+      padding-top: 40px;
+      .right {
+        width: 100%;
+        img {
+            width: 100%;
+        }
+      }
+    }
+  }
+}

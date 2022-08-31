@@ -1,10 +1,9 @@
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import { Stack, Typography } from '@mui/material';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
-import TextField from '@mui/material/TextField';
 import CardContent from '@mui/material/CardContent';
 import { DateTimePicker,LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -54,6 +53,7 @@ export function UpdateModal(props) {
       headers: { Authorization: `Bearer ${token}` },
     }).then((res)=>{
       setLoading(false)
+      props.onClose();
       dispatch(
       alertActions.success({message:'Trip request updated succesfully'})
       )

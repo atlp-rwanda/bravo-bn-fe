@@ -1,18 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { composeStory } from "@storybook/testing-react";
 import "@testing-library/jest-dom";
-import Meta, { Primary as PrimaryStory } from "../stories/Button.stories";
 import { Email as EmailInput } from "../stories/Input.stories";
 
-const Primary = composeStory(PrimaryStory, Meta);
-
-test("onclick handler is called", () => {
-  const onClickSpy = jest.fn();
-  render(<Primary onClick={onClickSpy} />);
-  const buttonElement = screen.getByRole("button");
-  buttonElement.click();
-  expect(onClickSpy).toHaveBeenCalled();
-});
 
 test("render email input", () => {
   render(
