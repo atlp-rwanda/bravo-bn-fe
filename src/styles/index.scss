@@ -4,31 +4,32 @@
   padding: 0px;
   margin: 0px;
 }
-@import './variables.scss';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import "./variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
 body {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   margin: 0;
   padding: 0;
   background-color: $primaryColor;
   margin: 0;
   padding: 0;
-  @import './buttonDisable.scss';
-  @import './landingPage.scss';
-  @import './navbar.scss';
-  @import './book.scss';
-  @import './registrationPage.scss';
-  @import './signup.scss';
-  @import './responsive.scss';
-  @import './Contents.scss';
-  @import './Sidebar.scss';
-  @import './footer.scss';
-  @import './responsiveness.scss';
-  @import './dashboard.scss';
-  @import './reset.scss';
-  @import './respassword.scss';
-  @import './createRequest.scss';
-  @import './about.scss';
+  @import "./buttonDisable.scss";
+  @import "./landingPage.scss";
+  @import "./navbar.scss";
+  @import "./book.scss";
+  @import "./registrationPage.scss";
+  @import "./signup.scss";
+  @import "./responsive.scss";
+  @import "./contents.scss";
+  @import "./sidebar.scss";
+  @import "./footer.scss";
+  @import "./responsiveness.scss";
+  @import "./dashboard.scss";
+  @import "./reset.scss";
+  @import "./respassword.scss";
+  @import "./createRequest.scss";
+  @import "./about.scss";
+  @import "./details.scss";
 }

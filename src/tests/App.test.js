@@ -9,12 +9,12 @@ import Btn from '../components/Btn'
 
 afterEach(cleanup);
 
-test('renders App on  registered user',  () => {
-  document.cookie='jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzksImlhdCI6MTY2MTMzNjM2OSwiZXhwIjoxNjYxNDIyNzY5fQ.RGMvNjJQsWDStzDEmdFDCFJDyYnX6VDjhkCGAp1UCqI'
+test('renders App on  registered user', () => {
+  document.cookie = 'jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzksImlhdCI6MTY2MTMzNjM2OSwiZXhwIjoxNjYxNDIyNzY5fQ.RGMvNjJQsWDStzDEmdFDCFJDyYnX6VDjhkCGAp1UCqI'
   render(
     <Router>
       <Provider store={store}>
-      <App />
+        <App />
       </Provider>
     </Router>,
   );
@@ -22,22 +22,21 @@ test('renders App on  registered user',  () => {
 
 test('renders react component', async () => {
   render(
-     <Router>
+    <Router>
       <Provider store={store}>
 
-      <About />    
+        <About />
       </Provider>
-      </Router>
+    </Router>
   );
 })
 test('renders react component', async () => {
   render(
-     <Router>
+    <Router>
       <Provider store={store}>
 
-      <Btn />    
+        <Btn />
       </Provider>
-      </Router>
+    </Router>
   );
 })
- 

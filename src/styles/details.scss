@@ -1,0 +1,42 @@
+.popupContainer {
+    .content {
+        padding: 20px 20px;
+        .row {
+            display: flex;
+            text-align: left;
+            margin-bottom: 15px;
+
+            .title {
+                font-weight: bold;
+                // padding-right: 3rem;
+                min-width: 11rem;
+            }
+        }
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            button {
+                margin-left: 20px;
+                padding: 8px 30px;
+            }
+        }
+        .disabled {
+            cursor: not-allowed !important;
+        }
+    }
+}
+
+$medium: 750px;
+
+@media (max-width: $medium) {
+    .popupContainer {
+        .ItemsContainer {
+            width: 80%;
+            .row {
+                flex-direction: column;
+            }
+        }
+    }
+}

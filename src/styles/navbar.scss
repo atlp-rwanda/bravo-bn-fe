@@ -1,30 +1,29 @@
-.navbar{
+.navbar {
     background: $primaryColor;
     box-shadow: none;
-    padding-top: 10px ;
-    padding-bottom: 10px ;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-.notification-icon{
+.notification-icon {
     color: $thirdColor;
 }
-.menu-icon{
+.menu-icon {
     color: $thirdColor;
 }
 
-.navlink{
+.navlink {
     text-decoration: none;
     color: $thirdColor;
     text-transform: none;
-    font-size: 0.750rem;
+    font-size: 0.75rem;
     font-weight: 600;
 }
-.active{
+.active {
     color: $secondaryColor;
-    
 }
-.active::before{
-    content: '';
+.active::before {
+    content: "";
     height: 5px;
     width: 5px;
     background: $secondaryColor;

@@ -1,4 +1,5 @@
 import React from "react";
+
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
@@ -40,7 +41,7 @@ const Sidebar = () => {
         <span>Locations</span>
       </div>
       <NavLink
-        to="/dashboard/requests"
+        to="/dashboard/trips"
         style={({ isActive }) => (isActive ? activeStyle : inActive)}
       >
         <div className="trips">
@@ -53,5 +54,6 @@ const Sidebar = () => {
     </div>
   );
 };
+
 
 export default Sidebar;

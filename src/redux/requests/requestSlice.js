@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
-console.log(jwtToken);
 
 export const requestSlice = createSlice({
   name: "request",
