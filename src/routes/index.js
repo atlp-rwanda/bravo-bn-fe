@@ -10,6 +10,7 @@ import Respassword from '../views/Respassword';
 import PopupModal from "../components/Modal/Modal.js"
 import Booking from '../views/Book';
 import Home from '../views/Home';
+import CreateRequest from '../views/CreateRequest';
 
 
 const routes= () => {
@@ -21,6 +22,7 @@ const routes= () => {
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/about" element={<About/>}/>
         <Route exact path="/trip-requests" element={<Booking/>}/>
+        <Route exact path="/create-request" element={<CreateRequest/>}/>
         <Route exact path="/dashboard" element={<Dashboard/>}/>        
       </Route >
       <Route path='/login' element={<Login/>}/>
