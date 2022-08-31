@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Meta, { Primary as PrimaryStory } from "../stories/Button.stories";
 import { Email as EmailInput } from "../stories/Input.stories";
 
 

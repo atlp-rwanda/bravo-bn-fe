@@ -14,17 +14,15 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import {  Typography } from '@mui/material';
-import { CommentsModal } from '../components/Models';
+import { CommentsModal, DetailsModal } from '../components/Models';
 import { UpdateModal } from '../components/Models';
 import { TripRequest } from '../components/TripRequest';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { tripsActions } from '../redux/tripsSlice';
 import PreLoader from "../components/PreLoader";
-import { ErrorAlert, InfoAlert, SuccessAlert, WarnAlert } from '../components/Alerts';
-import { alertActions } from '../redux/alertSlice';
-
 import { ErrorAlert, SuccessAlert } from '../components/Alerts';
+import { alertActions } from '../redux/alertSlice';
 import Pagination from '@mui/material/Pagination';
 import usePagination from "../hooks/Pagination";
 
@@ -82,23 +80,22 @@ export default function Booking() {
   const [comments, setComments] = React.useState(false);
     const [searchValue, setSearchValue] = React.useState('');
     const [searchLoading, setSearchLoading] = React.useState(false);
+    const [details, setDetails] = React.useState(false);
     const [filter, setFilter] = React.useState({year:'',month:'',day:''});
     const token= useSelector(state=> state.auth.token);
     const trips= useSelector(state=> state.trips.trips);
     const getComments= useSelector(state=> state.trips.getComments);
     const getLocation= useSelector(state=> state.trips.getLocation);
-    const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
     const dispatch = useDispatch();
-    const token= useSelector(state=> state.auth.token);
-    const trips= useSelector(state=> state.trips.trips);
     const [update, setUpdate] = React.useState(false);
     const { errorMessage,successMessage }= useSelector(state=> state.alert);
-    const closeUpdate=() => setUpdate(false);
     const count =  Math.ceil(trips?.length/4);
     const _DATA = usePagination(trips, 4);
   
     const handlePagination = (e, p) => {
       _DATA.jump(p);
+      dispatch(tripsActions.fetchComments({getComments:true}));
+      dispatch(tripsActions.fetchLocation({getLocation:true}));
     };
 
 
@@ -140,8 +137,12 @@ export default function Booking() {
         axios.get(`${process.env.API_URL}/user/trip/get`, {
           headers: { Authorization: `Bearer ${token}` },
         }).then((res)=>{
-          dispatch(tripsActions.fetchLocation({getLocation:true}));
-          dispatch(tripsActions.fetchComments({getComments:true}));
+          let tripIndex =[];
+          res.data.data.map((trip,index)=>{
+            trip.tripIndex = index;
+            return tripIndex.push(trip)
+          })
+
           dispatch(
             tripsActions.getTripRequests({trips: tripIndex})
             );
@@ -157,7 +158,7 @@ export default function Booking() {
                 alertActions.error({message: 'none'}));
               },10000)
         }
-    },[trips,searchValue,searchLoading]);
+    },[trips,comments,searchValue]);
 
 
     
@@ -246,6 +247,10 @@ export default function Booking() {
          open={update}
          onClose={closeUpdate}
          />
+         <DetailsModal
+         open={details}
+         onClose={closeDetails}
+         />
 
     <Box sx={{ flexGrow: 1 }} >
       <Grid container spacing={3} >
@@ -267,10 +272,10 @@ export default function Booking() {
     <Typography variant="h6" component="h6" pt={8} sx={{ textAlign:'start', fontWeight:600}}>
           My trip requests
 </Typography>
-{!trips && !errorMessage ? <PreLoader />:  trips?.length > 0? 
+{!trips && !errorMessage || searchLoading ? <PreLoader />:  trips?.length > 0? 
 _DATA.currentData().map((trip,index)=>{
-  getLocation(trip.accomodation?.locationId, trip.tripIndex)
-  getComments(trip.id, trip.tripIndex)
+  getAllLocation(trip.accomodation?.locationId, trip.tripIndex)
+  getAllComments(trip.id, trip.tripIndex)
 return(
   <TripRequest
   key={index}
@@ -291,16 +296,11 @@ return(
     setUpdate(true)
   }}
    openDetails={() => {
-    dispatch(tripsActions.openTripRequest({value: index}) );
+    dispatch(tripsActions.openTripRequest({value: trip.tripIndex}) );
     setDetails(true)
-  }}
-   openUpdate={() => {
-    dispatch(tripsActions.openTripRequest({value: index}) );
-    setUpdate(true)
   }}
    />
 )
-}
 })
 
 :<Typography variant="h5"  sx={{ textAlign:'center', fontWeight:600}}>
