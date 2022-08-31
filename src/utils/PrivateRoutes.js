@@ -24,9 +24,9 @@ const PrivateRoutes = () => {
    );
 
     let currentDate = new Date();
-
+    const user= useSelector(state=> state.login.user);
     useEffect(()=>{
-      if(isLoggedIn){
+      if(isLoggedIn && !user){
         const decodedToken = jwt_decode(isLoggedIn);
         axios.get(`${process.env.API_URL}/user/${decodedToken.id}`, {
           headers: { Authorization: `Bearer ${isLoggedIn}` },

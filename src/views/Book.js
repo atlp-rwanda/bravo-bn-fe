@@ -14,12 +14,12 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import {  Typography } from '@mui/material';
-import { CommentsModal } from '../components/Models';
 import { TripRequest } from '../components/TripRequest';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { tripsActions } from '../redux/tripsSlice';
 import PreLoader from "../components/PreLoader";
+import { CommentsModal } from '../components/Models';
 import { ErrorAlert, InfoAlert, SuccessAlert, WarnAlert } from '../components/Alerts';
 import { alertActions } from '../redux/alertSlice';
 
@@ -54,6 +54,7 @@ const Search = styled('div')(({ theme }) => ({
   }));
 
   
+
   
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
@@ -74,9 +75,15 @@ const Search = styled('div')(({ theme }) => ({
 
 
 export default function Booking() {
-    const [comments, setComments] = React.useState(false);
+  const [comments, setComments] = React.useState(false);
     const [searchValue, setSearchValue] = React.useState('');
+    const [searchLoading, setSearchLoading] = React.useState(false);
     const [filter, setFilter] = React.useState({year:'',month:'',day:''});
+    const token= useSelector(state=> state.auth.token);
+    const trips= useSelector(state=> state.trips.trips);
+    const getComments= useSelector(state=> state.trips.getComments);
+    const getLocation= useSelector(state=> state.trips.getLocation);
+    const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
     const dispatch = useDispatch();
     const days = [];
     for(let a=1 ; a <= 31; a++){
@@ -106,16 +113,17 @@ export default function Booking() {
           tripsActions.openTripRequest({value: null})
         );
       setComments(false)};
-    const token= useSelector(state=> state.auth.token);
-    const trips= useSelector(state=> state.trips.trips);
-    const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
-
+    const closeUpdate=() => setUpdate(false);
+    const closeDetails=() => setDetails(false);
+ 
     React.useEffect(()=>{
       if(!trips || trips.length == 0 && searchValue.length ==0 ){
 
         axios.get(`${process.env.API_URL}/user/trip/get`, {
           headers: { Authorization: `Bearer ${token}` },
         }).then((res)=>{
+          dispatch(tripsActions.fetchLocation({getLocation:true}));
+          dispatch(tripsActions.fetchComments({getComments:true}));
           dispatch(
             tripsActions.getTripRequests({trips: res.data.data})
             );
@@ -130,30 +138,78 @@ export default function Booking() {
                 alertActions.error({message: 'none'}));
               },10000)
         }
-    },[trips,comments,searchValue]);
+    },[trips,searchValue,searchLoading]);
+
 
     
 
-    const getLocation = (locationId,index)=>{
+    const getAllLocation = (locationId,index)=>{
+      if(getLocation){
       if(!trips[index]['location']){
 
         axios.get(`${process.env.API_URL}/location/${locationId}`, {
           headers: { Authorization: `Bearer ${token}` },
         }).then((res)=>{
-          dispatch(
-            tripsActions.updateTripRequests({index,property:'location',value:res.data.data?.location.locationName}));
-          }).catch(err=> console.log(err))
-        }
+          dispatch(tripsActions.updateTripRequests({index,property:'location',value:res.data.data?.location.locationName}));
+          dispatch(tripsActions.fetchLocation({getLocation:false}));
+        }).catch(err=> console.log(err))
+      }
     }
-    const getComments = (tripId,index)=>{
-        axios.get(`${process.env.API_URL}/user/trip/${tripId}/comments`, {
-          headers: { Authorization: `Bearer ${token}` },
-        }).then((res)=>{
+  }
+  const getAllComments = (tripId,index)=>{
+    if(getComments){
+      
+      axios.get(`${process.env.API_URL}/user/trip/${tripId}/comments`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).then((res)=>{
+          dispatch(tripsActions.fetchComments({getComments:false}));
           dispatch(tripsActions.updateTripRequests({index,property:'commentsCount',value:res.data.comments.count}));
-          }).catch(err=> console.log(err))
+        }).catch(err=> console.log(err))
+      }
         
     }
     
+
+    const searchTerm = (e)=>{
+      setSearchValue(`${e.target.value}`);
+      if(searchValue.trim().length ==0) return;
+      if(e.target.value.length == 0) return dispatch(
+        tripsActions.getTripRequests({trips: null})
+        );
+        if(e.target.value.length >=3 ){
+
+      setSearchLoading(true)
+      axios.get(`${process.env.API_URL}/search/${searchValue}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).then(async(res)=>{
+        try{
+          let allTrips = await axios.get(`${process.env.API_URL}/user/trip/get`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          let retrievedData =[]
+          res.data.data.tripss.rows.map(el => retrievedData.push(el.id));
+          let searchFilter = allTrips.data.data.filter( trip => retrievedData.includes(trip.id) );
+          dispatch(
+            tripsActions.getTripRequests({trips: searchFilter})
+            );
+            setSearchLoading(false)
+          }catch(err){
+            setSearchLoading(false)
+            console.log(err)
+          }
+        }).catch(err=> {
+          setSearchLoading(false)
+          dispatch(
+            alertActions.error({message: err.response.data.message })
+            );
+            setTimeout(()=>{
+              dispatch(
+                alertActions.error({message: 'none'}));
+              },10000)
+          })
+        }
+    }
+
 
   return (
     <Container maxWidth="xl"  className="book-container" >
@@ -164,7 +220,7 @@ export default function Booking() {
         { successMessage && successMessage != 'none' && <SuccessAlert message={successMessage}/> }
       </Stack>
 
-         <CommentsModal
+      <CommentsModal
          open={comments}
          onClose={closeComments}
          />
@@ -181,7 +237,7 @@ export default function Booking() {
               inputProps={{ 'aria-label': 'search' }}
               value={searchValue}
               sx={{padding:'0'}}
-              onChange={(e)=>{setSearchValue(`${e.target.value}`);}}
+              onChange={searchTerm}
             />
               <SearchIcon sx={{cursor:'pointer', mb:'-8px'}} />
           </Search>
@@ -189,10 +245,12 @@ export default function Booking() {
     <Typography variant="h6" component="h6" pt={8} sx={{ textAlign:'start', fontWeight:600}}>
           My trip requests
 </Typography>
-{!trips && !errorMessage ? <PreLoader />:  trips?.length > 0? 
+{!trips && !errorMessage || searchLoading ? <PreLoader />:  trips?.length > 0 ? 
 trips.map((trip,index)=>{
-  getLocation(trip.accomodation?.locationId,index)
-  getComments(trip.id,index)
+  if(trip.id){
+
+    getAllLocation(trip.accomodation?.locationId,index)
+    getAllComments(trip.id,index)
 return(
   <TripRequest
   key={index}
@@ -201,12 +259,24 @@ return(
   commentsCount = {trip.commentsCount}
   accomodation={trip.accomodation}
 
+  onDelete = {()=>{
+    deleteTrip(trip.id,index)
+  }}
    openComments={() => {
     dispatch(tripsActions.openTripRequest({value: index}) );
     setComments(true)
   }}
+   openDetails={() => {
+    dispatch(tripsActions.openTripRequest({value: index}) );
+    setDetails(true)
+  }}
+   openUpdate={() => {
+    dispatch(tripsActions.openTripRequest({value: index}) );
+    setUpdate(true)
+  }}
    />
 )
+}
 })
 
 :<Typography variant="h5"  sx={{ textAlign:'center', fontWeight:600}}>
