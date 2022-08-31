@@ -102,6 +102,11 @@ export default function Login() {
             alertActions.success({message: null })
             );
             navigate("/");
+            if(user.role === "travel admin"){
+              navigate("/accomodation");
+              }else{
+                navigate("/");
+              }
         },3000)             
       })
       .catch((err) => {
@@ -179,7 +184,10 @@ export default function Login() {
               </small>
             </div>
             <div className="forgot-p">
-              <p>Forgot password?</p>
+            
+              <p>
+              <Link to="/reset">Forgot password?</Link>
+              </p>
             </div>
             <div className="form-group">
               <div className="input-group button">

@@ -11,6 +11,8 @@ import PopupModal from "../components/Modal/Modal.js"
 import Booking from '../views/Book';
 import Home from '../views/Home';
 import CreateRequest from '../views/CreateRequest';
+import Map from '../../src/components/Map';
+import Accomodation from "../views/Accomodation";
 
 
 const routes= () => {
@@ -30,6 +32,9 @@ const routes= () => {
       <Route path='/reset' element={<Reset/>}/>
       <Route exact path="/password/:token" element={<Respassword/>}/>
       <Route path='/modal' element={<PopupModal/>}/>
+      <Route path='/map' element={<Map />}/>
+      <Route  exact path="accomodation" element={<Accomodation />}/>
+
     </Routes>
  
   );
