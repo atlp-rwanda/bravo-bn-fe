@@ -6,6 +6,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CheckIcon from '@mui/icons-material/Check';
+import { PreLoaderSmallDanger } from './PreLoader';
 
 
 export function TripRequest(props) {
@@ -50,10 +51,11 @@ const statusColor = props.status == 'pending' ? '#FFC107' : props.status == 'app
                    {props.commentsCount} Comments
                   </Typography>
                 <Box>
-                  {props.status == 'pending' ?<><Button variant="contained" size="medium"  sx={{ marginRight:'10px',textTransform:'none'}}>
+                  {props.status == 'pending' ?<><Button onClick={props.openUpdate} variant="contained" size="medium"  sx={{ marginRight:'10px',textTransform:'none'}}>
                   Update
                 </Button>
-                  <Button  sx={{ textTransform:'none'}} variant="outlined" color='error' size="medium">Delete
+                  <Button onClick={props.onDelete}  sx={{ textTransform:'none'}} variant="outlined" color='error' size="medium">
+                  {props.loading ? <PreLoaderSmallDanger /> : 'Delete'}
                 </Button></>
                 :''}
                 </Box>

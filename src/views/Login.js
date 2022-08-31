@@ -102,7 +102,7 @@ export default function Login() {
             alertActions.success({message: null })
             );
             navigate("/");
-        },5000)             
+        },3000)             
       })
       .catch((err) => {
         dispatch(
