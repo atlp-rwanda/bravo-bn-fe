@@ -1,5 +1,6 @@
 .about-page {
   display: flex;
+  flex-flow: row-reverse;
   margin: auto;
   padding: 20px 100px;
   .left {
