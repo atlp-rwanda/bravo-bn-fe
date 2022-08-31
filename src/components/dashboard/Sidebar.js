@@ -50,6 +50,17 @@ const Sidebar = () => {
           <span>Trip requests</span>
         </div>
       </NavLink>
+      <NavLink
+        to="/accomodation"
+        style={({ isActive }) => (isActive ? activeStyle : inActive)}
+      >
+        <div className="trips">
+          <span>
+            <i class="fa-solid fa-plane"></i>
+          </span>
+          <span>Accomodation</span>
+        </div>
+      </NavLink>
     </div>
   );
 };
