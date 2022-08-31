@@ -133,6 +133,9 @@
                 .borderColors {
                     width: 90%;
                 }
+                .borderArea {
+                    width: 90%;
+                }
 
                 .error {
                     color: $errorColor;
@@ -154,7 +157,7 @@
                 }
 
                 .accomodation--btn {
-                    width: 90%;
+                    width: 96%;
 
                 }
             }
@@ -163,66 +166,3 @@
 
 
 }
-
-// @media screen and (min-width:601px)and (max-width: 1020px) {
-//     .Accomodation {
-//         height: 100vh;
-
-//         form {
-//             .accomodation--select {
-//                 width: 400px;
-//             }
-//         }
-//     }
-// }
-
-// @media screen and (min-width:320px) and (max-width: 600px) {
-//     .Accomodation {
-// height: 180vh;
-//         .accomodation--paragraph {
-//             h3 {
-//                 margin-top: 2rem;
-//                 margin-bottom: 3rem;
-//             }
-
-//             form {
-//                 display: flex;
-//                 justify-content: center;
-//                 align-items: center;
-//                 flex-direction: column;
-
-//                 .accomodation--input {
-//                     width: 320px;
-
-//                 }
-//                 .error{
-//                     color:$errorColor;
-//                 }
-
-//                 .accomodation--area {
-//                     width: 320px;
-//                 }
-
-//                 .accomodation--image {
-//                     margin-top: 1rem;
-//                     margin-bottom: 1rem;
-//                 }
-//             .leaflet-container{
-//                 width:300px;
-//             }
-
-
-//                 .accomodation--select {
-//                     width: 350px;
-//                 }
-
-//                 .accomodation--btn {
-//                     width: 350px;
-//                     height: 40px;
-//                     margin-bottom: 2rem;
-
-//                 }
-//             }
-//         }
-//     }
-// }
