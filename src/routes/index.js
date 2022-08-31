@@ -18,7 +18,6 @@ const routes= () => {
   
       <Routes>
       <Route  element={<PrivateRoutes/>}>
-        <Route exact path="/about" component={<About/>}/>
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/about" element={<About/>}/>
         <Route exact path="/trip-requests" element={<Booking/>}/>
