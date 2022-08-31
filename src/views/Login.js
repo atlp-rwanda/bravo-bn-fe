@@ -103,7 +103,7 @@ export default function Login() {
             );
             navigate("/");
             if(user.role === "travel admin"){
-              navigate("/accomodation");
+              navigate("/dashboard");
               }else{
                 navigate("/");
               }

@@ -3,6 +3,8 @@ import Button from "../components/Button";
 import Input from "../components/Input/Input.js";
 import TextArea from "../../src/components/TextArea/TextArea.js";
 import axios from "axios";
+import {Alert} from "@mui/material"
+import { useNavigate } from "react-router-dom";
 
 import Map from "../../src/components/Map";
 import { current } from "@reduxjs/toolkit";
@@ -24,6 +26,11 @@ const Accomodation = () => {
   const [currentLocation, setCurrentLocation] = useState([]);
   const [position, setPosition] = useState(null);
   const [locations, setLocations] = useState();
+  const navigate =useNavigate()
+  const [alert, setAlert] = useState({
+    message: "",
+    status: null,
+  });
   const latlng = [];
 
   const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
@@ -39,28 +46,6 @@ const Accomodation = () => {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
     console.log("errors", formErrors);
-    // try {
-    //   const response = await axios({
-    //     url: "https://bravo-bfn-be.herokuapp.com/api/v1/accomodation",
-    //     method: "POST",
-    //     headers: { Authorization: `Bearer ${jwtToken}` },
-    //     data: {
-    //       name: formValues.facility,
-    //       description: formValues.description,
-    //       locationId: formValues.location,
-    //       image: formValues.image,
-    //       geoLocation: latlng.toString(),
-    //       highlight: formValues.highlight,
-    //       amenitiesList: formValues.amenities.split(","),
-    //     },
-    //   });
-    //   console.log(response);
-    //   if (response) {
-    //     setFormValues(initialValues);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   useEffect(() => {
@@ -121,9 +106,27 @@ const Accomodation = () => {
         console.log(response);
         if(response){
           setFormValues(initialValues)
+          setAlert({
+            message: response.statusText,
+            status: response.status,
+          });
+          setTimeout(() => {
+            setAlert({ message: "" });
+          }, 2200);
+         
         }
+        navigate("/dashboard");
       })
-      .catch((error) => console.log(error));
+      .catch((error) =>{
+        console.log(error)
+        setAlert({
+          message: error.response.data.message,
+          status: error.response.status,
+        });
+        setTimeout(() => {
+          setAlert({ message: "" });
+        }, 2200);
+      } );
     }
 
     return errors;
@@ -230,6 +233,21 @@ const Accomodation = () => {
           </div>
           <Button className="accomodation--btn">Create an Accomodation</Button>
         </form>
+                  {alert.message &&(
+              <div style={{ paddingTop: 50 }}>
+                <Alert
+                  variant="filled"
+                  severity={
+                    alert.status === 200 || alert.status === 201
+                      ? "success"
+                      : "error"
+                  }
+                  sx={{ width: "40%", marginRight: "20px" }}
+                >
+                  {alert.message}
+                </Alert>
+              </div>)}
+            
         <center>
         <p className="accomodation--footer">
           &copy;Copyright Barefoot nomad 2022
