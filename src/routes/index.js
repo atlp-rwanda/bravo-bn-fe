@@ -20,7 +20,7 @@ const routes= () => {
         <Route exact path="/about" component={<About/>}/>
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/about" element={<About/>}/>
-        <Route exact path="/booking" element={<Booking/>}/>
+        <Route exact path="/trip-requests" element={<Booking/>}/>
         <Route exact path="/dashboard" element={<Dashboard/>}/>        
       </Route >
       <Route path='/login' element={<Login/>}/>

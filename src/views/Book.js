@@ -18,7 +18,8 @@ import { TripRequest } from '../components/TripRequest';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { tripsActions } from '../redux/tripsSlice';
-import PreLoader, { PreLoaderSmall } from "../components/PreLoader";
+import PreLoader from "../components/PreLoader";
+import { CommentsModal } from '../components/Models';
 import { ErrorAlert, InfoAlert, SuccessAlert, WarnAlert } from '../components/Alerts';
 import { alertActions } from '../redux/alertSlice';
 
@@ -74,6 +75,7 @@ const Search = styled('div')(({ theme }) => ({
 
 
 export default function Booking() {
+  const [comments, setComments] = React.useState(false);
     const [searchValue, setSearchValue] = React.useState('');
     const [searchLoading, setSearchLoading] = React.useState(false);
     const [filter, setFilter] = React.useState({year:'',month:'',day:''});
@@ -218,6 +220,10 @@ export default function Booking() {
         { successMessage && successMessage != 'none' && <SuccessAlert message={successMessage}/> }
       </Stack>
 
+      <CommentsModal
+         open={comments}
+         onClose={closeComments}
+         />
 
     <Box sx={{ flexGrow: 1 }} >
       <Grid container spacing={3} >
