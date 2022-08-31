@@ -6,7 +6,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
 import { BrowserRouter } from 'react-router-dom';
-import server from './mocks/server';
 import { reducers } from '../redux/store';
 
 function render(
@@ -35,20 +34,16 @@ beforeAll(() => {
     store[key] = value;
   });
   global.Storage.prototype.getItem = jest.fn((key) => store[key]);
-  // start up the mock server
-  server.listen();
 });
 
 beforeEach(() => {
   store = {};
 });
 
-afterEach(() => server.resetHandlers());
 
 afterAll(() => {
   global.Storage.prototype.setItem.mockReset();
   global.Storage.prototype.getItem.mockReset();
-  server.close();
 });
 
 // re-export everything

@@ -11,6 +11,7 @@ import PopupModal from "../components/Modal/Modal.js"
 import Booking from '../views/Book';
 import Home from '../views/Home';
 import CreateRequest from '../views/CreateRequest';
+import RequestsTable from '../components/dashboard/RequestsTable';
 
 
 const routes= () => {
