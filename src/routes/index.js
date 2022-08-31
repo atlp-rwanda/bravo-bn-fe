@@ -5,7 +5,6 @@ import PrivateRoutes from '../utils/PrivateRoutes';
 import Login from '../views/Login';
 import Dashboard from '../views/Dashboard';
 import Signup from '../views/Signup';
-import RequestsTable from '../components/dashboard/RequestsTable';
 import Reset from '../views/Reset';
 import Respassword from '../views/Respassword';
 import PopupModal from "../components/Modal/Modal.js"
@@ -21,7 +20,7 @@ const routes= () => {
         <Route  element={<PrivateRoutes/>}>
           <Route exact path="/about" component={<About/>}/>
           <Route exact path="/dashboard/users" element={<Dashboard />} />
-          {user.role =="requester"? <Route exact path="/booking" element={<Booking/>}/> : <Route exact path="/dashboard" element={<Dashboard/>}/>}
+          {user.role =="requester"? <Route exact path="/about" component={<About/>}/> : <Route exact path="/dashboard" element={<Dashboard/>}/>}
       </Route >
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>

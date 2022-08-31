@@ -5,6 +5,7 @@ import Footer from "./Footer";
 const Dash = () => {
   return (
     <div className="dashboard-container">
+     
       <Contents />
       <Footer />
     </div>

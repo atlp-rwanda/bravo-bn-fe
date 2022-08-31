@@ -20,7 +20,6 @@ import Dashboard from "../views/Dashboard";
 import RequestsTable from "../components/dashboard/RequestsTable";
 import Apps from '../components/App'
 
-
 afterEach(cleanup);
 
 test("renders App on non registered user", () => {
