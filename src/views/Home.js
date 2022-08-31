@@ -1,26 +1,6 @@
 import * as React from 'react';
 import Container from '@mui/material/Container';
-import {  Box, Button, Card, CardMedia, Typography } from '@mui/material';
-import background from  '../assets/background.png';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { experimentalStyled as styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import { Accommodation } from '../components/accommodation';
-import Footer from '../components/dashboard/footer'
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
-
+import {  Button, Card, CardMedia, Typography } from '@mui/material';
 
 export default function Home() {
     const [age, setAge] = React.useState('');
