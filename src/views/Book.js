@@ -25,6 +25,7 @@ import { ErrorAlert, SuccessAlert } from '../components/Alerts';
 import { alertActions } from '../redux/alertSlice';
 import Pagination from '@mui/material/Pagination';
 import usePagination from "../hooks/Pagination";
+import { Link } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
     
@@ -257,7 +258,7 @@ export default function Booking() {
         <Grid item xs={8} >
           <Item className="book-grid" >
           <Stack spacing={2} direction="row" sx={{ display: { justifyContent: 'space-between' }}}>
-      <Button variant="contained" className='button'>Create a trip request</Button>
+      <Link to='/create-request' style={{padding:'10px 15px', textDecoration:'none', color:'white', borderRadius:'5px'}} variant="contained" className='button'>Create a trip request</Link>
       <Search>
             <StyledInputBase
               placeholder="search here..."

@@ -53,6 +53,7 @@ export function UpdateModal(props) {
       headers: { Authorization: `Bearer ${token}` },
     }).then((res)=>{
       setLoading(false)
+      props.onClose();
       dispatch(
       alertActions.success({message:'Trip request updated succesfully'})
       )
