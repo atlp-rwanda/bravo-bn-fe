@@ -112,10 +112,10 @@ const Accomodation = () => {
           });
           setTimeout(() => {
             setAlert({ message: "" });
+            navigate("/dashboard");
           }, 2200);
          
         }
-        navigate("/dashboard");
       })
       .catch((error) =>{
         console.log(error)
@@ -242,7 +242,7 @@ const Accomodation = () => {
                       ? "success"
                       : "error"
                   }
-                  sx={{ width: "40%", marginRight: "20px" }}
+                  sx={{ width: "50%", marginRight: "20px" }}
                 >
                   {alert.message}
                 </Alert>
