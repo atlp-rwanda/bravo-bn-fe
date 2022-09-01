@@ -4,11 +4,12 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getRequestAsync,
+  getRequests,
   showRequest,
   searchRequestAsync,
 } from "../../redux/requests/requestSlice";
 import DeleteIcon from '@mui/icons-material/Delete';
+import axios from "axios";
 
 const columns = [
   { field: "leavingFrom", headerName: "Requester Address", width: 200 },
@@ -23,19 +24,30 @@ const columns = [
 export default function RequestsTable() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selected, setSelected] = useState(false);
+  const token = useSelector(state => state.auth.token);
 
   const selectRow = (e) => {
     setSelected(!selected);
   };
 
   const dispatch = useDispatch();
-  let requests = useSelector(showRequest);
 
-  useEffect(() => {
-    dispatch(getRequestAsync());
+  const getData = () => {
+    axios.get(`${process.env.API_URL}/user/trip/get`, {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then(res => {
+      dispatch(getRequests(res.data.data))
+    }).catch(error => {
+      console.log(error)
+    })
+  }
+
+  useEffect(() =>{
+    getData()
   }, []);
+  let requests = useSelector(showRequest);
+  let trips = requests[0]
 
-  let trips = requests[0];
 
   return (
     <div
@@ -67,7 +79,7 @@ export default function RequestsTable() {
           style={{ width: 180, height: 38 }}
         >
           DELETE
-          <DeleteIcon style={{paddingLeft: 20}}/>
+          <DeleteIcon style={{ paddingLeft: 20 }} />
         </Button>
       </div>
       <DataGrid

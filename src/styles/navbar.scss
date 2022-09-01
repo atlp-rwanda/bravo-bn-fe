@@ -1,0 +1,34 @@
+.navbar {
+    background: $primaryColor;
+    box-shadow: none;
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.notification-icon {
+    color: $thirdColor;
+}
+.menu-icon {
+    color: $thirdColor;
+}
+
+.navlink {
+    text-decoration: none;
+    color: $thirdColor;
+    text-transform: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.active {
+    color: $secondaryColor;
+}
+.active::before {
+    content: "";
+    height: 5px;
+    width: 5px;
+    background: $secondaryColor;
+    position: absolute;
+    border-radius: 50%;
+    left: 45%;
+    top: 90%;
+}

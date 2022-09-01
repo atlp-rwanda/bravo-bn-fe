@@ -1,33 +1,37 @@
 .Accomodation {
 
-    height: 150vh;
+    height: 130vh;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-
+    flex-direction: column;
+.Accomodation1{
+    display: flex;
+    .accomodation-sidebar{
+        margin-left: 1rem;
+    }
+   
     .accomodation--paragraph {
-        height: 140vh;
-
-
-        h3 {
-            margin-top: 2rem;
-            margin-bottom: 3rem;
-
-            .accomodation-nomad {
-                color: $secondaryColor;
-            }
-        }
+        padding-left: 10rem;
+        height: 130vh;
+        width:100%;
 
         .accomodation-facility {
             font-weight: bold;
             font-size: 1.75rem;
             margin-bottom: 1rem;
+            margin-right: 3rem;
 
         }
 
         form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
 
+        .form--input{
+            display: flex;
+            row-gap: 10px;
+            column-gap: 20rem;
             .accomodation--input {
                 padding: 0.5rem;
                 width: 100%;
@@ -87,18 +91,20 @@
                 cursor: pointer;
             }
 
-            .accomodation--btn {
-                width: 104%;
-                height: 40px;
-                margin-top: 1rem;
-                background-color: $secondaryColor;
-                color: $primaryColor;
-                font-weight: bold;
-                font-size: 1rem;
-                border-radius: 5px;
-                cursor: pointer;
-                margin-bottom: 1rem;
-            }
+
+        }
+        .accomodation--btn {
+            width: 90%;
+            height: 40px;
+            background-color: $secondaryColor;
+            color: $primaryColor;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+           margin: 1rem 0;
+           align-self: center;
+        }
         }
     }
 
@@ -165,4 +171,5 @@
     }
 
 
+}
 }

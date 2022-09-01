@@ -1,7 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 import { NavLink } from "react-router-dom";
 
+
 const Sidebar = () => {
+  const user = useSelector((state) => state.login.user);
   let activeStyle = {
     textDecoration: "none",
     color: "white",
@@ -18,10 +22,13 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-contents">
-      <div>
-        <span class="iconify" data-icon="bxs:grid-alt"></span>
-        <span>Dashboard</span>
-      </div>
+      <NavLink
+        to="/dashboard">
+        <div>
+          <span class="iconify" data-icon="bxs:grid-alt"></span>
+          <span>Dashboard</span>
+        </div>
+      </NavLink>
       <div>
         <span class="iconify" data-icon="clarity:users-solid"></span>
         <span>
@@ -40,17 +47,6 @@ const Sidebar = () => {
         <span>Locations</span>
       </div>
       <NavLink
-        to="/dashboard/requests"
-        style={({ isActive }) => (isActive ? activeStyle : inActive)}
-      >
-        <div className="trips">
-          <span>
-            <i class="fa-solid fa-plane"></i>
-          </span>
-          <span>Trip requests</span>
-        </div>
-      </NavLink>
-      <NavLink
         to="/accomodation"
         style={({ isActive }) => (isActive ? activeStyle : inActive)}
       >
@@ -61,8 +57,24 @@ const Sidebar = () => {
           <span>Accomodation</span>
         </div>
       </NavLink>
+      {user.role == "manager" && (
+        <NavLink
+          to="/dashboard/trips"
+          style={({ isActive }) => (isActive ? activeStyle : inActive)}
+        >
+          <div>
+            <span>
+              <i class="fa-solid fa-plane"></i>
+            </span>
+            <span>Trip requests</span>
+          </div>
+        </NavLink>
+      )}
+
     </div>
+
   );
 };
+
 
 export default Sidebar;

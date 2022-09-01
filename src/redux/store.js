@@ -5,20 +5,26 @@ import loginReducer from "./auth/loginSlice";
 import mapSlice from "./mapSlice";
 import requestSlice from "./requests/requestSlice";
 import tripsSlice from "./tripsSlice";
+import accommodationsSlice from "./accommodationsSlice";
+import selectedRequestSlice from "./requests/selectedRequestSlice";
+
 
 export const reducers = {
   auth: authSlice.reducer,
   alert: alertSlice.reducer,
   login: loginReducer,
   request: requestSlice,
+  accommodations: accommodationsSlice.reducer,
   trips: tripsSlice.reducer,
   map: mapSlice.reducer,
-}
+  selectedRequest: selectedRequestSlice,
+};
 
- const store = configureStore({
+
+const store = configureStore({
   reducer: {
     ...reducers,
-    devTools: process.env.NODE_ENV !== 'production',
+    devTools: process.env.NODE_ENV !== "production",
   },
 });
 

@@ -18,6 +18,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import PopupModal from './Profile/ViewProfileModel';
 
 const Nav = () => {
   const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
@@ -26,20 +27,18 @@ const Nav = () => {
   const [invisible, setInvisible] = React.useState(false);
   const [Logout, setLogout] = React.useState("");
   const user = useSelector((state) => state.login.user);
-  const navigate=useNavigate();
+  const [open, setOpen] = React.useState(false)
+  const navigate = useNavigate();
   const pages = [
     ["Home", "/"],
     [
       `${user.role == "requester" ? "Trip requests" : "Dashboard"}`,
       `${user.role == "requester" ? "/trip-requests" : "/dashboard"}`,
     ],
-    ["Hotels", "/hotels"],
     ["About Us", "/about"],
-    ["Contact Us", "/contact"],
   ];
   const settings = [
     ["Profile", "/profile"],
-    ["Account", "/account"],
     ["Logout", ""],
   ];
 
@@ -61,12 +60,12 @@ const Nav = () => {
     var cookies = document.cookie.split(";");
 
     for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
-}
+  }
 
   const handleLogout = async () => {
     try {
@@ -74,22 +73,19 @@ const Nav = () => {
       const res = await axios.get(`${process.env.API_URL}/user/auth/logout`, {
         headers: { Authorization: `Bearer ${jwtToken}` },
       });
-      console.log(res);
       if (res) {
         deleteAllCookies();
+        localStorage.clear()
         navigate("/login");
-        
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log("array", settings[[2]][0]);
-
-
   return (
     <>
+      <PopupModal open={open} setOpen={setOpen} />
       <AppBar position="static" className="navbar">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -193,13 +189,9 @@ const Nav = () => {
               >
                 <NotificationsIcon className="notification-icon" />
               </Badge>
-              {/* <FormControlLabel
-          sx={{ color: 'text.primary' }}
-          control={<Switch checked={!invisible} onChange={handleBadgeVisibility} />}
-        /> */}
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar src={`${user.image}`} alt={`${user.username}`} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -226,6 +218,7 @@ const Nav = () => {
                         if (setting[0] === "Logout") {
                           handleLogout();
                         }
+                        else if (setting[0] == "Profile") { setOpen(true) }
                       }}
                     >
                       {setting[0]}

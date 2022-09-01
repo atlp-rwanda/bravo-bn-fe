@@ -7,14 +7,36 @@ import App from '../App.js';
 import About from '../views/About'
 import Btn from '../components/Btn'
 
+const user = {
+  "id": 16,
+  "firstName": "Alain",
+  "lastName": "Tresor",
+  "username": "Alain",
+  "email": "tresoralain35@gmail.com",
+  "phoneNumber": "0780591269",
+  "image": null,
+  "socialMediaId": null,
+  "provider": null,
+  "isVerified": true,
+  "gender": "male",
+  "preferredLanguage": null,
+  "preferredCurrency": null,
+  "department": null,
+  "lineManager": null,
+  "birthDate": null,
+  "verificationToken": null,
+  "role": "requester",
+  "remember_info": false
+}
 afterEach(cleanup);
 
-test('renders App on  registered user',  () => {
-  document.cookie='jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzksImlhdCI6MTY2MTMzNjM2OSwiZXhwIjoxNjYxNDIyNzY5fQ.RGMvNjJQsWDStzDEmdFDCFJDyYnX6VDjhkCGAp1UCqI'
+test("renders App on non registered user", () => {
+  localStorage.removeItem("jwt");
+  localStorage.setItem('user', JSON.stringify(user))
   render(
     <Router>
       <Provider store={store}>
-      <App />
+        <App />
       </Provider>
     </Router>,
   );
@@ -22,22 +44,21 @@ test('renders App on  registered user',  () => {
 
 test('renders react component', async () => {
   render(
-     <Router>
+    <Router>
       <Provider store={store}>
 
-      <About />    
+        <About />
       </Provider>
-      </Router>
+    </Router>
   );
 })
 test('renders react component', async () => {
   render(
-     <Router>
+    <Router>
       <Provider store={store}>
 
-      <Btn />    
+        <Btn />
       </Provider>
-      </Router>
+    </Router>
   );
 })
- 

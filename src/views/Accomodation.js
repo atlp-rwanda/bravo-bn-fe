@@ -5,6 +5,8 @@ import TextArea from "../../src/components/TextArea/TextArea.js";
 import axios from "axios";
 import {Alert} from "@mui/material"
 import { useNavigate } from "react-router-dom";
+import Nav from "../components/NavDummy.js"
+import Sidebar from "../components/dashboard/Sidebar"
 
 import Map from "../../src/components/Map";
 import { current } from "@reduxjs/toolkit";
@@ -134,16 +136,19 @@ const Accomodation = () => {
 
   return (
     <div className="Accomodation">
+      
+      <Nav/>
+      <div className="Accomodation1">
+      <div className="accomodation-sidebar">
+      <Sidebar/>
+      </div>
       <div className="accomodation--paragraph">
-        <center>
-        <h3>
-          Barefoot.<span className="accomodation-nomad">Nomad</span>
-        </h3>
-        </center>
         <p className="accomodation-facility">
           Create an Accomodation facility
         </p>
         <form onSubmit={handleSubmit}>
+          <div className="form--input">
+          <div>
           <div className="icon-inside1">
             <Input
               className={formErrors?.facility ? "borderColors" : "accomodation--input"}
@@ -193,12 +198,11 @@ const Accomodation = () => {
             </select>
            
           </div>
-          <Map
-            setCurrentLocation={setCurrentLocation}
-            position={position}
-            setPosition={setPosition}
-          />
+
+          </div>
+          <div>
           <div className="icon-inside">
+  
             <input
               className="accomodation--image"
               type="file"
@@ -231,7 +235,16 @@ const Accomodation = () => {
             />
              <p className="error">{formErrors.amenities}</p>
           </div>
+          
+          </div>
+          </div>
+          <div>          <Map
+            setCurrentLocation={setCurrentLocation}
+            position={position}
+            setPosition={setPosition}
+          />
           <Button className="accomodation--btn">Create an Accomodation</Button>
+          </div>
         </form>
                   {alert.message &&(
               <div style={{ paddingTop: 50 }}>
@@ -255,6 +268,7 @@ const Accomodation = () => {
         </center>
         
 
+      </div>
       </div>
     </div>
   );

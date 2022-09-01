@@ -2,6 +2,7 @@ import svg from "../assets/request_svg.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
 import React, { useState, useEffect } from "react";
 import { TextField, Button, TextareaAutosize, Alert } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
 import "../styles/createRequest.scss";
 import { Input, Select } from "../components/Input";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -9,6 +10,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import { useSelector } from "react-redux";
 
 const CreateRequest = () => {
   const [rooms, setRooms] = useState([]);
@@ -21,13 +25,55 @@ const CreateRequest = () => {
     returnDate: null,
     travelReason: "",
     accomodationId: null,
-    roomId: 1,
+    roomId: null,
+    passportName: "",
+    passportNumber: "",
   });
   const [alert, setAlert] = useState({
     message: "",
     status: null,
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [toggle, setToggle] = useState(1);
+
+  const newToken = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.login.user);
+
+  const localData = JSON.parse(localStorage.getItem("tripData"));
+
+  useEffect(() => {
+    if (user.remember_info && localData) {
+      setChecked(true);
+      tripData.passportName = localData.passportName;
+      tripData.passportNumber = localData.passportNumber;
+    } else {
+      setChecked(false);
+    }
+  }, [user]);
+
+  const handleCheck = async (event) => {
+    try {
+      let config = {
+        method: "put",
+        url: `${process.env.API_URL}/user/remember-info`,
+        headers: {
+          Authorization: `Bearer ${newToken}`,
+        },
+      };
+
+      axios(config)
+        .then(function (response) {
+          // console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      setChecked(event.target.checked);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -107,6 +153,14 @@ const CreateRequest = () => {
     isValid: true,
     message: "",
   });
+  const [passportNameError, setPassportNameError] = useState({
+    isValid: true,
+    message: "",
+  });
+  const [passportNberError, setPassportNberError] = useState({
+    isValid: true,
+    message: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -151,6 +205,22 @@ const CreateRequest = () => {
           ["message"]: reason ? "" : "Please enter your travel reason.",
         });
         break;
+      case "passportName":
+        let passportName = value.length != 0;
+        setPassportNameError({
+          ...passportNameError,
+          ["isValid"]: passportName ? true : false,
+          ["message"]: passportName ? "" : "Please enter your passport name.",
+        });
+        break;
+      case "passportNber":
+        let passportNber = value.length != 0;
+        setPassportNberError({
+          ...passportNberError,
+          ["isValid"]: passportNber ? true : false,
+          ["message"]: passportNber ? "" : "Please enter your passport number.",
+        });
+        break;
       default:
         break;
     }
@@ -182,6 +252,7 @@ const CreateRequest = () => {
 
     setIsLoading(true);
     try {
+      localStorage.setItem("tripData", JSON.stringify(tripData));
       const res = await axios.post(
         `${process.env.API_URL}/user/trip`,
         tripData,
@@ -243,203 +314,333 @@ const CreateRequest = () => {
             book your travel and accommodation easily and conveniently
           </p>
 
-          <form action="" className="create-form" onSubmit={submitRequest}>
-            <div className="create-input">
-              <div className="form-input">
-                <Select
-                  inputFor="location"
-                  name="location"
-                  options={locationOptions}
-                  onBlur={(e) => handleChange(e)}
-                  onChange={(e) => {
-                    setTripData({
-                      ...tripData,
-                      goingTo: parseInt(e.target.value),
-                    });
-                  }}
-                  value={tripData.goingTo}
-                  borderClass={`${locationError.isValid ? "" : "errorBorder"}`}
-                  errorClass="error"
-                  errorMessage={
-                    locationError.isValid ? "" : locationError.message
-                  }
-                />
-              </div>
-              <div className="form-input">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    label="Travel Date"
-                    name="travelDate"
-                    value={tripData.travelDate}
-                    onChange={(newValue) => {
-                      setTripData({
-                        ...tripData,
-                        travelDate: newValue,
-                      });
-                    }}
-                    renderInput={(params) => (
-                      <TextField size="10" {...params} />
-                    )}
-                  />
-                </LocalizationProvider>
-              </div>
-            </div>
-            <div className="create-input">
-              <div className="form-input">
-                <Select
-                  inputFor="accomodation"
-                  value={tripData.accomodationId}
-                  className="form-input"
-                  name="accomodation"
-                  borderClass={`${
-                    accomodationError.isValid ? "" : "errorBorder"
-                  }`}
-                  errorClass="error"
-                  errorMessage={
-                    accomodationError.isValid ? "" : accomodationError.message
-                  }
-                  options={accomodationOptions}
-                  onBlur={(e) => handleChange(e)}
-                  onChange={(e) => {
-                    setTripData({
-                      ...tripData,
-                      accomodationId: parseInt(e.target.value),
-                    });
-                  }}
-                />
-              </div>
-              <div className="form-input">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    label="Return Date"
-                    value={tripData.returnDate}
-                    onChange={(newValue) => {
-                      setTripData({
-                        ...tripData,
-                        returnDate: newValue,
-                      });
-                    }}
-                    renderInput={(params) => (
-                      <TextField size="10" {...params} />
-                    )}
-                  />
-                </LocalizationProvider>
-              </div>
-            </div>
-            <div className="create-input">
-              <div className="form-input">
-                <Select
-                  inputFor="room"
-                  value={tripData.roomId}
-                  name="room"
-                  errorClass="error"
-                  borderClass={`${roomError.isValid ? "" : "errorBorder"}`}
-                  errorMessage={roomError.isValid ? "" : roomError.message}
-                  options={roomsOptions}
-                  onBlur={(e) => handleChange(e)}
-                  onChange={(e) => {
-                    setTripData({
-                      ...tripData,
-                      roomId: parseInt(e.target.value),
-                    });
-                  }}
-                />
-              </div>
-              <div className="form-input">
-                <Input
-                  inputFor="leavingfrom"
-                  value={tripData.leavingFrom}
-                  placeholder="Leaving from"
-                  type="text"
-                  name="leavingFrom"
-                  errorClass="error"
-                  borderClass={`${
-                    leavingFromError.isValid ? "" : "errorBorder"
-                  }`}
-                  onChange={(e) => {
-                    setTripData({
-                      ...tripData,
-                      leavingFrom: e.target.value,
-                    });
-                  }}
-                  onBlur={(e) => {
-                    handleChange(e);
-                    if (e.target.value.length != 0) {
-                      setLeavingFromError({
-                        isValid: true,
-                        message: "",
-                      });
-                    }
-                  }}
-                  errorMessage={
-                    leavingFromError.isValid ? "" : leavingFromError.message
-                  }
-                />
-              </div>
-            </div>
-            <div>
+          {toggle === 1 && (
+            <form
+              action=""
+              className="create-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (tripData.passportName == "")
+                  return handleChange({
+                    target: { name: "passportName", value: "" },
+                  });
+                if (tripData.passportNumber == "")
+                  return handleChange({
+                    target: { name: "passportNber", value: "" },
+                  });
+                setToggle(2);
+              }}
+            >
               <div className="create-input">
-                <TextareaAutosize
-                  aria-label="minimum height"
-                  minRows={4}
-                  value={tripData.travelReason}
-                  className={`form-input ${
-                    reasonError.isValid ? "" : "errorBorder"
-                  }`}
-                  name="reason"
-                  placeholder="Travel reason"
-                  onBlur={(e) => {
-                    handleChange(e);
-                    if (e.target.value.length != 0) {
-                      setReasonError({
-                        isValid: true,
-                        message: "",
+                <div className="form-input">
+                  <Input
+                    inputFor="passportName"
+                    value={tripData.passportName}
+                    placeholder="Passport name"
+                    type="text"
+                    name="PassportName"
+                    errorClass="error"
+                    borderClass={`${
+                      passportNameError.isValid ? "" : "errorBorder"
+                    }`}
+                    onChange={(e) => {
+                      setTripData({
+                        ...tripData,
+                        passportName: e.target.value,
                       });
+                    }}
+                    onBlur={(e) => {
+                      handleChange(e);
+                      if (e.target.value.length != 0) {
+                        setPassportNameError({
+                          isValid: true,
+                          message: "",
+                        });
+                      }
+                    }}
+                    errorMessage={
+                      passportNameError.isValid ? "" : passportNameError.message
                     }
-                  }}
-                  onChange={(e) => {
-                    setTripData({
-                      ...tripData,
-                      travelReason: e.target.value,
-                    });
-                  }}
+                  />
+                </div>
+                <div className="form-input">
+                  <Input
+                    inputFor="passportNber"
+                    value={tripData.passportNumber}
+                    placeholder="Passport number"
+                    type="text"
+                    name="PassportNber"
+                    errorClass="error"
+                    borderClass={`${
+                      passportNberError.isValid ? "" : "errorBorder"
+                    }`}
+                    onChange={(e) => {
+                      setTripData({
+                        ...tripData,
+                        passportNumber: e.target.value,
+                      });
+                    }}
+                    onBlur={(e) => {
+                      handleChange(e);
+                      if (e.target.value.length != 0) {
+                        setPassportNberError({
+                          isValid: true,
+                          message: "",
+                        });
+                      }
+                    }}
+                    errorMessage={
+                      passportNberError.isValid ? "" : passportNberError.message
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="create-input">
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={checked}
+                      onChange={handleCheck}
+                      inputProps={{ "aria-label": "controlled" }}
+                    />
+                  }
+                  label="Remember my information"
                 />
               </div>
-              <p
-                style={{
-                  marginLeft: 14,
-                  display: reasonError.isValid ? "none" : "block",
-                }}
-                className="error"
-              >
-                {reasonError.message}
-              </p>
-            </div>
-            {alert.message && (
-              <div style={{ paddingTop: 20 }}>
-                <Alert
-                  variant="filled"
-                  severity={
-                    alert.status === 200 || alert.status === 201
-                      ? "success"
-                      : "error"
-                  }
-                  sx={{ width: "40%", marginLeft: "auto" }}
+              {alert.message && (
+                <div style={{ paddingTop: 20 }}>
+                  <Alert
+                    variant="filled"
+                    severity={
+                      alert.status === 200 || alert.status === 201
+                        ? "success"
+                        : "error"
+                    }
+                    sx={{ width: "40%", marginLeft: "auto" }}
+                  >
+                    {alert.message}
+                  </Alert>
+                </div>
+              )}
+              <div className="create-input">
+                <Button
+                  className="submit-btn"
+                  type="submit"
+                  variant={isLoading ? "outlined" : "contained"}
                 >
-                  {alert.message}
-                </Alert>
+                  Next
+                </Button>
               </div>
-            )}
-            <div className="create-input">
-              <Button
-                className="submit-btn"
-                type="submit"
-                variant={isLoading ? "outlined" : "contained"}
-              >
-                {isLoading ? "Loading.." : "Create"}
-              </Button>
-            </div>
-          </form>
+            </form>
+          )}
+
+          {toggle === 2 && (
+            <form action="" className="create-form" onSubmit={submitRequest}>
+              <div className="create-input">
+                <div className="form-input">
+                  <Select
+                    inputFor="location"
+                    name="location"
+                    options={locationOptions}
+                    onBlur={(e) => handleChange(e)}
+                    onChange={(e) => {
+                      setTripData({
+                        ...tripData,
+                        goingTo: parseInt(e.target.value),
+                      });
+                    }}
+                    value={tripData.goingTo}
+                    borderClass={`${
+                      locationError.isValid ? "" : "errorBorder"
+                    }`}
+                    errorClass="error"
+                    errorMessage={
+                      locationError.isValid ? "" : locationError.message
+                    }
+                  />
+                </div>
+                <div className="form-input">
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      label="Travel Date"
+                      name="travelDate"
+                      value={tripData.travelDate}
+                      onChange={(newValue) => {
+                        setTripData({
+                          ...tripData,
+                          travelDate: newValue,
+                        });
+                      }}
+                      renderInput={(params) => (
+                        <TextField size="10" {...params} />
+                      )}
+                    />
+                  </LocalizationProvider>
+                </div>
+              </div>
+              <div className="create-input">
+                <div className="form-input">
+                  <Select
+                    inputFor="accomodation"
+                    value={tripData.accomodationId}
+                    className="form-input"
+                    name="accomodation"
+                    borderClass={`${
+                      accomodationError.isValid ? "" : "errorBorder"
+                    }`}
+                    errorClass="error"
+                    errorMessage={
+                      accomodationError.isValid ? "" : accomodationError.message
+                    }
+                    options={accomodationOptions}
+                    onBlur={(e) => handleChange(e)}
+                    onChange={(e) => {
+                      setTripData({
+                        ...tripData,
+                        accomodationId: parseInt(e.target.value),
+                      });
+                    }}
+                  />
+                </div>
+                <div className="form-input">
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      label="Return Date"
+                      value={tripData.returnDate}
+                      onChange={(newValue) => {
+                        setTripData({
+                          ...tripData,
+                          returnDate: newValue,
+                        });
+                      }}
+                      renderInput={(params) => (
+                        <TextField size="10" {...params} />
+                      )}
+                    />
+                  </LocalizationProvider>
+                </div>
+              </div>
+              <div className="create-input">
+                <div className="form-input">
+                  <Select
+                    inputFor="room"
+                    value={tripData.roomId}
+                    name="room"
+                    errorClass="error"
+                    borderClass={`${roomError.isValid ? "" : "errorBorder"}`}
+                    errorMessage={roomError.isValid ? "" : roomError.message}
+                    options={roomsOptions}
+                    onBlur={(e) => handleChange(e)}
+                    onChange={(e) => {
+                      setTripData({
+                        ...tripData,
+                        roomId: parseInt(e.target.value),
+                      });
+                    }}
+                  />
+                </div>
+                <div className="form-input">
+                  <Input
+                    inputFor="leavingfrom"
+                    value={tripData.leavingFrom}
+                    placeholder="Leaving from"
+                    type="text"
+                    name="leavingFrom"
+                    errorClass="error"
+                    borderClass={`${
+                      leavingFromError.isValid ? "" : "errorBorder"
+                    }`}
+                    onChange={(e) => {
+                      setTripData({
+                        ...tripData,
+                        leavingFrom: e.target.value,
+                      });
+                    }}
+                    onBlur={(e) => {
+                      handleChange(e);
+                      if (e.target.value.length != 0) {
+                        setLeavingFromError({
+                          isValid: true,
+                          message: "",
+                        });
+                      }
+                    }}
+                    errorMessage={
+                      leavingFromError.isValid ? "" : leavingFromError.message
+                    }
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="create-input">
+                  <TextareaAutosize
+                    aria-label="minimum height"
+                    minRows={4}
+                    value={tripData.travelReason}
+                    className={`form-input ${
+                      reasonError.isValid ? "" : "errorBorder"
+                    }`}
+                    name="reason"
+                    placeholder="Travel reason"
+                    onBlur={(e) => {
+                      handleChange(e);
+                      if (e.target.value.length != 0) {
+                        setReasonError({
+                          isValid: true,
+                          message: "",
+                        });
+                      }
+                    }}
+                    onChange={(e) => {
+                      setTripData({
+                        ...tripData,
+                        travelReason: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+                <p
+                  style={{
+                    marginLeft: 14,
+                    display: reasonError.isValid ? "none" : "block",
+                  }}
+                  className="error"
+                >
+                  {reasonError.message}
+                </p>
+              </div>
+              {alert.message && (
+                <div style={{ paddingTop: 20 }}>
+                  <Alert
+                    variant="filled"
+                    severity={
+                      alert.status === 200 || alert.status === 201
+                        ? "success"
+                        : "error"
+                    }
+                    sx={{ width: "40%", marginLeft: "auto" }}
+                  >
+                    {alert.message}
+                  </Alert>
+                </div>
+              )}
+              <div className="create-input">
+                <KeyboardBackspaceIcon
+                  onClick={() => {
+                    setToggle(1);
+                  }}
+                />
+                <Button
+                  className="submit-btn"
+                  type="submit"
+                  variant={isLoading ? "outlined" : "contained"}
+                >
+                  {isLoading ? "Loading.." : "Create"}
+                </Button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </div>

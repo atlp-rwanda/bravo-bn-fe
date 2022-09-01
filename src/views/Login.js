@@ -12,7 +12,7 @@ import { Stack } from "@mui/material";
 import { alertActions } from "../redux/alertSlice";
 
 const alertStyle = {
-  position: 'fixed', zIndex: '2000',right: '3%', bottom: '30px',
+  position: 'fixed', zIndex: '2000', right: '3%', bottom: '30px',
   transition: 'all 300ms linear 0s'
 };
 
@@ -20,7 +20,7 @@ const alertStyle = {
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {warnMessage, infoMessage, errorMessage,successMessage }= useSelector(state=> state.alert);
+  const { warnMessage, infoMessage, errorMessage, successMessage } = useSelector(state => state.alert);
 
 
   const [email, setEmail] = useState();
@@ -93,11 +93,12 @@ export default function Login() {
         const { token } = res.data;
         const { user } = res.data.data;
         document.cookie = `jwt=${token}`;
+        localStorage.setItem("user", JSON.stringify(user))
         dispatch(logginUser(user));
         dispatch(
-          alertActions.success({message: `Hey ${user.username}, Welcome to Barefoot Nomad` })
-          );
-        setTimeout(()=>{
+          alertActions.success({ message: `Hey ${user.username}, Welcome to Barefoot Nomad` })
+        );
+        setTimeout(() => {
           dispatch(
             alertActions.success({message: null })
             );
@@ -111,22 +112,22 @@ export default function Login() {
       })
       .catch((err) => {
         dispatch(
-          alertActions.error({message:`${err.response.data.message}` })
+          alertActions.error({ message: `${err.response.data.message}` })
+        );
+        setTimeout(() => {
+          dispatch(
+            alertActions.error({ message: null })
           );
-          setTimeout(()=>{
-            dispatch(
-              alertActions.error({message: null })
-              );
-          },15000)
+        }, 15000)
       });
   };
   return (
     <div className="reg-area">
       <Stack sx={alertStyle} spacing={2} >
-        { warnMessage  && <WarnAlert /> }
-        { infoMessage  && <InfoAlert /> }
-        { successMessage && <SuccessAlert/> }
-        { errorMessage && <ErrorAlert /> }
+        {warnMessage && <WarnAlert />}
+        {infoMessage && <InfoAlert />}
+        {successMessage && <SuccessAlert />}
+        {errorMessage && <ErrorAlert />}
       </Stack>
       <div className="slice-a">
         <img src={svg} alt="Login svg" />
@@ -145,9 +146,8 @@ export default function Login() {
           <form action="" className="reg-form" onSubmit={submitHandle}>
             <div className="form-group">
               <div
-                className={`input-group ${
-                  emailError.isValid ? "" : "errorBoredr"
-                }`}
+                className={`input-group ${emailError.isValid ? "" : "errorBoredr"
+                  }`}
                 id="email"
               >
                 <input
@@ -166,9 +166,8 @@ export default function Login() {
             </div>
             <div className="form-group">
               <div
-                className={`input-group ${
-                  passwordError.isValid ? "" : "errorBoredr"
-                }`}
+                className={`input-group ${passwordError.isValid ? "" : "errorBoredr"
+                  }`}
               >
                 <input
                   type="password"
@@ -184,9 +183,8 @@ export default function Login() {
               </small>
             </div>
             <div className="forgot-p">
-            
               <p>
-              <Link to="/reset">Forgot password?</Link>
+                <Link to="/reset"> Forgot password?</Link>
               </p>
             </div>
             <div className="form-group">
@@ -196,20 +194,31 @@ export default function Login() {
             </div>
           </form>
           <div className="form-group">
-          <a className="input-group social-m" data-testid="google-button" href={process.env.GOOGLE_BACKEND_API_URL}>
-            <img src={googleIcon} alt="" />
-            <p>Sign in with Google</p>
-          </a>
-                        </div>
-                        <div className="form-group">
-          <a className="input-group social-m" data-testid="facebook-button" href={process.env.FACEBOOK_BACKEND_API_URL}>
-            <img src={facebookIcon} alt="" />
-            <p>Sign in with Facebook</p>
-          </a>
-                        </div>
+            <a
+              className="input-group social-m"
+              data-testid="google-button"
+              href={process.env.GOOGLE_BACKEND_API_URL}
+            >
+              <img src={googleIcon} alt="" />
+              <p>Sign in with Google</p>
+            </a>
+          </div>
+          <div className="form-group">
+            <a
+              className="input-group social-m"
+              data-testid="facebook-button"
+              href={process.env.FACEBOOK_BACKEND_API_URL}
+            >
+              <img src={facebookIcon} alt="" />
+              <p>Sign in with Facebook</p>
+            </a>
+          </div>
         </div>
         <p className="no-account">
-          Don't have an account yet? <Link to="/signup" className="signup-btn">Sign Up</Link>
+          Don't have an account yet?{" "}
+          <Link to="/signup" className="signup-btn">
+            Sign Up
+          </Link>
         </p>
       </div>
     </div>
