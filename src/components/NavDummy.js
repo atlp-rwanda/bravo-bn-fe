@@ -85,9 +85,6 @@ const Nav = () => {
     }
   };
 
-  console.log("array", settings[[2]][0]);
-
-
   return (
     <>
       <AppBar position="static" className="navbar">
