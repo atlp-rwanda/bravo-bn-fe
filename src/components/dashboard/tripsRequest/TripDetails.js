@@ -10,7 +10,7 @@ import axios from "axios";
 import { getRequestAsync } from "../../../redux/requests/requestSlice";
 import { Alert } from "@mui/material";
 import { useEffect } from "react";
-
+import ConfirmDialog from "./ConfirmDialog";
 
 const style = {
   position: 'absolute',
@@ -31,6 +31,7 @@ export default function Details({ open, setOpen, getData }) {
   const { data } = useSelector((state) => state.selectedRequest);
   const token = useSelector(state => state.auth.token);
   const [requester, setRequester] = React.useState("")
+  const [confirmOpen, setConfirmOpen] = React.useState(false);
   const [alert, setAlert] = React.useState({
     message: "",
     status: null,
@@ -86,11 +87,18 @@ export default function Details({ open, setOpen, getData }) {
     }
   };
 
-
   const handleClose = () => setOpen(false);
 
   return (
     <div style={{ position: "relative" }}>
+      <ConfirmDialog
+        title="Reject Trip Request?"
+        open={confirmOpen}
+        setOpen={setConfirmOpen}
+        onConfirm={rejectRequest}
+      >
+        Are you sure you want to Reject this Trip Request?
+      </ConfirmDialog>
       <Modal
         open={open}
         onClose={handleClose}
@@ -172,7 +180,7 @@ export default function Details({ open, setOpen, getData }) {
                 <Button
                   data-testid="btn1"
                   disabled={data.status != "pending" ? true : false}
-                  onClick={() => rejectRequest()}
+                  onClick={() => setConfirmOpen(true)}
                   className={data.status == "pending" ? "button primary" : "disabled"}
                 >
                   {loading ? <PreLoaderSmall /> : 'Reject'}
@@ -180,6 +188,7 @@ export default function Details({ open, setOpen, getData }) {
               </div>
             </div>
           </CardContent>
+
         </Box>
       </Modal>
     </div>
