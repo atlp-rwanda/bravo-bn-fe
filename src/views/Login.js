@@ -101,7 +101,11 @@ export default function Login() {
           dispatch(
             alertActions.success({message: null })
             );
-            navigate("/");
+            if(user.role === "travel admin"){
+              navigate("/dashboard");
+              }else{
+                navigate("/");
+              }
         },3000)             
       })
       .catch((err) => {
