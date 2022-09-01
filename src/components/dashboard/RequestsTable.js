@@ -10,7 +10,7 @@ import {
 } from "../../redux/requests/requestSlice";
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
-
+import { useNavigate } from 'react-router-dom';
 const columns = [
   { field: "leavingFrom", headerName: "Requester Address", width: 200 },
   { field: "travelReason", headerName: "Travel Reason", width: 200 },
@@ -25,6 +25,9 @@ export default function RequestsTable() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selected, setSelected] = useState(false);
   const token = useSelector(state => state.auth.token);
+  const navigate = useNavigate()
+
+  console.log(user, "user")
 
   const selectRow = (e) => {
     setSelected(!selected);
@@ -42,9 +45,14 @@ export default function RequestsTable() {
     })
   }
 
+  const user = useSelector((state) => state.login.user);
+
   useEffect(() => {
+    if (user.role == 'requester') {
+      navigate('/')
+    }
     getData()
-  }, []);
+  }, [user]);
   let requests = useSelector(showRequest);
   let trips = requests[0]
 

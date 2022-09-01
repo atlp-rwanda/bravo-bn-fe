@@ -19,10 +19,15 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-contents">
-      <div>
-        <span class="iconify" data-icon="bxs:grid-alt"></span>
-        <span>Dashboard</span>
-      </div>
+      <NavLink
+        to="/dashboard"
+        style={({ isActive }) => (isActive ? activeStyle : inActive)}
+      >
+        <div>
+          <span class="iconify" data-icon="bxs:grid-alt"></span>
+          <span>Dashboard</span>
+        </div>
+      </NavLink>
       <div>
         <span class="iconify" data-icon="clarity:users-solid"></span>
         <span>
