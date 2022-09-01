@@ -20,9 +20,12 @@ export const getRequestAsync = () => async (dispatch) => {
     const res = await axios.get(`${process.env.API_URL}/user/trip/get`, {
       headers: { Authorization: `Bearer ${jwtToken}` },
     });
-    dispatch(getRequests(res.data.data));
+    const unsortedData = res.data.data;
+    const sortedData = unsortedData.sort((a, b) => b.id - a.id);
+    dispatch(getRequests(sortedData));
   } catch (err) {
     console.log(err)
+
   }
 };
 export const searchRequestAsync = (searchTerm) => async (dispatch) => {

@@ -95,7 +95,7 @@ export default function EditPopupModal({ openThis, setOpenThis, setOpen }) {
 
   useEffect(() => {
     if (typeof (user.id) == 'number') {
-      setUserData({ firstName: user.firstName, lastName: user.lastName, email: user.email, username: user.username, phoneNumber: user.phoneNumber, lineManager: user.lineManger, preferredLanguage: user.preferredLanguage, preferredCurrency: user.preferredCurrency, gender: user.gender, department: user.department, image: user.image })
+      setUserData({ firstName: user.firstName, lastName: user.lastName, email: user.email, username: user.username, phoneNumber: user.phoneNumber, lineManager: user.lineManager, preferredLanguage: user.preferredLanguage, preferredCurrency: user.preferredCurrency, gender: user.gender, department: user.department, image: user.image })
     }
   }, [user.id])
 

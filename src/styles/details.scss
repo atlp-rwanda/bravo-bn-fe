@@ -40,3 +40,14 @@ $medium: 750px;
         }
     }
 }
+$medium: 750px;
+@media (max-width: $medium) {
+    .popupContainer {
+        .ItemsContainer {
+            width: 80%;
+            .row {
+                flex-direction: column;
+            }
+        }
+    }
+}

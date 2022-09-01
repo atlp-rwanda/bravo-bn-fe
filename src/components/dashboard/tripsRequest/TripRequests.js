@@ -12,6 +12,7 @@ import { selectRequest } from "../../../redux/requests/selectedRequestSlice";
 import DetailsPopUp from "./TripDetails";
 import axios from "axios";
 
+
 const columns = [
   { field: "leavingFrom", headerName: "Requester Address", width: 200 },
   { field: "travelReason", headerName: "Travel Reason", width: 400 },
@@ -19,7 +20,6 @@ const columns = [
   { field: "returnDate", headerName: "returnDate", width: 160 },
   { field: "tripType", headerName: "type", width: 140 },
   { field: "status", headerName: "Status", width: 140 },
-  { field: "goingTo", headerName: "Destination", width: 220 },
 ];
 
 export default function TripRequests() {
@@ -48,6 +48,7 @@ export default function TripRequests() {
     getData()
   }, []);
   let requests = useSelector(showRequest);
+
 
   let trips = requests[0];
 
@@ -116,6 +117,6 @@ export default function TripRequests() {
           }}
         />
       </div>
-    </Fragment>
+    </Fragment >
   );
 }

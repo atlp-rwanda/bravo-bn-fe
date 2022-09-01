@@ -1,8 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import { NavLink } from "react-router-dom";
 
+
 const Sidebar = () => {
+  const user = useSelector((state) => state.login.user);
   let activeStyle = {
     textDecoration: "none",
     color: "white",
@@ -19,10 +22,13 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-contents">
-      <div>
-        <span class="iconify" data-icon="bxs:grid-alt"></span>
-        <span>Dashboard</span>
-      </div>
+      <NavLink
+        to="/dashboard">
+        <div>
+          <span class="iconify" data-icon="bxs:grid-alt"></span>
+          <span>Dashboard</span>
+        </div>
+      </NavLink>
       <div>
         <span class="iconify" data-icon="clarity:users-solid"></span>
         <span>
@@ -40,7 +46,22 @@ const Sidebar = () => {
         <span class="iconify" data-icon="entypo:location"></span>
         <span>Locations</span>
       </div>
+      {user.role == "manager" && (
+        <NavLink
+          to="/dashboard/trips"
+          style={({ isActive }) => (isActive ? activeStyle : inActive)}
+        >
+          <div>
+            <span>
+              <i class="fa-solid fa-plane"></i>
+            </span>
+            <span>Trip requests</span>
+          </div>
+        </NavLink>
+      )}
+
     </div>
+
   );
 };
 

@@ -10,6 +10,7 @@ import axios from "axios";
 import { getRequestAsync } from "../../../redux/requests/requestSlice";
 import { Alert } from "@mui/material";
 import { useEffect } from "react";
+import ConfirmDialog from "./ConfirmDialog";
 
 
 const style = {
@@ -28,13 +29,14 @@ const style = {
 export default function Details({ open, setOpen, getData }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
+  const [confirmOpen, setConfirmOpen] = React.useState(false);
   const { data } = useSelector((state) => state.selectedRequest);
-  const token = useSelector(state => state.auth.token);
   const [requester, setRequester] = React.useState("")
   const [alert, setAlert] = React.useState({
     message: "",
     status: null,
   });
+  const token = useSelector(state => state.auth.token);
 
   const getUser = () => {
     axios.get(`${process.env.API_URL}/user/${data.requesterId}`, {
@@ -86,11 +88,19 @@ export default function Details({ open, setOpen, getData }) {
     }
   };
 
-
   const handleClose = () => setOpen(false);
 
   return (
     <div style={{ position: "relative" }}>
+      <ConfirmDialog
+        title="Reject Trip Request?"
+        open={confirmOpen}
+        setOpen={setConfirmOpen}
+        onConfirm={rejectRequest}
+      >
+        Are you sure you want to Reject this Trip Request?
+      </ConfirmDialog>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -172,7 +182,7 @@ export default function Details({ open, setOpen, getData }) {
                 <Button
                   data-testid="btn1"
                   disabled={data.status != "pending" ? true : false}
-                  onClick={() => rejectRequest()}
+                  onClick={() => setConfirmOpen(true)}
                   className={data.status == "pending" ? "button primary" : "disabled"}
                 >
                   {loading ? <PreLoaderSmall /> : 'Reject'}

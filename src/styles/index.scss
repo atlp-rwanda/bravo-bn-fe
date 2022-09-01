@@ -15,6 +15,9 @@ body {
   background-color: $primaryColor;
   margin: 0;
   padding: 0;
+  a {
+    text-decoration: none;
+  }
   @import "./buttonDisable.scss";
   @import "./landingPage.scss";
   @import "./navbar.scss";

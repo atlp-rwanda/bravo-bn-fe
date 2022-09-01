@@ -12,13 +12,10 @@ import Booking from '../views/Book';
 import Home from '../views/Home';
 import CreateRequest from '../views/CreateRequest';
 import RequestsTable from '../components/dashboard/RequestsTable';
-import Trips from '../views/Trips'
-
-
+import Trips from '../views/Trips';
 
 const routes = () => {
   return (
-
     <Routes>
       <Route element={<PrivateRoutes />}>
         <Route exact path="/" element={<Home />} />
