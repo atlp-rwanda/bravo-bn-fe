@@ -12,6 +12,7 @@ import Booking from '../views/Book';
 import Home from '../views/Home';
 import CreateRequest from '../views/CreateRequest';
 import RequestsTable from '../components/dashboard/RequestsTable';
+import User from '../views/Users';
 
 
 const routes= () => {
@@ -23,7 +24,8 @@ const routes= () => {
         <Route exact path="/about" element={<About/>}/>
         <Route exact path="/trip-requests" element={<Booking/>}/>
         <Route exact path="/create-request" element={<CreateRequest/>}/>
-        <Route exact path="/dashboard" element={<Dashboard/>}/>        
+        <Route exact path="/dashboard" element={<Dashboard/>}/>       
+        <Route exact path="/dashboard/users" element={<User />} /> 
       </Route >
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>

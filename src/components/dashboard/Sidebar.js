@@ -22,13 +22,17 @@ const Sidebar = () => {
         <span class="iconify" data-icon="bxs:grid-alt"></span>
         <span>Dashboard</span>
       </div>
-      <div>
-        <span class="iconify" data-icon="clarity:users-solid"></span>
-        <span>
-          <a />
-          Users
-        </span>
-      </div>
+      <NavLink
+        to="/dashboard/users"
+        style={({ isActive }) => (isActive ? activeStyle : inActive)}
+      >
+        <div className="users">
+          <span>
+            <i class="iconify" data-icon="clarity:users-solid"></i>
+          </span>
+          <span> Users </span>
+        </div>
+      </NavLink>
       <div>
         <span>
           <i class="fa-solid fa-hotel"></i>
