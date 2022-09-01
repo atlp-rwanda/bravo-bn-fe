@@ -42,11 +42,12 @@ export default function RequestsTable() {
     })
   }
 
-  useEffect(() => {
+  useEffect(() =>{
     getData()
   }, []);
   let requests = useSelector(showRequest);
   let trips = requests[0]
+
 
   return (
     <div
