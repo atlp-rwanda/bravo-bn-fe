@@ -4,6 +4,7 @@ import authSlice from "./auth/authSlice";
 import loginReducer from "./auth/loginSlice";
 import requestSlice from "./requests/requestSlice";
 import tripsSlice from "./tripsSlice";
+import selectedRequestSlice from "./requests/selectedRequestSlice";
 
 export const reducers = {
   auth: authSlice.reducer,
@@ -11,12 +12,14 @@ export const reducers = {
   login: loginReducer,
   request: requestSlice,
   trips: tripsSlice.reducer,
-}
+  selectedRequest: selectedRequestSlice,
+};
 
- const store = configureStore({
+
+const store = configureStore({
   reducer: {
     ...reducers,
-    devTools: process.env.NODE_ENV !== 'production',
+    devTools: process.env.NODE_ENV !== "production",
   },
 });
 

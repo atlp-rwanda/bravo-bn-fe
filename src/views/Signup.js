@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert2';
-import { Input,Select } from "../components/Input";
+import { Input,Select} from "../components/Input";
 
 const Signup = () =>{
   const navigate = useNavigate('');

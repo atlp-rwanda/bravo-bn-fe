@@ -179,7 +179,9 @@ export default function Login() {
               </small>
             </div>
             <div className="forgot-p">
-              <p>Forgot password?</p>
+              <p>
+                <Link to="/reset"> Forgot password?</Link>
+              </p>
             </div>
             <div className="form-group">
               <div className="input-group button">
@@ -188,20 +190,31 @@ export default function Login() {
             </div>
           </form>
           <div className="form-group">
-          <a className="input-group social-m" data-testid="google-button" href={process.env.GOOGLE_BACKEND_API_URL}>
-            <img src={googleIcon} alt="" />
-            <p>Sign in with Google</p>
-          </a>
-                        </div>
-                        <div className="form-group">
-          <a className="input-group social-m" data-testid="facebook-button" href={process.env.FACEBOOK_BACKEND_API_URL}>
-            <img src={facebookIcon} alt="" />
-            <p>Sign in with Facebook</p>
-          </a>
-                        </div>
+            <a
+              className="input-group social-m"
+              data-testid="google-button"
+              href={process.env.GOOGLE_BACKEND_API_URL}
+            >
+              <img src={googleIcon} alt="" />
+              <p>Sign in with Google</p>
+            </a>
+          </div>
+          <div className="form-group">
+            <a
+              className="input-group social-m"
+              data-testid="facebook-button"
+              href={process.env.FACEBOOK_BACKEND_API_URL}
+            >
+              <img src={facebookIcon} alt="" />
+              <p>Sign in with Facebook</p>
+            </a>
+          </div>
         </div>
         <p className="no-account">
-          Don't have an account yet? <Link to="/signup" className="signup-btn">Sign Up</Link>
+          Don't have an account yet?{" "}
+          <Link to="/signup" className="signup-btn">
+            Sign Up
+          </Link>
         </p>
       </div>
     </div>
