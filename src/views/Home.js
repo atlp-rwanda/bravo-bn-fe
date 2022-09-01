@@ -91,7 +91,25 @@ export default function Home() {
       }
     }
 
+    
+    const handleMostTravelled  = async () => {
+      
+      try {
 
+        const res = await axios.get(`${process.env.API_URL}/user/trip/most-travelled-destinations`, {
+          headers: { Authorization: `Bearer ${jwtToken}` },
+        });
+        // console.log(res);
+        // if (res) {
+        //   navigate("/");
+  
+        // }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  
     return (
         <>
         <Container maxWidth="xl"  className="book-container" >
@@ -130,7 +148,7 @@ export default function Home() {
         <MenuItem value="">
           <em>All</em>
         </MenuItem>
-        <MenuItem value={10}>Most traveled</MenuItem>
+        <MenuItem value={10}  onClick={handleMostTravelled}>Most traveled</MenuItem>
         <MenuItem value={20}>Most reviewed</MenuItem>
       </Select>
     </FormControl>

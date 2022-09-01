@@ -1,0 +1,58 @@
+.profileContainer {
+    .header {
+        padding: 1rem;
+        color: $secondaryColor;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .modelContainer {
+        padding: 1rem;
+    }
+    .row {
+        display: flex;
+        .down {
+            display: none;
+        }
+    }
+    .btn {
+        justify-content: flex-end;
+        padding: 10px;
+        Button {
+            height: 2.5rem;
+            margin-left: 5px;
+        }
+    }
+
+    .data {
+        padding: 0.5rem 2rem;
+    }
+    .title {
+        font-weight: bold;
+        min-width: 8rem;
+        padding-right: 20px;
+        color: $secondaryColor !important;
+    }
+    .inputs-group {
+        display: flex;
+        margin-top: 2rem;
+        Input {
+            width: 18rem;
+            height: 2rem;
+        }
+    }
+}
+$medium: 750px;
+@media (max-width: $medium) {
+    .profileContainer {
+        .ItemsContainer {
+            width: 80%;
+            .row {
+                flex-direction: column;
+                justify-content: space-between;
+                .down {
+                    display: block;
+                }
+            }
+        }
+    }
+}

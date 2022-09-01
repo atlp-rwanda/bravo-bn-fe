@@ -18,6 +18,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import PopupModal from './Profile/ViewProfileModel';
 
 const Nav = () => {
   const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
@@ -26,7 +27,8 @@ const Nav = () => {
   const [invisible, setInvisible] = React.useState(false);
   const [Logout, setLogout] = React.useState("");
   const user = useSelector((state) => state.login.user);
-  const navigate=useNavigate();
+  const [open, setOpen] = React.useState(false)
+  const navigate = useNavigate();
   const pages = [
     ["Home", "/"],
     [
@@ -37,7 +39,6 @@ const Nav = () => {
   ];
   const settings = [
     ["Profile", "/profile"],
-    ["Account", "/account"],
     ["Logout", ""],
   ];
 
@@ -59,12 +60,12 @@ const Nav = () => {
     var cookies = document.cookie.split(";");
 
     for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
-}
+  }
 
   const handleLogout = async () => {
     try {
@@ -76,7 +77,7 @@ const Nav = () => {
       if (res) {
         deleteAllCookies();
         navigate("/login");
-        
+
       }
     } catch (error) {
       console.log(error);
@@ -85,6 +86,7 @@ const Nav = () => {
 
   return (
     <>
+      <PopupModal open={open} setOpen={setOpen} />
       <AppBar position="static" className="navbar">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -188,13 +190,9 @@ const Nav = () => {
               >
                 <NotificationsIcon className="notification-icon" />
               </Badge>
-              {/* <FormControlLabel
-          sx={{ color: 'text.primary' }}
-          control={<Switch checked={!invisible} onChange={handleBadgeVisibility} />}
-        /> */}
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt={`${user.username}`} src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -221,6 +219,7 @@ const Nav = () => {
                         if (setting[0] === "Logout") {
                           handleLogout();
                         }
+                        else if (setting[0] == "Profile") { setOpen(true) }
                       }}
                     >
                       {setting[0]}
