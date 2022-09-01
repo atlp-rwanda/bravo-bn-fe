@@ -40,17 +40,6 @@ const Sidebar = () => {
         <span class="iconify" data-icon="entypo:location"></span>
         <span>Locations</span>
       </div>
-      <NavLink
-        to="/dashboard/trips"
-        style={({ isActive }) => (isActive ? activeStyle : inActive)}
-      >
-        <div className="trips">
-          <span>
-            <i class="fa-solid fa-plane"></i>
-          </span>
-          <span>Trip requests</span>
-        </div>
-      </NavLink>
     </div>
   );
 };

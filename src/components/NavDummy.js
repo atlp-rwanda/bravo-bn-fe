@@ -33,9 +33,7 @@ const Nav = () => {
       `${user.role == "requester" ? "Trip requests" : "Dashboard"}`,
       `${user.role == "requester" ? "/trip-requests" : "/dashboard"}`,
     ],
-    ["Hotels", "/hotels"],
     ["About Us", "/about"],
-    ["Contact Us", "/contact"],
   ];
   const settings = [
     ["Profile", "/profile"],
