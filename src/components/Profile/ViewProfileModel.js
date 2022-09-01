@@ -30,82 +30,88 @@ export default function PopupModal({ open, setOpen }) {
 
   return (
     <div>
-      <EditPopupModal openThis={openThis} setOpenThis={setOpenThis} setOpen={setOpen} />
-      <div style={{ position: "relative" }}>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          className="profileContainer"
-        >
-          <Box sx={style} className="ItemsContainer">
-            <CardContent sx={{ background: '#046CC6', padding: '10px 20px' }}>
-              <Typography id="modal-modal-title" sx={{ color: '#fff', fontSize: '1rem' }} variant="h5" >
-                Profile
-              </Typography>
-            </CardContent>
-            <CardContent sx={{ padding: '20px 20px 0 20px' }}>
-              <div className="row">
-                <div>
-                  <img
-                    src={user.image ? `${user.image}` : userImage}
-                    alt="" width={120}
-                  />
-                </div>
-                <div>
-                  <div className="row data">
-                    <div className="title">Firstname</div><div>{user.firstName}</div>
-                  </div>
-                  <div className="row data">
-                    <div className="title">Lastname</div><div>{user.lastName}</div>
-                  </div>
-                  <div className="row data">
-                    <div className="title">Username</div><div>{user.username}</div>
-                  </div>
-                  <div className="row data">
-                    <div className="title">Email</div><div>{user.email}</div>
-                  </div>
-                  <div className="row data">
-                    <div className="title">Gender</div><div>{user.gender}</div>
-                  </div>
-                  <div className="row data">
-                    <div className="title">Phone Number</div><div>{user.phoneNumber}</div>
-                  </div>
-                  <div className="row data">
-                    <div className="title">Role</div><div>{user.role}</div>
-                  </div>
-                  <div className="row data">
-                    <div className="title">Language</div><div>{user.preferredLanguage}</div>
-                  </div>
-                  <div className="row data">
-                    <div className="title">Currency</div><div>{user.preferredCurrency}</div>
-                  </div>
-                  <div className="row data">
-                    <div className="title">Department</div><div>{user.department}</div>
-                  </div>
-                  <div className="row data">
-                    <div className="title">Line Manager</div><div>{user.lineManager}</div>
-                  </div>
+      {
+        user && (
+          <div>
+            <EditPopupModal openThis={openThis} setOpenThis={setOpenThis} setOpen={setOpen} />
+            <div style={{ position: "relative" }}>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                className="profileContainer"
+              >
+                <Box sx={style} className="ItemsContainer">
+                  <CardContent sx={{ background: '#046CC6', padding: '10px 20px' }}>
+                    <Typography id="modal-modal-title" sx={{ color: '#fff', fontSize: '1rem' }} variant="h5" >
+                      Profile
+                    </Typography>
+                  </CardContent>
+                  <CardContent sx={{ padding: '20px 20px 0 20px' }}>
+                    <div className="row">
+                      <div>
+                        <img
+                          src={user.image ? `${user.image}` : userImage}
+                          alt="" width={120}
+                        />
+                      </div>
+                      <div>
+                        <div className="row data">
+                          <div className="title">Firstname</div><div>{user.firstName}</div>
+                        </div>
+                        <div className="row data">
+                          <div className="title">Lastname</div><div>{user.lastName}</div>
+                        </div>
+                        <div className="row data">
+                          <div className="title">Username</div><div>{user.username}</div>
+                        </div>
+                        <div className="row data">
+                          <div className="title">Email</div><div>{user.email}</div>
+                        </div>
+                        <div className="row data">
+                          <div className="title">Gender</div><div>{user.gender}</div>
+                        </div>
+                        <div className="row data">
+                          <div className="title">Phone Number</div><div>{user.phoneNumber}</div>
+                        </div>
+                        <div className="row data">
+                          <div className="title">Role</div><div>{user.role}</div>
+                        </div>
+                        <div className="row data">
+                          <div className="title">Language</div><div>{user.preferredLanguage}</div>
+                        </div>
+                        <div className="row data">
+                          <div className="title">Currency</div><div>{user.preferredCurrency}</div>
+                        </div>
+                        <div className="row data">
+                          <div className="title">Department</div><div>{user.department}</div>
+                        </div>
+                        <div className="row data">
+                          <div className="title">Line Manager</div><div>{user.lineManager}</div>
+                        </div>
 
 
-                </div>
-              </div>
-            </CardContent>
-            <CardContent sx={{ margin: '20px 0' }}>
-              <Button variant="outlined" size="medium" onClick={() => handleClose()} sx={{ ml: 2, float: 'right', textTransform: 'none', lineHeight: 'normal' }}>
-                Close
-              </Button>
-              <Button variant="contained" size="medium" sx={{ float: 'right', textTransform: 'none', lineHeight: 'normal' }} onClick={() => {
-                handleClose()
-                setOpenThis(true)
-              }}>
-                {/* {loading ? <PreLoaderSmall/> : 'Update'} */} Update
-              </Button>
-            </CardContent>
-          </Box>
-        </Modal>
-      </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                  <CardContent sx={{ margin: '20px 0' }}>
+                    <Button variant="outlined" size="medium" onClick={() => handleClose()} sx={{ ml: 2, float: 'right', textTransform: 'none', lineHeight: 'normal' }}>
+                      Close
+                    </Button>
+                    <Button variant="contained" size="medium" sx={{ float: 'right', textTransform: 'none', lineHeight: 'normal' }} onClick={() => {
+                      handleClose()
+                      setOpenThis(true)
+                    }}>
+                      {/* {loading ? <PreLoaderSmall/> : 'Update'} */} Update
+                    </Button>
+                  </CardContent>
+                </Box>
+              </Modal>
+            </div>
+          </div>
+        )
+      }
     </div>
   );
 }
