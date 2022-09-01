@@ -98,7 +98,7 @@ export default function Home() {
               <Card sx={{height: "70vh"}}>
     <div style={{ position: "relative" }}>
       <CardMedia   component="img" sx={{height:'70vh'}} image={background} title="Pancakes" alt="Pancakes"/> 
-      <div style={{position: "absolute", textAlign:'center', color: "white",top: '25%',left: "50%",transform: "translateX(-50%)",}}> 
+      <div style={{position: "absolute", textAlign:'center', color: "white",top: '25%',width:'100%',left: "50%",transform: "translateX(-50%)",}}> 
       <Typography sx={{fontSize:'2.5em', letterSpacing: '.3rem',fontWeight:'900'}}>Explore Beautiful Places</Typography>  
       <Typography sx={{fontSize:'1em', maxWidth:'500px', margin:'auto'}}>We always make our customers happy by providing as many choice as possible</Typography>  
       <Link to='/create-request' style={{padding:'10px 15px', marginTop:'40px',textDecoration:'none', color:'white', borderRadius:'5px'}} variant="contained" className='button'>Book Now</Link>
