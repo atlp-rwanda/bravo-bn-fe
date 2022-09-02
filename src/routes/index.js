@@ -15,6 +15,9 @@ import RequestsTable from '../components/dashboard/RequestsTable';
 import Map from '../../src/components/Map';
 import Accomodation from "../views/Accomodation";
 import Trips from '../views/Trips';
+import NotFound from '../views/NotFound';
+
+
 
 const routes = () => {
   return (
@@ -26,6 +29,7 @@ const routes = () => {
         <Route exact path="/create-request" element={<CreateRequest />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/dashboard/trips" element={<Trips />} />
+        <Route path='*' exact={true} element={<NotFound />} />
       </Route >
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>
@@ -34,7 +38,7 @@ const routes = () => {
       <Route path='/modal' element={<PopupModal/>}/>
       <Route path='/map' element={<Map />}/>
       <Route  exact path="accomodation" element={<Accomodation />}/>
-
+      <Route path='*' exact={true} element={<NotFound />} />
     </Routes>
   );
 }

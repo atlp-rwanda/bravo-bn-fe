@@ -6,7 +6,7 @@ import svg from "../assets/mobile_login.svg";
 import googleIcon from "../assets/google_icon.svg";
 import facebookIcon from "../assets/facebook_icon.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { ErrorAlert, InfoAlert, SuccessAlert, WarnAlert } from '../components/Alerts';
 import { Stack } from "@mui/material";
 import { alertActions } from "../redux/alertSlice";
@@ -22,7 +22,6 @@ export default function Login() {
   const navigate = useNavigate();
   const { warnMessage, infoMessage, errorMessage, successMessage } = useSelector(state => state.alert);
 
-
   const [email, setEmail] = useState();
   const [emailError, setEmailError] = useState({
     isValid: true,
@@ -32,6 +31,20 @@ export default function Login() {
     isValid: true,
     message: "",
   });
+
+  function get(n) {
+    var half = location.search.split(n + '=')[1];
+    return half !== undefined ? decodeURIComponent(half.split('&')[0]) : null;
+}
+    let token = get('token');
+    token ? document.cookie = `jwt=${token}` :'';
+    let jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
+
+  useEffect(()=>{
+    if(jwtToken){    
+      return  navigate('/')
+    }
+  },[])
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -127,7 +140,7 @@ export default function Login() {
         {warnMessage && <WarnAlert />}
         {infoMessage && <InfoAlert />}
         {successMessage && <SuccessAlert />}
-        {errorMessage && <ErrorAlert />}
+        {errorMessage && errorMessage != 'none' &&  <ErrorAlert />}
       </Stack>
       <div className="slice-a">
         <img src={svg} alt="Login svg" />

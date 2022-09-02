@@ -15,10 +15,11 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PopupModal from './Profile/ViewProfileModel';
+import { authActions } from "../redux/auth/authSlice";
 
 const Nav = () => {
   const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
@@ -29,6 +30,7 @@ const Nav = () => {
   const user = useSelector((state) => state.login.user);
   const [open, setOpen] = React.useState(false)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const pages = [
     ["Home", "/"],
     [
@@ -74,9 +76,12 @@ const Nav = () => {
         headers: { Authorization: `Bearer ${jwtToken}` },
       });
       if (res) {
+        
+    dispatch(authActions.login({ token: null }));
         deleteAllCookies();
         localStorage.clear()
         navigate("/login");
+
       }
     } catch (error) {
       console.log(error);

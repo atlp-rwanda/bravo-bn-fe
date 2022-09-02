@@ -166,8 +166,6 @@ export default function Booking() {
 
     const getAllLocation = (locationId,index)=>{
       if(getLocation){
-      if(!trips[index]['location']){
-
         axios.get(`${process.env.API_URL}/location/${locationId}`, {
           headers: { Authorization: `Bearer ${token}` },
         }).then((res)=>{
@@ -175,7 +173,6 @@ export default function Booking() {
           dispatch(tripsActions.fetchLocation({getLocation:false}));
         }).catch(err=> console.log(err))
       }
-    }
   }
   const getAllComments = (tripId,index)=>{
     if(getComments){
