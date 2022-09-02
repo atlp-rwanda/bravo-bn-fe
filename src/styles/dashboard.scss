@@ -1,14 +1,14 @@
-.dashboard-container{
+.dashboard-container {
     min-height: 100vh;
     width: 100vw;
     position: relative;
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
         width: auto;
         height: auto;
     }
 }
 
-.popup-container{
+.popup-container {
     position: absolute;
     top: 0;
     left: 0;

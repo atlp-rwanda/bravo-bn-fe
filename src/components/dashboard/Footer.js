@@ -2,6 +2,7 @@ import React from "react";
 import "../../views/Home";
 import { Link } from "react-router-dom";
 import barefootLogo from "../../assets/Barefoot. Nomad.svg";
+
 const Footer = () => {
   return (
     <div className="footer-content">
@@ -37,3 +38,4 @@ const Footer = () => {
   );
 };
 export default Footer;
+

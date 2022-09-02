@@ -3,15 +3,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getRequestAsync,
   showRequest,
-  searchRequestAsync,
   getRequests
 } from "../../../redux/requests/requestSlice";
 import { selectRequest } from "../../../redux/requests/selectedRequestSlice";
 import DetailsPopUp from "./TripDetails";
 import axios from "axios";
-
 
 const columns = [
   { field: "leavingFrom", headerName: "Requester Address", width: 200 },
@@ -19,14 +16,13 @@ const columns = [
   { field: "travelDate", headerName: "travelDate", width: 160 },
   { field: "returnDate", headerName: "returnDate", width: 160 },
   { field: "tripType", headerName: "type", width: 140 },
-  { field: "status", headerName: "Status", width: 140 },
+  { field: "status", headerName: "Status", width: 140 }
 ];
 
 export default function TripRequests() {
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState(false);
   const token = useSelector(state => state.auth.token);
-
 
   const dispatch = useDispatch();
 
@@ -44,11 +40,24 @@ export default function TripRequests() {
 
   }
 
+  const searchRequestAsync = async (searchTerm) => {
+    try {
+      axios.get(
+        `${process.env.API_URL}/search/${searchTerm}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      ).then(res => {
+
+        dispatch(getRequests(res.data.data.tripss.rows));
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  };
+
   useEffect(() => {
     getData()
   }, []);
   let requests = useSelector(showRequest);
-
 
   let trips = requests[0];
 
@@ -72,7 +81,7 @@ export default function TripRequests() {
           onChange={(e) => {
             e.preventDefault();
             setSearchTerm(e.target.value);
-            dispatch(searchRequestAsync(searchTerm));
+            searchRequestAsync(searchTerm);
           }}
           variant="outlined"
           placeholder="Search..."

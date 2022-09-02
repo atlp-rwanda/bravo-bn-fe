@@ -29,14 +29,18 @@ const style = {
 export default function Details({ open, setOpen, getData }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
+  const [load, setLoad] = React.useState(false);
   const [confirmOpen, setConfirmOpen] = React.useState(false);
   const { data } = useSelector((state) => state.selectedRequest);
   const [requester, setRequester] = React.useState("")
+  const token = useSelector(state => state.auth.token);
+  const [question, setQuestion] = React.useState("")
+  const [action, setAction] = React.useState("")
   const [alert, setAlert] = React.useState({
     message: "",
     status: null,
   });
-  const token = useSelector(state => state.auth.token);
+
 
   const getUser = () => {
     axios.get(`${process.env.API_URL}/user/${data.requesterId}`, {
@@ -55,6 +59,8 @@ export default function Details({ open, setOpen, getData }) {
     }
   })
 
+
+
   const rejectRequest = async () => {
     setLoading(true)
     try {
@@ -64,16 +70,51 @@ export default function Details({ open, setOpen, getData }) {
       };
 
       let reqOptions = {
-        url: `${process.env.API_URL}/user/trip/reject/${data.id}`,
+        url: `${process.env.API_URL}/user/trip/approve/${data.id}`,
+        method: "PUT",
+        headers: headersList,
+      };
+
+      let response = await axios.request(reqOptions);
+      setLoading(false)
+      setAlert({
+        message: "Trip Request Reject successfully",
+        status: response.status,
+      });
+      setTimeout(() => {
+        setAlert({ message: "" });
+      }, 1500);
+      setTimeout(() => {
+        handleClose(), getData()
+      }, 2200);
+
+    } catch (err) {
+      dispatch(
+        alertActions.error({ message: err.message })
+      );
+      console.log(err);
+    }
+  };
+
+  const approveRequest = async () => {
+    setLoad(true)
+    try {
+      let headersList = {
+        Accept: "*/*",
+        Authorization: `Bearer ${token}`,
+      };
+
+      let reqOptions = {
+        url: `${process.env.API_URL}/user/trip/approve/${data.id}`,
         method: "PUT",
         headers: headersList,
       };
 
       let response = await axios.request(reqOptions);
 
-      setLoading(false)
+      setLoad(false)
       setAlert({
-        message: "Trip Request Reject successfully",
+        message: "Trip Request approved successfully",
         status: response.status,
       });
       setTimeout(() => {
@@ -88,19 +129,19 @@ export default function Details({ open, setOpen, getData }) {
     }
   };
 
+
   const handleClose = () => setOpen(false);
 
   return (
     <div style={{ position: "relative" }}>
       <ConfirmDialog
-        title="Reject Trip Request?"
+        title="Trip Request"
         open={confirmOpen}
         setOpen={setConfirmOpen}
-        onConfirm={rejectRequest}
+        onConfirm={action == "reject" ? rejectRequest : approveRequest}
       >
-        Are you sure you want to Reject this Trip Request?
+        {question}
       </ConfirmDialog>
-
       <Modal
         open={open}
         onClose={handleClose}
@@ -176,13 +217,22 @@ export default function Details({ open, setOpen, getData }) {
                   data-testid="btn1"
                   disabled={data.status != "pending" ? true : false}
                   className={data.status == "pending" ? "button primary" : "disabled"}
+                  onClick={() => {
+                    setQuestion("Are you sure you want to approve this request?")
+                    setAction("approve")
+                    setConfirmOpen(true)
+                  }}
                 >
-                  Approve
+                  {load ? <PreLoaderSmall /> : 'Approve'}
                 </Button>
                 <Button
                   data-testid="btn1"
                   disabled={data.status != "pending" ? true : false}
-                  onClick={() => setConfirmOpen(true)}
+                  onClick={() => {
+                    setQuestion("Are you sure you want to reject this request?")
+                    setAction("reject")
+                    setConfirmOpen(true)
+                  }}
                   className={data.status == "pending" ? "button primary" : "disabled"}
                 >
                   {loading ? <PreLoaderSmall /> : 'Reject'}
@@ -195,3 +245,4 @@ export default function Details({ open, setOpen, getData }) {
     </div>
   );
 }
+
