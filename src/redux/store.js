@@ -7,6 +7,7 @@ import requestSlice from "./requests/requestSlice";
 import tripsSlice from "./tripsSlice";
 import accommodationsSlice from "./accommodationsSlice";
 import selectedRequestSlice from "./requests/selectedRequestSlice";
+import accomodationReducer from "./requests/accomodationSlice";
 
 
 export const reducers = {
@@ -18,6 +19,7 @@ export const reducers = {
   trips: tripsSlice.reducer,
   map: mapSlice.reducer,
   selectedRequest: selectedRequestSlice,
+  facility: accomodationReducer,
 };
 
 

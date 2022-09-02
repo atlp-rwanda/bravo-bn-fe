@@ -29,23 +29,29 @@ const Sidebar = () => {
           <span>Dashboard</span>
         </div>
       </NavLink>
-      <div>
+      {user.role ==="super admin" && (
+         <div>
         <span class="iconify" data-icon="clarity:users-solid"></span>
         <span>
           <a />
           Users
         </span>
-      </div>
-      <div>
-        <span>
-          <i class="fa-solid fa-hotel"></i>
-        </span>
-        <span>Hotels</span>
-      </div>
-      <div>
-        <span class="iconify" data-icon="entypo:location"></span>
-        <span>Locations</span>
-      </div>
+      </div>)}     
+       {user.role ==="travel admin" && (
+      <NavLink
+        to="/facilitytable"
+        style={({ isActive }) => (isActive ? activeStyle : inActive)}
+      >
+        <div className="trips">
+          <span>
+            <i class="fa-solid fa-plane"></i>
+          </span>
+          <span> View Accomodation</span>
+        </div>
+      </NavLink>)}
+
+
+      {user.role ==="travel admin" && (
       <NavLink
         to="/accomodation"
         style={({ isActive }) => (isActive ? activeStyle : inActive)}
@@ -56,7 +62,7 @@ const Sidebar = () => {
           </span>
           <span>Accomodation</span>
         </div>
-      </NavLink>
+      </NavLink>)}
       {user.role == "manager" && (
         <NavLink
           to="/dashboard/trips"

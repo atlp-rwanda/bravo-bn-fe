@@ -18,7 +18,6 @@ const Accomodation = () => {
     facility: "",
     description: "",
     location: "",
-    image: "",
     highlight: "",
     amenities: "",
     geoLocation: "",
@@ -29,6 +28,7 @@ const Accomodation = () => {
   const [currentLocation, setCurrentLocation] = useState([]);
   const [position, setPosition] = useState(null);
   const [locations, setLocations] = useState();
+  const [image, setImage] = useState(null);
   const navigate =useNavigate()
   const [alert, setAlert] = useState({
     message: "",
@@ -74,6 +74,16 @@ const Accomodation = () => {
 
     latlng.push(coordinates[0][1], coordinates[1][1]);
   }
+console.log("location",latlng);
+  const formData = new FormData()
+  formData.append('name', formValues.facility);
+  formData.append('description', formValues.description);
+  formData.append('locationId', formValues.location);
+  formData.append('image', image);
+  formData.append('geoLocation', latlng.toString());
+  formData.append('highlight', formValues.highlight);
+  formData.append('amenitiesList', `[${formValues.amenities.split(",").map(data=>`"${data}"`)}]`);
+
 
 
 
@@ -91,19 +101,8 @@ const Accomodation = () => {
       errors.amenities = " Amenities is required";
     }
     else if (values.amenities!=="" && values.facility!==""&& values.description!=="" && values.highlight!=="") {
-      axios({
-        url: "https://bravo-bfn-be.herokuapp.com/api/v1/accomodation",
-        method: "POST",
-        headers: { Authorization: `Bearer ${jwtToken}` },
-        data: {
-          name: formValues.facility,
-          description: formValues.description,
-          locationId: formValues.location,
-          image: formValues.image,
-          geoLocation: latlng.toString(),
-          highlight: formValues.highlight,
-          amenitiesList: formValues.amenities.split(","),
-        },
+      axios.post(`${process.env.API_URL}/accomodation`, formData, {
+        headers: { Authorization: `Bearer ${jwtToken}`, 'content-type': 'multipart/form-data' },
       })
       .then((response) => {
         console.log(response);
@@ -217,7 +216,7 @@ const Accomodation = () => {
               name="image"
               placeholder="Image"
               value={formValues.image}
-              onChange={handleChange}
+              onChange={(e)=>setImage(e.target.files[0])}
             />
           </div>
           <div className="icon-inside">
