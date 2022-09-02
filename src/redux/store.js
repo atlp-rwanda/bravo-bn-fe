@@ -5,6 +5,7 @@ import loginReducer from "./auth/loginSlice";
 import requestSlice from "./requests/requestSlice";
 import tripsSlice from "./tripsSlice";
 import accommodationsSlice from "./accommodationsSlice";
+import notificationSlice from "./notificationSlice";
 import selectedRequestSlice from "./requests/selectedRequestSlice";
 
 export const reducers = {
@@ -14,6 +15,7 @@ export const reducers = {
   request: requestSlice,
   accommodations: accommodationsSlice.reducer,
   trips: tripsSlice.reducer,
+  notification: notificationSlice,
   selectedRequest: selectedRequestSlice,
 };
 

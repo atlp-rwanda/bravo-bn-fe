@@ -20,12 +20,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PopupModal from './Profile/ViewProfileModel';
 import { authActions } from "../redux/auth/authSlice";
+import NotificationsPopover from "./Notifications/NotificationPopover";
 
 const Nav = () => {
   const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [invisible, setInvisible] = React.useState(false);
+  const [invisible, setInvisible] = React.useState(true);
   const [Logout, setLogout] = React.useState("");
   const user = useSelector((state) => state.login.user);
   const [open, setOpen] = React.useState(false)
@@ -181,18 +182,13 @@ const Nav = () => {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              ></IconButton>
               <Badge
                 color="secondary"
                 variant="dot"
                 sx={{ margin: "0 20px" }}
                 invisible={invisible}
               >
-                <NotificationsIcon className="notification-icon" />
+                <NotificationsPopover />
               </Badge>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
