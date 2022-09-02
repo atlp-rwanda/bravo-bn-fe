@@ -1,0 +1,246 @@
+.Accomodation {
+
+    height: 130vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .Accomodation1 {
+        display: flex;
+
+        .accomodation-sidebar {
+            margin-left: 1rem;
+        }
+
+        .accomodation--paragraph {
+            padding-left: 10rem;
+            height: 130vh;
+            width: 100%;
+
+            .accomodation-facility {
+                font-weight: bold;
+                font-size: 1.75rem;
+                margin-bottom: 1rem;
+                margin-right: 3rem;
+
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+
+                .form--input {
+                    display: flex;
+                    row-gap: 10px;
+                    column-gap: 20rem;
+
+                    .accomodation--input {
+                        padding: 0.5rem;
+                        width: 100%;
+                        height: 30px;
+                        margin-bottom: 0.5rem;
+                        border-radius: 5px;
+                        font-size: 1rem;
+                        border: 1px solid $thirdColor;
+                    }
+
+                    .error {
+                        color: $errorColor;
+                        margin-top: 0;
+                        margin-bottom: 1rem;
+                        text-align: start;
+
+                    }
+
+                    .borderColors {
+                        width: 100%;
+                        height: 30px;
+                        padding: 0.5rem;
+                        border-radius: 5px;
+                        margin-bottom: 0.5rem;
+                        border: 1px solid $errorColor !important;
+                    }
+
+                    .borderArea {
+                        width: 100%;
+                        height: 60px;
+                        padding: 0.5rem;
+                        border-radius: 5px;
+                        margin-bottom: 0.5rem;
+                        border: 1px solid $errorColor !important;
+                    }
+
+                    .accomodation--area {
+                        padding: 0.5rem;
+                        width: 100%;
+                        height: 60px;
+                        margin-bottom: 1rem;
+                        font-size: 1rem;
+                        border-radius: 5px;
+                    }
+
+                    .accomodation--image {
+                        margin-top: 1rem;
+                        margin-bottom: 1rem;
+                    }
+
+                    .accomodation--select {
+                        width: 103%;
+                        height: 40px;
+                        margin-bottom: 1rem;
+                        font-size: 1rem;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+
+
+                }
+
+                .accomodation--btn {
+                    width: 90%;
+                    height: 40px;
+                    background-color: $secondaryColor;
+                    color: $primaryColor;
+                    font-weight: bold;
+                    font-size: 1rem;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    margin: 1rem 0;
+                    align-self: center;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width:601px) and (max-width: 1024px) {
+        .Accomodation1 {
+            .accomodation--paragraph {
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+
+                .accomodation-facility {
+
+                    font-size: 1rem;
+                    margin-bottom: 1rem;
+
+                }
+
+                form {
+                    width: 100%;
+
+                    .form--input {
+                        row-gap: 10px;
+                        column-gap: 5rem;
+                        flex-direction: column;
+
+                        .accomodation--input {
+                            width: 90%;
+
+                        }
+
+                        .borderColors {
+                            width: 90%;
+                        }
+
+                        .borderArea {
+                            width: 90%;
+                        }
+
+                        .error {
+                            color: $errorColor;
+                        }
+
+                        .accomodation--area {
+                            width: 90%;
+                        }
+
+                        .accomodation--image {
+                            margin-top: 1rem;
+                            margin-bottom: 1rem;
+                        }
+
+
+
+                        .accomodation--select {
+                            width: 90%;
+                        }
+                    }
+
+                    .accomodation--btn {
+                        width: 90%;
+
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width:320px) and (max-width: 600px) {
+        .Accomodation1 {
+            .accomodation--paragraph {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                .accomodation-facility {
+
+                    font-size: 1rem;
+                    margin-bottom: 1rem;
+
+                }
+
+                form {
+                    width: 100%;
+                    flex-direction: row;
+
+                    .form--input {
+                        row-gap: 10px;
+                        column-gap: 5rem;
+
+                        .accomodation--input {
+                            width: 90%;
+
+                        }
+
+                        .borderColors {
+                            width: 90%;
+                        }
+
+                        .borderArea {
+                            width: 90%;
+                        }
+
+                        .error {
+                            color: $errorColor;
+                        }
+
+                        .accomodation--area {
+                            width: 90%;
+                        }
+
+                        .accomodation--image {
+                            margin-top: 1rem;
+                            margin-bottom: 1rem;
+                        }
+
+
+
+                        .accomodation--select {
+                            width: 90%;
+                        }
+                    }
+
+                    .accomodation--btn {
+                        width: 96%;
+
+                    }
+                }
+            }
+        }
+
+    }
+
+}

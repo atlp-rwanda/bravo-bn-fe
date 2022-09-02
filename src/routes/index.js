@@ -11,8 +11,12 @@ import PopupModal from "../components/Modal/Modal.js"
 import Booking from '../views/Book';
 import Home from '../views/Home';
 import CreateRequest from '../views/CreateRequest';
-import Trips from '../views/Trips'
+import RequestsTable from '../components/dashboard/RequestsTable';
+import Map from '../../src/components/Map';
+import Accomodation from "../views/Accomodation";
+import Trips from '../views/Trips';
 import NotFound from '../views/NotFound';
+import AccomodationTable from '../components/dashboard/AccomodationTable';
 
 
 
@@ -29,11 +33,14 @@ const routes = () => {
         <Route exact path="/dashboard/trips" element={<Trips />} />
         <Route path='*' exact={true} element={<NotFound />} />
       </Route >
-      <Route path='/login' element={<Login />} />
-      <Route path='/signup' element={<Signup />} />
-      <Route path='/reset' element={<Reset />} />
-      <Route exact path="/password/:token" element={<Respassword />} />
-      <Route path='/modal' element={<PopupModal />} />
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/signup' element={<Signup/>}/>
+      <Route path='/reset' element={<Reset/>}/>
+      <Route exact path="/password/:token" element={<Respassword/>}/>
+      <Route path='/modal' element={<PopupModal/>}/>
+      <Route path='/map' element={<Map />}/>
+      <Route  exact path="accomodation" element={<Accomodation />}/>
+      <Route  exact path="/facilitytable" element={<AccomodationTable />}/>
       <Route path='*' exact={true} element={<NotFound />} />
     </Routes>
   );

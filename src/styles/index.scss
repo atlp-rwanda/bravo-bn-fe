@@ -15,25 +15,24 @@ body {
   background-color: $primaryColor;
   margin: 0;
   padding: 0;
-  a {
-    text-decoration: none;
-  }
-  @import "./buttonDisable.scss";
-  @import "./landingPage.scss";
-  @import "./navbar.scss";
-  @import "./book.scss";
-  @import "./registrationPage.scss";
-  @import "./signup.scss";
-  @import "./responsive.scss";
-  @import "./contents.scss";
-  @import "./sidebar.scss";
-  @import "./footer.scss";
-  @import "./responsiveness.scss";
-  @import "./dashboard.scss";
-  @import "./reset.scss";
-  @import "./respassword.scss";
-  @import "./createRequest.scss";
-  @import "./about.scss";
+  @import './buttonDisable.scss';
+  @import './landingPage.scss';
+  @import './navbar.scss';
+  @import './book.scss';
+  @import './registrationPage.scss';
+  @import './signup.scss';
+  @import './responsive.scss';
+  @import './contents.scss';
+  @import './sidebar.scss';
+  @import './footer.scss';
+  @import './responsiveness.scss';
+  @import './dashboard.scss';
+  @import './reset.scss';
+  @import './respassword.scss';
+  @import './createRequest.scss';
+  @import './about.scss';
+  @import './map.scss';
+  @import 'accommodation.scss';
   @import "./details.scss";
   @import "./profile.scss";
 }

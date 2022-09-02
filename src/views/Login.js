@@ -113,10 +113,11 @@ export default function Login() {
         );
         setTimeout(() => {
           dispatch(
-            alertActions.success({ message: null })
-          );
-          navigate("/");
-        }, 3000)
+            alertActions.success({message: null })
+            );
+            navigate("/");
+          
+        },3000)             
       })
       .catch((err) => {
         dispatch(
