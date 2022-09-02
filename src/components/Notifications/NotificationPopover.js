@@ -25,7 +25,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function NotificationsPopover() {
   const anchorRef = useRef(null);
-  const token = useSelector((state) => state.auth.token);
+  // const token = useSelector((state) => state.auth.token);
+  const token = document.cookie.split("=")[1];
   const trips = useSelector(state=> state.trips.trips);
   const getComments= useSelector(state=> state.trips.getComments);
 
@@ -51,7 +52,7 @@ export default function NotificationsPopover() {
   useEffect(() => {
     getNotifData();
 
-  }, [trips, getComments]);
+  }, [trips, getComments, totalUnRead]);
 
   let notificationss = useSelector(showNotifications);
   let notifications = notificationss[0];
@@ -75,9 +76,10 @@ export default function NotificationsPopover() {
   };
 
   const handleMarkAllAsRead = async () => {
-    await axios.put(`${process.env.API_URL}/user/notification/read`, {
-      headers: { Authorization: `Bearer ${jwtToken}` },
-    });
+    console.log(token);
+    const res = await axios.put(`${process.env.API_URL}/user/notification/read`, {
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },});
+    console.log(res);
   };
 
   return (
