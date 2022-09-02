@@ -31,7 +31,7 @@ export default function AccomodationTable() {
     axios.get(`${process.env.API_URL}/accomodation`, {
       headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
-        console.log("response",res);
+      
       const unsortedData = res.data.data.rows;
       const sortedData = unsortedData.sort((a,b) => b.id - a.id);
         setAccomodationData(sortedData);
@@ -47,7 +47,7 @@ export default function AccomodationTable() {
   useEffect(() => {
     getData()
   }, []);
-  console.log("get",accomodationData);
+
 
 
   const columns = [
