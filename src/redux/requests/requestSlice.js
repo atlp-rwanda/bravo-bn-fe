@@ -3,6 +3,7 @@ import axios from "axios";
 
 const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
 
+
 export const requestSlice = createSlice({
   name: "request",
   initialState: {
@@ -28,17 +29,7 @@ export const getRequestAsync = () => async (dispatch) => {
 
   }
 };
-export const searchRequestAsync = (searchTerm) => async (dispatch) => {
-  try {
-    const response = await axios.get(
-      `${process.env.API_URL}/search/${searchTerm}`,
-      { headers: { Authorization: `Bearer ${jwtToken}` } }
-    );
-    dispatch(getRequests(response.data.data.tripss.rows));
-  } catch (err) {
-    console.log(err)
-  }
-};
+
 
 export const { getRequests, searchRequest } = requestSlice.actions;
 export const showRequest = (state) => state.request.data;

@@ -1,15 +1,15 @@
-.contents-container{
+.contents-container {
     display: flex;
     height: 90vh;
     width: 100%;
     overflow-y: scroll;
-    .sidebar{
-        background-color:$primaryColor;
-        width:250px;
+    .sidebar {
+        background-color: $primaryColor;
+        width: 250px;
         margin-right: 10px;
-        color:$thirdColor;
+        color: $thirdColor;
     }
-    .contents{
+    .contents {
         width: 100%;
     }
 }

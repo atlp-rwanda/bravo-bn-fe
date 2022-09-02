@@ -9,7 +9,7 @@ const Contents = ({ openPopup, setOpenPopup, setData }) => {
         <Sidebar />
       </div>
       <div className="contents">
-        <TripRequests  />
+        <TripRequests />
       </div>
     </div>
   );

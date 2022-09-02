@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getRequests,
   showRequest,
-  searchRequestAsync,
 } from "../../redux/requests/requestSlice";
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
@@ -42,7 +41,7 @@ export default function RequestsTable() {
     })
   }
 
-  useEffect(() =>{
+  useEffect(() => {
     getData()
   }, []);
   let requests = useSelector(showRequest);
@@ -63,7 +62,7 @@ export default function RequestsTable() {
           onChange={(e) => {
             e.preventDefault();
             setSearchTerm(e.target.value);
-            dispatch(searchRequestAsync(searchTerm));
+            // dispatch(searchRequestAsync(searchTerm));
           }}
           label="Search trip requests"
           variant="outlined"

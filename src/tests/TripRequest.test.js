@@ -17,5 +17,4 @@ test("Trip request component", async () => {
     />);
 
 });
-
-});
+})

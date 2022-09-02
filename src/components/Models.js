@@ -1,12 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import { Stack, Typography } from '@mui/material';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
 import CardContent from '@mui/material/CardContent';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
+import TextField from '@mui/material/TextField';
 import { DateTimePicker,LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -17,7 +16,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '../redux/alertSlice';
 import axios from 'axios';
 import { tripsActions } from '../redux/tripsSlice';
-import PreLoader, { PreLoaderSmall } from './PreLoader'; 
+import PreLoader, { PreLoaderSmall } from './PreLoader';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 const style = {
   position: 'absolute',
@@ -231,7 +231,7 @@ setTimeout(()=>{
             }, {
               headers: { Authorization: `Bearer ${token}` },
             }).then((res)=>{
-              dispatch(tripsActions.fetchComments({getComments:true}));
+
               let date = new Date().toISOString();
               setNewComment('')
 
@@ -347,7 +347,6 @@ setTimeout(()=>{
         
   );
 }
- 
 
 export function DetailsModal(props) {
 

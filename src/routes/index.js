@@ -20,6 +20,7 @@ import AccomodationTable from '../components/dashboard/AccomodationTable';
 
 
 
+
 const routes = () => {
   return (
     <Routes>
@@ -44,5 +45,4 @@ const routes = () => {
     </Routes>
   );
 }
-
 export default routes;
