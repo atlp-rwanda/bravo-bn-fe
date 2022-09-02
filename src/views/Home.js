@@ -42,27 +42,31 @@ export default function Home() {
 
     React.useEffect(()=>{
         if(!accommodations || accommodations.length == 0  ){
-  
-          axios.get(`${process.env.API_URL}/accomodation`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }).then((res)=>{
-            dispatch(accommodationsActions.fetchLocation({getLocation:true}));
-            dispatch(accommodationsActions.fetchReviews({getReviews:true}));
-            dispatch(
-                accommodationsActions.getAccommodations({accommodations: res.data.data.rows})
-              );
-            }).catch(err=> {
-              console.log(err)
-              dispatch(
-                alertActions.error({message: err.name == "AxiosError"? 'There was a network error': err.response.data.message })
-                );
-              })
-              setTimeout(()=>{
-                dispatch(
-                  alertActions.error({message: 'none'}));
-                },10000)
+            getAllAccommodations();
           }
       },[accommodations]);
+
+      const getAllAccommodations = () => {
+        
+        axios.get(`${process.env.API_URL}/accomodation`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }).then((res)=>{
+          console.log(accommodations);
+          dispatch(
+              accommodationsActions.getAccommodations({accommodations: res.data.data.rows})
+            );
+            dispatch(accommodationsActions.fetchLocation({getLocation:true}));
+            dispatch(accommodationsActions.fetchReviews({getReviews:true}));
+          }).catch(err=> {
+            dispatch(
+              alertActions.error({message: err.name == "AxiosError"? 'There was a network error': err.response.data.message })
+              );
+            })
+            setTimeout(()=>{
+              dispatch(
+                alertActions.error({message: 'none'}));
+              },10000)
+      }
 
       const getAllLocation = (locationId,index)=>{
         if(getLocation){
@@ -77,6 +81,7 @@ export default function Home() {
         }
       }
     }
+    
       const getAllReviews = (accommodationId,index)=>{
         if(getReviews){
         if(!accommodations[index]['reviews']){
@@ -93,17 +98,16 @@ export default function Home() {
 
     
     const handleMostTravelled  = async () => {
-      
       try {
-
         const res = await axios.get(`${process.env.API_URL}/user/trip/most-travelled-destinations`, {
-          headers: { Authorization: `Bearer ${jwtToken}` },
+          headers: { Authorization: `Bearer ${token}` },
         });
-        // console.log(res);
-        // if (res) {
-        //   navigate("/");
+        if (res) {
+          dispatch(
+            accommodationsActions.getAccommodations({accommodations: accommodations.filter(acc=> acc.id === res.data.data[0].id)})
+          )
   
-        // }
+        }
       } catch (error) {
         console.log(error);
       }
@@ -145,10 +149,10 @@ export default function Home() {
         label="Age"
         onChange={handleChange}
       >
-        <MenuItem value="">
+        <MenuItem value={0} onClick={e => getAllAccommodations() } selected>
           <em>All</em>
         </MenuItem>
-        <MenuItem value={10}  onClick={handleMostTravelled}>Most traveled</MenuItem>
+        <MenuItem value={10} onClick={handleMostTravelled}>Most traveled</MenuItem>
         <MenuItem value={20}>Most reviewed</MenuItem>
       </Select>
     </FormControl>

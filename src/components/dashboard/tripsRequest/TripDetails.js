@@ -4,7 +4,7 @@ import Button from "../../Btn";
 import Typography from "@mui/material/Typography";
 import CardContent from '@mui/material/CardContent';
 import Modal from "@mui/material/Modal";
-import { PreLoaderSmall } from '../PreLoader';
+import { PreLoaderSmall } from '../../PreLoader';
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getRequestAsync } from "../../../redux/requests/requestSlice";
