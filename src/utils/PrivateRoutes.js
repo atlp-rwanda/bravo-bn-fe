@@ -6,6 +6,7 @@ import { authActions} from '../redux/auth/authSlice'
 import Nav from '../components/NavDummy';
 import axios from 'axios';
 import { logginUser } from '../redux/auth/loginSlice';
+import Swal from 'sweetalert2';
 
 const PrivateRoutes = () => {
   const navigate = useNavigate();
@@ -22,6 +23,16 @@ const PrivateRoutes = () => {
        token: jwtToken
      })
    );
+   let validation = get('validation');
+
+   if(validation){
+     if(validation == 'true'){
+      Swal.fire(`Welcome to Barefoot`, 'Your email has been verified successfully', 'success');
+     }else{
+      Swal.fire('Email verification failed', `Sorry, your validation token is invalid or expired.`, 'error');
+     }
+
+   }
 
     let currentDate = new Date();
     const user= useSelector(state=> state.login.user);

@@ -7,6 +7,10 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import CardContent from '@mui/material/CardContent';
 import { DateTimePicker,LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 
 import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -64,9 +68,9 @@ export function UpdateModal(props) {
       }).catch(err=> {
         console.log(err)
         setLoading(false)
-        dispatch(
-          alertActions.error({message: err.response.data.message })
-          );
+         dispatch(
+              alertActions.error({message: err.name == "AxiosError"? 'There was a network error': err.response.data.message })
+              );
         })
 setTimeout(()=>{
   dispatch(
@@ -144,6 +148,7 @@ setTimeout(()=>{
 
 export  function CommentsModal(props) {
   const [newComment, setNewComment] = React.useState('');
+  const [deleteComment, setDeleteComment] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [status, setStatus] = React.useState('');
   const tripId = useSelector(state=> state.trips.tripRequest);
@@ -152,11 +157,40 @@ export  function CommentsModal(props) {
   const token= useSelector(state=> state.auth.token);
   const user = useSelector(state=> state.login.user.id);
   const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClose = () => {
+    setAnchorEl(null);
+    axios.delete(`${process.env.API_URL}/user/trip/comments/${deleteComment}/delete`, {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((res)=>{
+      setDeleteComment(null)
+      dispatch(tripsActions.fetchComments({getComments:true}));
+      dispatch(
+        alertActions.success({message:'Comment deleted succesfully'})
+        )
+        setTimeout(()=>{
+          dispatch(
+            alertActions.success({message: 'none'}));
+          },5000)
+      }).catch(err=> {
+        console.log(err)
+        setLoading(false)
+         dispatch(
+              alertActions.error({message: err.name == "AxiosError"? 'There was a network error': err.response.data.message })
+              );
+       
+setTimeout(()=>{
+  dispatch(
+    alertActions.error({message: 'none'}));
+  },5000)
+        })
+  };
 
   const bottomRef = React.useRef(null);
 
   React.useEffect(()=>{
-    if(typeof(tripId) == 'number'){
+    if(typeof(tripId) == 'number' || deleteComment){
       const trip =  allTrips[tripId];
 
       trip.status == 'pending' ? setStatus('pending') : setStatus('');
@@ -179,7 +213,7 @@ export  function CommentsModal(props) {
               },10000)
             })
           }
-            },[tripId]);
+            },[tripId,deleteComment]);
 
  React.useEffect(() => {
    bottomRef.current?.scrollIntoView({behavior: 'smooth'});
@@ -204,7 +238,7 @@ export  function CommentsModal(props) {
               setLoading(false)
                dispatch(
                 tripsActions.comments({comments:[...comments, {
-                  id:res.data.comment.id,
+                  id: res.data.comment.id,
                   comment: res.data.comment.comment,
                   createdAt: date,
                   userId: user
@@ -251,7 +285,36 @@ export  function CommentsModal(props) {
               <Box sx={{display:'flex', justifyContent:'end'}}>
             <Typography id="modal-modal-title" sx={{   fontSize:'0.5em', pl:2}} variant="h5" > {comment.createdAt.slice(0,10)} {comment.createdAt.slice(12,16)}</Typography>
               </Box>
-            <Typography id="modal-modal-title" sx={{  bgcolor:'#046CC6', textAlign:'center', color:'#fff', borderRadius:'5px', padding:'10px 20px', fontSize:'0.8rem'}} variant="h5" >{comment.comment}</Typography>
+            <Typography id="modal-modal-title" sx={{  bgcolor:'#046CC6', textAlign:'center', color:'#fff', borderRadius:'5px', padding:'10px',display:'flex',alignItems:'center', fontSize:'0.8rem'}} variant="h5" >
+            {comment.comment}
+              <Box>             
+                 <IconButton
+        aria-label="more"
+        id="long-button"
+        aria-controls={open ? 'long-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
+        aria-haspopup="true"
+        onClick={(event) => {setAnchorEl(event.currentTarget); 
+        setDeleteComment(comment.id)
+        }}
+        sx={{color:'white',padding:'0px'}}
+      >
+        <KeyboardArrowDownRoundedIcon />
+      </IconButton>
+      <Menu
+        id="long-menu"
+        MenuListProps={{
+          'aria-labelledby': 'long-button',
+        }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+      >
+        <MenuItem sx={{padding:'0 5px 0 5px', color:'red'}} onClick={handleClose}>
+            Delete
+          </MenuItem>
+      </Menu></Box>
+              </Typography>
             </Box>
           </CardContent>
             }): 'No comments yet'
