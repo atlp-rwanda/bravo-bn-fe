@@ -25,14 +25,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function NotificationsPopover() {
   const anchorRef = useRef(null);
-  //   const [notifications, setNotifications] = useState([]);
-
-  //   const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
   const token = useSelector((state) => state.auth.token);
-
-  const trips= useSelector(state=> state.trips.trips);
+  const trips = useSelector(state=> state.trips.trips);
+  const getComments= useSelector(state=> state.trips.getComments);
 
   console.log(trips)
+  console.log(getComments)
 
   const dispatch = useDispatch();
 
@@ -50,28 +48,10 @@ export default function NotificationsPopover() {
       });
   };
 
-  //   let notificationsss;
-  //   socket.on("newNotification", (info) => {
-  //     console.log("hello");
-  //     notificationsss = info;
-  //     console.log(notificationsss);
-  //     setNotifications(notificationsss)
-  //   });
-
   useEffect(() => {
     getNotifData();
-    // const renderNotifications = async () => {
-    //   const res = await axios.get(
-    //     `${process.env.API_URL}/user/notification/get`,
-    //     { headers: { Authorization: `Bearer ${jwtToken}` } }
-    //   );
-    //   const unsortedNotifs = res.data.data.rows;
-    //   const sortedNotifs = unsortedNotifs.sort((a, b) => b.id - a.id);
-    //   console.log(sortedNotifs);
-    //   setNotifications(sortedNotifs);
-    // };
-    // renderNotifications();
-  }, [trips]);
+
+  }, [trips, getComments]);
 
   let notificationss = useSelector(showNotifications);
   let notifications = notificationss[0];

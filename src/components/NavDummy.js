@@ -14,13 +14,13 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import NotificationPopover from './Notifications/NotificationPopover'
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import NotificationsPopover from "./Notifications/NotificationPopover";
 import PopupModal from './Profile/ViewProfileModel';
 import { authActions } from "../redux/auth/authSlice";
+import NotificationsPopover from "./Notifications/NotificationPopover";
 
 const Nav = () => {
   const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
@@ -28,7 +28,7 @@ const Nav = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [invisible, setInvisible] = React.useState(true);
   const [Logout, setLogout] = React.useState("");
- const user = useSelector((state) => state.login.user);
+  const user = useSelector((state) => state.login.user);
   const [open, setOpen] = React.useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,7 +42,6 @@ const Nav = () => {
   ];
   const settings = [
     ["Profile", "/profile"],
-    ["Account", "/account"],
     ["Logout", ""],
   ];
 
@@ -60,6 +59,9 @@ const Nav = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
     for (var i = 0; i < cookies.length; i++) {
       var cookie = cookies[i];
       var eqPos = cookie.indexOf("=");
@@ -85,6 +87,7 @@ const Nav = () => {
     } catch (error) {
       console.log(error);
     }
+  };
 
   return (
     <>
@@ -179,7 +182,7 @@ const Nav = () => {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-               <Badge
+              <Badge
                 color="secondary"
                 variant="dot"
                 sx={{ margin: "0 20px" }}
@@ -210,7 +213,17 @@ const Nav = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting[0]} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting[0]}</Typography>
+                    <Typography
+                      textAlign="center"
+                      onClick={() => {
+                        if (setting[0] === "Logout") {
+                          handleLogout();
+                        }
+                        else if (setting[0] == "Profile") { setOpen(true) }
+                      }}
+                    >
+                      {setting[0]}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>

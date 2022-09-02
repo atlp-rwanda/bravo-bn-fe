@@ -5,9 +5,7 @@ import { Stack, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import TextField from '@mui/material/TextField';
-import CardContent from '@mui/material/CardContent';
 import { DateTimePicker,LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -18,8 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '../redux/alertSlice';
 import axios from 'axios';
 import { tripsActions } from '../redux/tripsSlice';
-import PreLoader, { PreLoaderSmall } from './PreLoader'; 
-import { DateTimePicker,LocalizationProvider } from '@mui/x-date-pickers';
+import PreLoader, { PreLoaderSmall } from './PreLoader';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 const style = {
