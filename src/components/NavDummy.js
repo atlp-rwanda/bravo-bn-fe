@@ -18,27 +18,31 @@ import NotificationPopover from './Notifications/NotificationPopover'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import NotificationsPopover from "./Notifications/NotificationPopover";
 import PopupModal from './Profile/ViewProfileModel';
 import { authActions } from "../redux/auth/authSlice";
 
 const Nav = () => {
+  const jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [invisible, setInvisible] = React.useState(true);
-  const user = useSelector((state) => state.login.user);
+  const [Logout, setLogout] = React.useState("");
+ const user = useSelector((state) => state.login.user);
   const [open, setOpen] = React.useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const pages = [
     ["Home", "/"],
     [
-      `${user.role == "requester" ? "Booking" : "Dashboard"}`,
-      `${user.role == "requester" ? "/booking" : "/dashboard"}`,
+      `${user.role == "requester" ? "Trip requests" : "Dashboard"}`,
+      `${user.role == "requester" ? "/trip-requests" : "/dashboard"}`,
     ],
     ["About Us", "/about"],
   ];
   const settings = [
     ["Profile", "/profile"],
+    ["Account", "/account"],
     ["Logout", ""],
   ];
 
@@ -175,19 +179,13 @@ const Nav = () => {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              ></IconButton>
-              <Badge
+               <Badge
                 color="secondary"
                 variant="dot"
                 sx={{ margin: "0 20px" }}
                 invisible={invisible}
               >
-                {/* <NotificationsIcon className="notification-icon" /> */}
-                <NotificationPopover />
+                <NotificationsPopover />
               </Badge>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -212,17 +210,6 @@ const Nav = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting[0]} onClick={handleCloseUserMenu}>
-                    <Typography
-                      textAlign="center"
-                      onClick={() => {
-                        if (setting[0] === "Logout") {
-                          handleLogout();
-                        }
-                        else if (setting[0] == "Profile") { setOpen(true) }
-                      }}
-                    >
-                      {setting[0]}
-                    </Typography>
                     <Typography textAlign="center">{setting[0]}</Typography>
                   </MenuItem>
                 ))}

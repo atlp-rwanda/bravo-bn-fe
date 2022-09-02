@@ -59,7 +59,7 @@ export default function Login() {
 
         break;
       case "password":
-        let passwordValid = value.length >= 6;
+        let passwordValid = value.length >= 1;
         setPasswordError({
           ...passwordError,
           ["isValid"]: passwordValid ? true : false,
