@@ -18,7 +18,7 @@ function Map(props) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width:"100%",
+        width:"90%",
         height: "300px",
         cursor: "pointer",
       }}

@@ -7,12 +7,13 @@ import {Alert} from "@mui/material"
 import { useNavigate } from "react-router-dom";
 import Nav from "../components/NavDummy.js"
 import Sidebar from "../components/dashboard/Sidebar"
-
 import Map from "../../src/components/Map";
+import { NavLink } from "react-router-dom";
 import { current } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 
 const Accomodation = () => {
+
   const initialValues = {
     facility: "",
     description: "",
@@ -143,7 +144,14 @@ const Accomodation = () => {
       <Sidebar/>
       </div>
       <div className="accomodation--paragraph">
+      <div style={{ margin: '10px' }}>
+                        <NavLink to="/" style={({ isActive }) => ({ 
+                            color: isActive ? 'greenyellow' : 'white' })}>
+                            Home
+                        </NavLink>
+                    </div>
         <p className="accomodation-facility">
+
           Create an Accomodation facility
         </p>
         <form onSubmit={handleSubmit}>
