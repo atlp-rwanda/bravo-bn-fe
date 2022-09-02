@@ -39,7 +39,6 @@ const PrivateRoutes = () => {
     })
 
     const isLoggedIn= useSelector(state=> state.auth.token);
-    
       if(isLoggedIn){
         let decodedToken = jwt_decode(isLoggedIn);
         if(decodedToken.exp * 1000 > currentDate.getTime()){

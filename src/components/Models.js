@@ -204,7 +204,8 @@ export  function CommentsModal(props) {
               setLoading(false)
                dispatch(
                 tripsActions.comments({comments:[...comments, {
-                  comment: res.data.comment,
+                  id:res.data.comment.id,
+                  comment: res.data.comment.comment,
                   createdAt: date,
                   userId: user
                 }]})

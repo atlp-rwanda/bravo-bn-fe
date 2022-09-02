@@ -1,7 +1,7 @@
 import svg from "../assets/signup_svg.svg";
 import barefootLogo from "../assets/barefoot_logo.svg";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert2';
 import { Input,Select} from "../components/Input";
@@ -47,6 +47,20 @@ const Signup = () =>{
     isValid: true,
     message: "",
   });
+
+  function get(n) {
+    var half = location.search.split(n + '=')[1];
+    return half !== undefined ? decodeURIComponent(half.split('&')[0]) : null;
+}
+    let token = get('token');
+    token ? document.cookie = `jwt=${token}` :'';
+    let jwtToken = ("; " + document.cookie).split(`; jwt=`).pop().split(";")[0];
+
+  useEffect(()=>{
+    if(jwtToken){    
+      return  navigate('/')
+    }
+  },[])
 
   function handleChange(e) {
     const { name, value } = e.target;
